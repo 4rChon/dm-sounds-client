@@ -1,0 +1,15 @@
+<form (ngSubmit)="onSubmit()">
+  <label>
+    Youtube Playlist Id
+    <input id="ytpl-id" type="text" [formControl]="playlistId" />
+    <button type="submit">Stream</button>
+  </label>
+</form>
+
+<div *ngFor="let playlist of playlists">
+  <app-playlist [playlistId]="playlist"></app-playlist>
+</div>
+<!-- <div>{{ playlistIndex + 1 }}/{{ playlistItems.length }}</div> -->
+<!-- <div *ngFor="let audioId of audioIds">
+  <app-audio [audioSrc]="audioId" [loop]="true"></app-audio>
+</div> -->

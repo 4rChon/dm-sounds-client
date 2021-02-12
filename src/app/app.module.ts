@@ -4,21 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TempComponent } from './temp/temp.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AudioComponent } from './audio/audio.component';
-import { PlaylistComponent } from './playlist/playlist.component';
-import { PlaylistSettingsComponent } from './playlist/playlist-settings/playlist-settings.component';
-import { PlaylistControlsComponent } from './playlist/playlist-controls/playlist-controls.component';
+import { SelectablePlaylistContainerComponent } from './playlist/selectable-playlist-container/selectable-playlist-container.component';
+import { SelectablePlaylistItemComponent } from './playlist/selectable-playlist-item/selectable-playlist-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TempComponent,
-    PlaylistComponent,
-    PlaylistSettingsComponent,
-    PlaylistControlsComponent,
-    AudioComponent,
+    SelectablePlaylistContainerComponent,
+    SelectablePlaylistItemComponent
   ],
   imports: [
     BrowserModule,
@@ -30,4 +24,4 @@ import { PlaylistControlsComponent } from './playlist/playlist-controls/playlist
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

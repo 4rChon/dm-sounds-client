@@ -11,6 +11,12 @@ export class APIService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
+  public addPlaylist(id: string): Promise<any> {
+    return this.httpClient.post(
+      `${environment.api}/playlist/`, { url: id }, { headers: this.jsonHeaders }
+    ).toPromise();
+  }
+
   public getAudioStreamUrl(id: string): string {
     return `${environment.api}/stream/${id}`;
   }

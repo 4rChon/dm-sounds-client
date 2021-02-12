@@ -1,3 +1,8 @@
 <div>
-  <selectable-playlist-item *ngFor="let playlist of playlists$ | async" [playlist]="playlist"></selectable-playlist-item>
+  <app-add-playlist></app-add-playlist>
+  <h2>Playlists</h2>
+  <app-selectable-playlist-item
+    *ngFor="let playlist of playlists$ | async"
+    [playlist]="playlist"
+  ></app-selectable-playlist-item>
 </div>

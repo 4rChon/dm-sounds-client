@@ -1,7 +1,7 @@
 <form (ngSubmit)="onSubmit()">
-  <label>
-    Youtube Playlist id:
-    <input id="playlistId" type="text" [formControl]="playlistId" />
-    <button type="submit">Submit</button>
-  </label>
+  <mat-form-field appearance="legacy">
+    <mat-label>Youtube Playlist ID</mat-label>
+    <input matInput id="playlistId" type="text" [formControl]="playlistId" />
+  </mat-form-field>
+  <button mat-button color="primary" type="submit">Submit</button>
 </form>

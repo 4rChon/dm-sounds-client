@@ -26,6 +26,8 @@ export class PlaylistContainerComponent implements OnInit, OnDestroy {
     this.getActivePlaylistsSubscription = this.playlistService.getActivePlaylistsAction$.subscribe(
       playlists => this.activePlaylists = playlists
     );
+
+    this.playlistService.getNextPlaylists();
   }
 
   ngOnDestroy(): void {

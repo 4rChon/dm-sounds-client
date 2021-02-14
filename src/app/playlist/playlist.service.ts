@@ -28,6 +28,11 @@ export class PlaylistService implements OnDestroy {
     });
   }
 
+  public getNextPlaylists(): void {
+    this.getActivePlaylistsSubject.next([...this.activePlaylistStates.values()]);
+    this.getInactivePlaylistsSubject.next([...this.inactivePlaylistStates.values()]);
+  }
+
   public deactivatePlaylist(playlist: PlaylistState): void {
     this.activePlaylistStates.delete(playlist.model.id);
     this.inactivePlaylistStates.set(playlist.model.id, playlist);

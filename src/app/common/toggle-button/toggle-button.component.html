@@ -1,0 +1,16 @@
+<button
+  *ngIf="!currentValue"
+  (click)="toggleValue()"
+  mat-stroked-button
+  color="accent"
+>
+  <mat-icon svgIcon="{{ icon }}"></mat-icon>
+</button>
+<button
+  *ngIf="currentValue"
+  (click)="toggleValue()"
+  mat-raised-button
+  color="accent"
+>
+  <mat-icon svgIcon="{{ icon }}"></mat-icon>
+</button>

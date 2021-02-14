@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ playlist.title }}</mat-card-title>
+    <img mat-card-avatar src="{{ playlist.bestThumbnail?.url }}" />
+    <mat-card-subtitle
+      >Currently playing:
+      {{ playlistState.getCurrentItem().title }}</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <audio #playlistAudio autoplay>
+      <source src="" type="audio/mp3" />
+    </audio>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="prev()"
+      [disabled]="!hasPrev"
+    >
+      <mat-icon svgIcon="skip-previous"></mat-icon>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="next()"
+      [disabled]="!hasNext"
+    >
+      <mat-icon svgIcon="skip-next"></mat-icon>
+    </button>
+    <app-toggle-button
+      [initialValue]="playlist.shuffle"
+      [icon]="'shuffle'"
+      (value)="toggleShuffle($event)"
+    ></app-toggle-button>
+    <app-toggle-button
+      [initialValue]="playlist.loop"
+      [icon]="'loop'"
+      (value)="toggleLoop($event)"
+    ></app-toggle-button>
+  </mat-card-actions>
+</mat-card>

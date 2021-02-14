@@ -5,4 +5,6 @@ export interface PlaylistModel {
   title: string;
   bestThumbnail: Image;
   items: Array<Item>;
+  loop: boolean;
+  shuffle: boolean;
 }

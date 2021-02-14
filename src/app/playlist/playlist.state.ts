@@ -1,12 +1,12 @@
 import { Item } from 'ytpl';
-import { PlaylistModel } from "./playlist-item/playlist.model";
+import { PlaylistModel } from './playlist-item/playlist.model';
 
 export default class PlaylistState {
   private currentId = 0;
   private history: Array<number> = [];
   private itemCount;
 
-  constructor(private readonly model: PlaylistModel) {
+  constructor(public readonly model: PlaylistModel) {
     this.itemCount = this.model.items.length;
   }
 
@@ -47,6 +47,10 @@ export default class PlaylistState {
 
   public hasPrev(): boolean {
     return this.history.length > 0;
+  }
+
+  public getCurrentItemId(): number {
+    return this.currentId;
   }
 
   public getCurrentItem(): Item {

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IconService } from 'src/app/common/icon.service';
-import { PlaylistModel } from '../playlist.model';
+import PlaylistState from '../../playlist.state';
 
 @Component({
   selector: 'app-inactive-playlist-item',
@@ -9,7 +9,7 @@ import { PlaylistModel } from '../playlist.model';
 })
 
 export class InactivePlaylistItemComponent {
-  @Input() playlist!: PlaylistModel;
+  @Input() playlist!: PlaylistState;
 
   public shuffle = false;
   public loop = false;
@@ -18,11 +18,11 @@ export class InactivePlaylistItemComponent {
 
   public toggleShuffle(value: boolean): void {
     this.shuffle = value;
-    this.playlist.shuffle = this.shuffle;
+    this.playlist.model.shuffle = this.shuffle;
   }
 
   public toggleLoop(value: boolean): void {
     this.loop = value;
-    this.playlist.loop = this.loop;
+    this.playlist.model.loop = this.loop;
   }
 }

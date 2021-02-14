@@ -1,8 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { APIService } from '../../common/api.service';
-import { PlaylistModel } from '../playlist-item/playlist.model';
+import { PlaylistService } from '../playlist.service';
+import PlaylistState from '../playlist.state';
 
 @Component({
   selector: 'app-playlist-container',
@@ -10,24 +10,30 @@ import { PlaylistModel } from '../playlist-item/playlist.model';
   styleUrls: ['./playlist-container.component.less'],
 })
 export class PlaylistContainerComponent implements OnInit, OnDestroy {
-  activePlaylists: Array<PlaylistModel> = [];
-  inactivePlaylists: Array<PlaylistModel> = [];
+  activePlaylists: Array<PlaylistState> = [];
+  inactivePlaylists: Array<PlaylistState> = [];
 
-  private playlistSubscription?: Subscription;
+  getInactivePlaylistsSubscription!: Subscription;
+  getActivePlaylistsSubscription!: Subscription;
 
-  constructor(private readonly apiService: APIService) { }
+  constructor(private readonly playlistService: PlaylistService) { }
 
   ngOnInit(): void {
-    this.playlistSubscription = this.apiService.getPlaylists().subscribe(
+    this.getInactivePlaylistsSubscription = this.playlistService.getInactivePlaylistsAction$.subscribe(
       playlists => this.inactivePlaylists = playlists
+    );
+
+    this.getActivePlaylistsSubscription = this.playlistService.getActivePlaylistsAction$.subscribe(
+      playlists => this.activePlaylists = playlists
     );
   }
 
   ngOnDestroy(): void {
-    this.playlistSubscription?.unsubscribe();
+    this.getInactivePlaylistsSubscription?.unsubscribe();
+    this.getActivePlaylistsSubscription?.unsubscribe();
   }
 
-  drop(event: CdkDragDrop<PlaylistModel[]>): void {
+  drop(event: CdkDragDrop<PlaylistState[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -36,5 +42,7 @@ export class PlaylistContainerComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex);
     }
+
+    this.playlistService.updatePlaylistArrays(this.activePlaylists, this.inactivePlaylists);
   }
 }

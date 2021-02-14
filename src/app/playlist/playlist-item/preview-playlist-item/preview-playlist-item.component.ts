@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PlaylistModel } from '../playlist.model';
+import PlaylistState from '../../playlist.state';
 
 @Component({
   selector: 'app-preview-playlist-item',
@@ -7,5 +7,5 @@ import { PlaylistModel } from '../playlist.model';
 })
 
 export class PreviewPlaylistItemComponent {
-  @Input() playlist?: PlaylistModel;
+  @Input() playlist!: PlaylistState;
 }

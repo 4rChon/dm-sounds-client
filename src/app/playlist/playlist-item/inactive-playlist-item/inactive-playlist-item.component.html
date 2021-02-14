@@ -1,16 +1,16 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ playlist.title }}</mat-card-title>
-    <img mat-card-avatar src="{{ playlist.bestThumbnail?.url }}" />
+    <mat-card-title>{{ playlist.model.title }}</mat-card-title>
+    <img mat-card-avatar src="{{ playlist.model.bestThumbnail?.url }}" />
   </mat-card-header>
   <mat-card-actions>
     <app-toggle-button
-      [initialValue]="playlist.shuffle"
+      [initialValue]="playlist.model.shuffle"
       [icon]="'shuffle'"
       (value)="toggleShuffle($event)"
     ></app-toggle-button>
     <app-toggle-button
-      [initialValue]="playlist.loop"
+      [initialValue]="playlist.model.loop"
       [icon]="'loop'"
       (value)="toggleLoop($event)"
     ></app-toggle-button>

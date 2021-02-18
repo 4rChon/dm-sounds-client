@@ -3,5 +3,18 @@
     <mat-label>Youtube Playlist ID</mat-label>
     <input matInput id="playlistId" type="text" [formControl]="playlistId" />
   </mat-form-field>
-  <button mat-button color="primary" type="submit">Submit</button>
+  <mat-slide-toggle id="loop" [formControl]="loop" [color]="'primary'">
+    Loop
+  </mat-slide-toggle>
+  <mat-slide-toggle id="shuffle" [formControl]="shuffle" [color]="'primary'">
+    Shuffle
+  </mat-slide-toggle>
+  <mat-slide-toggle
+    id="replaceAll"
+    [formControl]="replaceAll"
+    [color]="'primary'"
+  >
+    Replace All on Play
+  </mat-slide-toggle>
+  <button mat-stroked-button color="primary" type="submit">Submit</button>
 </form>

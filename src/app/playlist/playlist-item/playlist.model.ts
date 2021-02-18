@@ -7,4 +7,5 @@ export interface PlaylistModel {
   items: Array<Item>;
   loop: boolean;
   shuffle: boolean;
+  replaceAll: boolean;
 }

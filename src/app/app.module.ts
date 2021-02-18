@@ -6,17 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTreeModule } from '@angular/material/tree';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
@@ -40,23 +39,24 @@ import { PlaylistNavComponent } from './playlist/playlist-nav/playlist-nav.compo
     ToggleButtonComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
+    BrowserModule,
     DragDropModule,
+    FormsModule,
+    HttpClientModule,
+    LayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

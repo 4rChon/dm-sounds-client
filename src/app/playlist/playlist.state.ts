@@ -18,6 +18,10 @@ export default class PlaylistState {
     this.model.loop = value;
   }
 
+  public setReplaceAll(value: boolean): void {
+    this.model.replaceAll = value;
+  }
+
   public getNextId(): number {
     if (!this.hasNext()) {
       return -1;

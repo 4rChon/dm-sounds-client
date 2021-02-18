@@ -14,7 +14,6 @@ export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
   @Input() playlist!: PlaylistState;
 
   public currentId = 0;
-  public audioSourceUrl = '';
   public hasPrev = false;
   public hasNext = false;
   public ejecting = false;
@@ -65,13 +64,12 @@ export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
       this.audioElement.volume *= 0.9;
       setTimeout(() => { this.fadeOut(); }, 100);
     } else {
-      this.playlistService.deactivatePlaylist(this.playlist);
+      this.playlistService.deactivatePlaylist(this.playlist.model.id);
     }
   }
 
   public next(): void {
     this.currentId = this.playlist.getNextId();
-    console.log(this.currentId);
     this.updateButtonState();
     this.updateSrc();
   }

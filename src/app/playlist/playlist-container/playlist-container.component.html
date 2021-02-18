@@ -9,6 +9,9 @@
     class="list"
     (cdkDropListDropped)="drop($event)"
   >
+    <h3 class="empty-active-tip" *ngIf="activePlaylists.length === 0">
+      Drag playlists into this container to play
+    </h3>
     <div class="list-item" *ngFor="let item of activePlaylists" cdkDrag>
       <app-active-playlist-item [playlist]="item"></app-active-playlist-item>
       <app-preview-playlist-item *cdkDragPreview [playlist]="item">
@@ -28,6 +31,9 @@
     class="list"
     (cdkDropListDropped)="drop($event)"
   >
+    <h3 class="empty-inactive-tip" *ngIf="inactivePlaylists.length === 0">
+      Add new playlists from the 'Add Playlists' tab
+    </h3>
     <div class="list-item" *ngFor="let item of inactivePlaylists" cdkDrag>
       <app-inactive-playlist-item [playlist]="item">
       </app-inactive-playlist-item>

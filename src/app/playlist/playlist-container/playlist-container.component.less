@@ -43,8 +43,7 @@
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-/* Animate items as they're being sorted. */
-.cdk-drop-dragging .cdk-drag {
+.cdk-drop-list-dragging :not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -60,4 +59,18 @@
 .cdk-drop-list {
   max-height: 500px;
   overflow: auto;
+}
+
+.empty-active-tip {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.empty-inactive-tip {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #ccc;
 }

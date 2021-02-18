@@ -10,12 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
@@ -25,6 +24,7 @@ import { ActivePlaylistItemComponent } from './playlist/playlist-item/active-pla
 import { InactivePlaylistItemComponent } from './playlist/playlist-item/inactive-playlist-item/inactive-playlist-item.component';
 import { PreviewPlaylistItemComponent } from './playlist/playlist-item/preview-playlist-item/preview-playlist-item.component';
 import { PlaylistNavComponent } from './playlist/playlist-nav/playlist-nav.component';
+
 
 
 @NgModule({

@@ -36,16 +36,15 @@ export class PlaylistContainerComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<PlaylistState[]>): void {
-    const playlist = event.previousContainer.data[event.previousIndex];
-    if (playlist.model.replaceAll && !this.playlistService.isActive(playlist.model.id)) {
-      this.playlistService.activatePlaylist(playlist.model.id, playlist.model.replaceAll);
-
-      return;
-    }
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      const playlist = event.previousContainer.data[event.previousIndex];
+      if (playlist.model.replaceAll && !this.playlistService.isActive(playlist.model.id)) {
+        this.playlistService.activatePlaylist(playlist.model.id, playlist.model.replaceAll);
+
+        return;
+      }
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,

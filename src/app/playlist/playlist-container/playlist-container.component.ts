@@ -1,8 +1,10 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { AddPlaylistComponent } from '../add-playlist/add-playlist.component';
+import PlaylistStateModel from '../playlist-state.model';
 import { PlaylistService } from '../playlist.service';
-import PlaylistState from '../playlist.state';
 
 @Component({
   selector: 'app-playlist-container',
@@ -10,13 +12,19 @@ import PlaylistState from '../playlist.state';
   styleUrls: ['./playlist-container.component.less'],
 })
 export class PlaylistContainerComponent implements OnInit, OnDestroy {
-  activePlaylists: Array<PlaylistState> = [];
-  inactivePlaylists: Array<PlaylistState> = [];
+  activePlaylists: Array<PlaylistStateModel> = [];
+  inactivePlaylists: Array<PlaylistStateModel> = [];
 
   getInactivePlaylistsSubscription!: Subscription;
   getActivePlaylistsSubscription!: Subscription;
+  errorSubscription!: Subscription;
 
-  constructor(private readonly playlistService: PlaylistService) { }
+  public fetching = true;
+
+  constructor(
+    private readonly playlistService: PlaylistService,
+    private readonly dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getInactivePlaylistsSubscription = this.playlistService.getInactivePlaylistsAction$.subscribe(
@@ -27,21 +35,36 @@ export class PlaylistContainerComponent implements OnInit, OnDestroy {
       playlists => this.activePlaylists = playlists
     );
 
+    this.playlistService.isFetchingAction$.subscribe(
+      fetching => this.fetching = fetching
+    );
+
+    this.errorSubscription = this.playlistService.errorAction$.subscribe(
+      (error) => {
+        console.error(error);
+      }
+    );
+
     this.playlistService.getNextPlaylists();
   }
 
   ngOnDestroy(): void {
     this.getInactivePlaylistsSubscription?.unsubscribe();
     this.getActivePlaylistsSubscription?.unsubscribe();
+    this.errorSubscription?.unsubscribe();
   }
 
-  drop(event: CdkDragDrop<PlaylistState[]>): void {
+  openDialog(): void {
+    this.dialog.open(AddPlaylistComponent);
+  }
+
+  drop(event: CdkDragDrop<PlaylistStateModel[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const playlist = event.previousContainer.data[event.previousIndex];
-      if (playlist.model.replaceAll && !this.playlistService.isActive(playlist.model.id)) {
-        this.playlistService.activatePlaylist(playlist.model.id, playlist.model.replaceAll);
+      if (playlist.replaceAll && !this.playlistService.isActive(playlist.id)) {
+        this.playlistService.activatePlaylist(playlist.id, playlist.replaceAll);
 
         return;
       }

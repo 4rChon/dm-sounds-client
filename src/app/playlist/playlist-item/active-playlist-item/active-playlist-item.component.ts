@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { APIService } from 'src/app/common/api.service';
-import { IconService } from 'src/app/common/icon.service';
+import PlaylistStateModel from '../../playlist-state.model';
 import { PlaylistService } from '../../playlist.service';
-import PlaylistState from '../../playlist.state';
 
 @Component({
   selector: 'app-active-playlist-item',
@@ -11,7 +10,7 @@ import PlaylistState from '../../playlist.state';
 })
 
 export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
-  @Input() playlist!: PlaylistState;
+  @Input() playlist!: PlaylistStateModel;
 
   public currentId = 0;
   public hasPrev = false;
@@ -23,15 +22,14 @@ export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
   @ViewChild('playlistAudio') audio!: ElementRef;
 
   constructor(
-    private readonly iconService: IconService,
     public readonly apiService: APIService,
     private readonly playlistService: PlaylistService
   ) { }
 
   ngOnInit(): void {
-    this.hasPrev = this.playlist.hasPrev();
-    this.hasNext = this.playlist.hasNext();
-    this.currentId = this.playlist.getCurrentItemId();
+    this.hasPrev = this.playlist.hasPrev;
+    this.hasNext = this.playlist.hasNext;
+    this.currentId = this.playlist.currentItemId;
   }
 
   ngAfterViewInit(): void {
@@ -49,7 +47,7 @@ export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
   }
 
   public prev(): void {
-    this.currentId = this.playlist.getPrevId();
+    this.currentId = this.playlist.prevId();
     this.updateButtonState();
     this.updateSrc();
   }
@@ -59,40 +57,40 @@ export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
     this.ejecting = true;
   }
 
-  private fadeOut(): void {
-    if (this.audioElement.volume > 0.01) {
-      this.audioElement.volume *= 0.9;
-      setTimeout(() => { this.fadeOut(); }, 100);
-    } else {
-      this.playlistService.deactivatePlaylist(this.playlist.model.id);
-    }
-  }
-
   public next(): void {
-    this.currentId = this.playlist.getNextId();
+    this.currentId = this.playlist.nextId();
     this.updateButtonState();
     this.updateSrc();
   }
 
   public toggleShuffle(value: boolean): void {
-    this.playlist.setShuffle(value);
+    this.playlist.shuffle = value;
     this.updateButtonState();
   }
 
   public toggleLoop(value: boolean): void {
-    this.playlist.setLoop(value);
+    this.playlist.loop = value;
     this.updateButtonState();
   }
 
+  private fadeOut(): void {
+    if (this.audioElement.volume > 0.01) {
+      this.audioElement.volume *= 0.9;
+      setTimeout(() => { this.fadeOut(); }, 100);
+    } else {
+      this.playlistService.deactivatePlaylist(this.playlist.id);
+    }
+  }
+
   private updateButtonState(): void {
-    this.hasPrev = this.playlist.hasPrev();
-    this.hasNext = this.playlist.hasNext();
+    this.hasPrev = this.playlist.hasPrev;
+    this.hasNext = this.playlist.hasNext;
   }
 
   private updateSrc(): void {
     this.pause();
     if (this.currentId >= 0) {
-      this.audioElement.src = this.apiService.getAudioStreamUrl(this.playlist.model.items[this.currentId].id);
+      this.audioElement.src = this.apiService.getAudioStreamUrl(this.playlist.items[this.currentId].id);
       this.play();
     }
   }

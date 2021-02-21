@@ -1,20 +1,31 @@
-<form (ngSubmit)="onSubmit()">
+<form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+  <mat-progress-bar *ngIf="pending" mode="indeterminate"></mat-progress-bar>
   <mat-form-field appearance="legacy">
     <mat-label>Youtube Playlist ID</mat-label>
-    <input matInput id="playlistId" type="text" [formControl]="playlistId" />
+    <input matInput id="playlistId" type="text" formControlName="playlistId" />
+    <mat-error *ngIf="playlistId?.hasError('required')">
+      Please enter a playlist ID
+    </mat-error>
   </mat-form-field>
-  <mat-slide-toggle id="loop" [formControl]="loop" [color]="'primary'">
+  <mat-slide-toggle id="loop" formControlName="loop" [color]="'primary'">
     Loop
   </mat-slide-toggle>
-  <mat-slide-toggle id="shuffle" [formControl]="shuffle" [color]="'primary'">
+  <mat-slide-toggle id="shuffle" formControlName="shuffle" [color]="'primary'">
     Shuffle
   </mat-slide-toggle>
   <mat-slide-toggle
     id="replaceAll"
-    [formControl]="replaceAll"
+    formControlName="replaceAll"
     [color]="'primary'"
   >
     Replace All on Play
   </mat-slide-toggle>
-  <button mat-stroked-button color="primary" type="submit">Submit</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!playlistForm.valid"
+  >
+    Submit
+  </button>
 </form>

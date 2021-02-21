@@ -9,31 +9,34 @@
     class="list"
     (cdkDropListDropped)="drop($event)"
   >
-    <h3 class="empty-active-tip" *ngIf="activePlaylists.length === 0">
-      Drag playlists into this container to play
-    </h3>
     <div class="list-item" *ngFor="let item of activePlaylists" cdkDrag>
       <app-active-playlist-item [playlist]="item"></app-active-playlist-item>
       <app-preview-playlist-item *cdkDragPreview [playlist]="item">
       </app-preview-playlist-item>
     </div>
   </div>
+  <h3 class="empty-active-tip" *ngIf="activePlaylists.length === 0">
+    Drag playlists into this container to play
+  </h3>
 </div>
 
 <div class="container inactive-playlists">
-  <h2>Inactive Playlists</h2>
-
+  <h2>
+    Inactive Playlists
+    <button mat-raised-button (click)="openDialog()" color="primary">
+      <mat-icon svgIcon="add"></mat-icon>
+    </button>
+  </h2>
   <div
     cdkDropList
     #inactivePlaylistsList="cdkDropList"
     [cdkDropListData]="inactivePlaylists"
     [cdkDropListConnectedTo]="activePlaylistsList"
     class="list"
+    [ngClass]="{ 'populated-drop-list': !fetching }"
     (cdkDropListDropped)="drop($event)"
   >
-    <h3 class="empty-inactive-tip" *ngIf="inactivePlaylists.length === 0">
-      Add new playlists from the 'Add Playlists' tab
-    </h3>
+    <mat-progress-bar *ngIf="fetching" mode="indeterminate"></mat-progress-bar>
     <div class="list-item" *ngFor="let item of inactivePlaylists" cdkDrag>
       <app-inactive-playlist-item [playlist]="item">
       </app-inactive-playlist-item>
@@ -41,4 +44,10 @@
       </app-preview-playlist-item>
     </div>
   </div>
+  <h3
+    class="empty-inactive-tip"
+    *ngIf="!fetching && inactivePlaylists.length === 0"
+  >
+    Add new playlists from the 'Add Playlists' tab
+  </h3>
 </div>

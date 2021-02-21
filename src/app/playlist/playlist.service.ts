@@ -1,30 +1,42 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { APIService } from '../common/api.service';
-import { PlaylistModel } from './playlist-item/playlist.model';
-import PlaylistState from './playlist.state';
+import { PlaylistModel } from '../common/models/playlist.model';
+import PlaylistStateModel from './playlist-state.model';
 
 @Injectable({ providedIn: 'root' })
-export class PlaylistService implements OnDestroy {
-  private playlistSubscription?: Subscription;
+export class PlaylistService {
   private playlistModels: Array<PlaylistModel> = [];
-  private inactivePlaylists = new Map<string, PlaylistState>();
-  private activePlaylists = new Map<string, PlaylistState>();
+  private inactivePlaylists = new Map<string, PlaylistStateModel>();
+  private activePlaylists = new Map<string, PlaylistStateModel>();
 
-  private getInactivePlaylistsSubject = new Subject<Array<PlaylistState>>();
+  private getInactivePlaylistsSubject = new Subject<Array<PlaylistStateModel>>();
   public getInactivePlaylistsAction$ = this.getInactivePlaylistsSubject.asObservable();
 
-  private getActivePlaylistsSubject = new Subject<Array<PlaylistState>>();
+  private getActivePlaylistsSubject = new Subject<Array<PlaylistStateModel>>();
   public getActivePlaylistsAction$ = this.getActivePlaylistsSubject.asObservable();
 
+  private isFetchingSubject = new Subject<boolean>();
+  public isFetchingAction$ = this.isFetchingSubject.asObservable();
+
+  private errorSubject = new Subject();
+  public errorAction$ = this.errorSubject.asObservable();
+
   constructor(private readonly apiService: APIService) {
-    this.playlistSubscription = this.apiService.getPlaylists().subscribe(playlists => {
+    this.isFetchingSubject.next(true);
+    this.apiService.getPlaylists().then(playlists => {
       this.playlistModels = playlists;
       this.playlistModels.forEach(playlist => {
-        const state = new PlaylistState(playlist);
+        const state = new PlaylistStateModel(playlist);
         this.inactivePlaylists.set(playlist.id, state);
       });
       this.getInactivePlaylistsSubject.next([...this.inactivePlaylists.values()]);
+      this.isFetchingSubject.next(false);
+      this.isFetchingSubject.complete();
+    }).catch(error => {
+      this.isFetchingSubject.next(false);
+      this.isFetchingSubject.complete();
+      this.errorSubject.next(error);
     });
   }
 
@@ -72,19 +84,15 @@ export class PlaylistService implements OnDestroy {
     this.getInactivePlaylistsSubject.next([...this.inactivePlaylists.values()]);
   }
 
-  public updatePlaylistArrays(active: Array<PlaylistState>, inactive: Array<PlaylistState>): void {
+  public updatePlaylistArrays(active: Array<PlaylistStateModel>, inactive: Array<PlaylistStateModel>): void {
     this.activePlaylists.clear();
     this.inactivePlaylists.clear();
 
     active.forEach(playlist => {
-      this.activePlaylists.set(playlist.model.id, playlist);
+      this.activePlaylists.set(playlist.id, playlist);
     });
     inactive.forEach(playlist => {
-      this.inactivePlaylists.set(playlist.model.id, playlist);
+      this.inactivePlaylists.set(playlist.id, playlist);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.playlistSubscription?.unsubscribe();
   }
 }

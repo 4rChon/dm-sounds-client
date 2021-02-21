@@ -4,11 +4,10 @@
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ playlist.model.title }}</mat-card-title>
-    <img mat-card-avatar src="{{ playlist.model.bestThumbnail?.url }}" />
+    <mat-card-title>{{ playlist.title }}</mat-card-title>
+    <img mat-card-avatar src="{{ playlist.thumbnail }}" />
     <mat-card-subtitle
-      >Currently playing:
-      {{ playlist.getCurrentItem().title }}</mat-card-subtitle
+      >Currently playing: {{ playlist.currentItem.title }}</mat-card-subtitle
     >
   </mat-card-header>
   <mat-card-actions>
@@ -29,12 +28,12 @@
       <mat-icon svgIcon="skip-next"></mat-icon>
     </button>
     <app-toggle-button
-      [initialValue]="playlist.model.shuffle"
+      [initialValue]="playlist.shuffle"
       [icon]="'shuffle'"
       (value)="toggleShuffle($event)"
     ></app-toggle-button>
     <app-toggle-button
-      [initialValue]="playlist.model.loop"
+      [initialValue]="playlist.loop"
       [icon]="'loop'"
       (value)="toggleLoop($event)"
     ></app-toggle-button>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { APIService } from 'src/app/common/api.service';
 import { PlaylistFormModel } from 'src/app/common/models/playlist-form.model';
+import { PlaylistService } from '../playlist.service';
 
 
 @Component({
@@ -12,10 +13,15 @@ import { PlaylistFormModel } from 'src/app/common/models/playlist-form.model';
 
 export class AddPlaylistComponent implements OnInit {
 
-  constructor(private readonly apiService: APIService) { }
+  constructor(
+    private readonly apiService: APIService,
+    private readonly playlistService: PlaylistService
+  ) { }
 
   public playlistForm!: FormGroup;
   public pending = false;
+  public error = '';
+  public success = '';
 
   get playlistId(): AbstractControl | null {
     return this.playlistForm.get('playlistId');
@@ -33,7 +39,7 @@ export class AddPlaylistComponent implements OnInit {
 
   ngOnInit(): void {
     this.playlistForm = new FormGroup({
-      playlistId: new FormControl('', Validators.required),
+      playlistId: new FormControl('', [Validators.required]),
       loop: new FormControl(false),
       shuffle: new FormControl(false),
       replaceAll: new FormControl(false)
@@ -51,7 +57,29 @@ export class AddPlaylistComponent implements OnInit {
     };
 
     this.apiService.addPlaylist(model)
-      .catch((error) => console.log(error.message))
+      .then(response => {
+        this.playlistForm.setErrors(null);
+        this.success = response.message;
+        const subscription = this.playlistForm.valueChanges.subscribe(
+          () => {
+            this.success = '';
+            subscription.unsubscribe();
+          }
+        );
+
+        this.playlistService.fetchPlaylists();
+      })
+      .catch(response => {
+        this.playlistForm.setErrors({ error: true });
+        this.error = response.error.message;
+        const subscription = this.playlistForm.valueChanges.subscribe(
+          () => {
+            this.error = '';
+            this.playlistForm.setErrors(null);
+            subscription.unsubscribe();
+          }
+        );
+      })
       .finally(() =>
         this.pending = false
       );

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { APIService } from '../common/api.service';
 import { PlaylistModel } from '../common/models/playlist.model';
 import PlaylistStateModel from './playlist-state.model';
@@ -16,14 +16,20 @@ export class PlaylistService {
   private getActivePlaylistsSubject = new Subject<Array<PlaylistStateModel>>();
   public getActivePlaylistsAction$ = this.getActivePlaylistsSubject.asObservable();
 
-  private isFetchingSubject = new Subject<boolean>();
-  public isFetchingAction$ = this.isFetchingSubject.asObservable();
+  public isFetchingAction$!: Observable<boolean>;
 
   private errorSubject = new Subject();
   public errorAction$ = this.errorSubject.asObservable();
 
   constructor(private readonly apiService: APIService) {
-    this.isFetchingSubject.next(true);
+    this.fetchPlaylists();
+  }
+
+  public fetchPlaylists(): void {
+    const isFetchingSubject = new Subject<boolean>();
+    this.isFetchingAction$ = isFetchingSubject.asObservable();
+
+    isFetchingSubject.next(true);
     this.apiService.getPlaylists().then(playlists => {
       this.playlistModels = playlists;
       this.playlistModels.forEach(playlist => {
@@ -31,11 +37,11 @@ export class PlaylistService {
         this.inactivePlaylists.set(playlist.id, state);
       });
       this.getInactivePlaylistsSubject.next([...this.inactivePlaylists.values()]);
-      this.isFetchingSubject.next(false);
-      this.isFetchingSubject.complete();
+      isFetchingSubject.next(false);
+      isFetchingSubject.complete();
     }).catch(error => {
-      this.isFetchingSubject.next(false);
-      this.isFetchingSubject.complete();
+      isFetchingSubject.next(false);
+      isFetchingSubject.complete();
       this.errorSubject.next(error);
     });
   }

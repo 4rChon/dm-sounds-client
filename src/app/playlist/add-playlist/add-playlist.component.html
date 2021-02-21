@@ -1,31 +1,57 @@
+<h2>Add Playlist</h2>
 <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
-  <mat-progress-bar *ngIf="pending" mode="indeterminate"></mat-progress-bar>
-  <mat-form-field appearance="legacy">
-    <mat-label>Youtube Playlist ID</mat-label>
-    <input matInput id="playlistId" type="text" formControlName="playlistId" />
-    <mat-error *ngIf="playlistId?.hasError('required')">
-      Please enter a playlist ID
-    </mat-error>
-  </mat-form-field>
-  <mat-slide-toggle id="loop" formControlName="loop" [color]="'primary'">
-    Loop
-  </mat-slide-toggle>
-  <mat-slide-toggle id="shuffle" formControlName="shuffle" [color]="'primary'">
-    Shuffle
-  </mat-slide-toggle>
-  <mat-slide-toggle
-    id="replaceAll"
-    formControlName="replaceAll"
-    [color]="'primary'"
-  >
-    Replace All on Play
-  </mat-slide-toggle>
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!playlistForm.valid"
-  >
-    Submit
-  </button>
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Youtube Playlist ID</mat-label>
+      <input
+        matInput
+        id="playlistId"
+        type="text"
+        formControlName="playlistId"
+      />
+      <mat-error *ngIf="playlistId?.hasError('required')">
+        Please enter a playlist ID
+      </mat-error>
+    </mat-form-field>
+    <mat-slide-toggle id="loop" formControlName="loop" [color]="'primary'">
+      Loop
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      id="shuffle"
+      formControlName="shuffle"
+      [color]="'primary'"
+    >
+      Shuffle
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      id="replaceAll"
+      formControlName="replaceAll"
+      [color]="'primary'"
+    >
+      Replace All on Play
+    </mat-slide-toggle>
+  </div>
+  <div>
+    <div class="summary">
+      <mat-error *ngIf="playlistForm?.invalid">
+        {{ error }}
+      </mat-error>
+      <span *ngIf="playlistForm?.valid && success && !pending">
+        {{ success }}
+      </span>
+      <mat-progress-bar *ngIf="pending" mode="indeterminate"></mat-progress-bar>
+    </div>
+  </div>
+  <div>
+    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
+    <button
+      class="submit"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!playlistForm.valid || pending"
+    >
+      Submit
+    </button>
+  </div>
 </form>

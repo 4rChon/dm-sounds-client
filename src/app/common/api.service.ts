@@ -23,7 +23,7 @@ export class APIService {
 
   public getPlaylists(): Promise<Array<PlaylistModel>> {
     return this.httpClient.get<Array<PlaylistModel>>(
-      `${environment.api}/playlists/`, { headers: this.jsonHeaders }
+      `${environment.api}/playlists/`, { responseType: 'json' }
     ).toPromise();
   }
 }

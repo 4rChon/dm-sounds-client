@@ -15,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,7 +30,6 @@ import { ActivePlaylistItemComponent } from './playlist/playlist-item/active-pla
 import { InactivePlaylistItemComponent } from './playlist/playlist-item/inactive-playlist-item/inactive-playlist-item.component';
 import { PreviewPlaylistItemComponent } from './playlist/playlist-item/preview-playlist-item/preview-playlist-item.component';
 import { PlaylistNavComponent } from './playlist/playlist-nav/playlist-nav.component';
-
 
 @NgModule({
   declarations: [
@@ -57,12 +57,13 @@ import { PlaylistNavComponent } from './playlist/playlist-nav/playlist-nav.compo
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSidenavModule,
+    MatSliderModule,
     MatSlideToggleModule,
+    MatToolbarModule,
     ReactiveFormsModule
   ],
   providers: [{

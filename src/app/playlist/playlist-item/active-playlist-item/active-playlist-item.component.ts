@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MatSliderChange } from '@angular/material/slider';
 import { APIService } from 'src/app/common/api.service';
 import PlaylistStateModel from '../../playlist-state.model';
 import { PlaylistService } from '../../playlist.service';
@@ -11,6 +12,8 @@ import { PlaylistService } from '../../playlist.service';
 
 export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
   @Input() playlist!: PlaylistStateModel;
+  @Output() volumeEnterHover = new EventEmitter<any>();
+  @Output() volumeLeaveHover = new EventEmitter<any>();
 
   public currentId = 0;
   public hasPrev = false;
@@ -36,6 +39,24 @@ export class ActivePlaylistItemComponent implements OnInit, AfterViewInit {
     this.audioElement = this.audio.nativeElement;
     this.audioElement.onended = this.next.bind(this);
     this.updateSrc();
+  }
+
+  set volume(value: number) {
+    if (this.audioElement) {
+      this.audioElement.volume = value;
+    }
+  }
+
+  get volume(): number {
+    return this.audioElement?.volume ?? 1;
+  }
+
+  public onMouseEnter(event: any): void {
+    this.volumeEnterHover.emit(event);
+  }
+
+  public onMouseLeave(event: any): void {
+    this.volumeLeaveHover.emit(event);
   }
 
   public pause(): void {

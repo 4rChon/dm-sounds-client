@@ -20,6 +20,7 @@ export class PlaylistContainerComponent implements OnInit, OnDestroy {
   errorSubscription!: Subscription;
 
   public fetching = true;
+  public canDragDrop = false;
 
   constructor(
     private readonly playlistService: PlaylistService,
@@ -54,11 +55,15 @@ export class PlaylistContainerComponent implements OnInit, OnDestroy {
     this.errorSubscription?.unsubscribe();
   }
 
-  openDialog(): void {
+  public setDragDrop(value: boolean): void {
+    this.canDragDrop = value;
+  }
+
+  public openDialog(): void {
     this.dialog.open(AddPlaylistComponent);
   }
 
-  drop(event: CdkDragDrop<PlaylistStateModel[]>): void {
+  public drop(event: CdkDragDrop<PlaylistStateModel[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

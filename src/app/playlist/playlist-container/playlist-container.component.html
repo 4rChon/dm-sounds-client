@@ -8,9 +8,14 @@
     [cdkDropListConnectedTo]="inactivePlaylistsList"
     class="list"
     (cdkDropListDropped)="drop($event)"
+    [cdkDropListDisabled]="!canDragDrop"
   >
     <div class="list-item" *ngFor="let item of activePlaylists" cdkDrag>
-      <app-active-playlist-item [playlist]="item"></app-active-playlist-item>
+      <app-active-playlist-item
+        [playlist]="item"
+        (volumeEnterHover)="setDragDrop(false)"
+        (volumeLeaveHover)="setDragDrop(true)"
+      ></app-active-playlist-item>
       <app-preview-playlist-item *cdkDragPreview [playlist]="item">
       </app-preview-playlist-item>
     </div>

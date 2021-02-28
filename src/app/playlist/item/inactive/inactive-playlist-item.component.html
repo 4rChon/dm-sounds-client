@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ playlist.title }}</mat-card-title>
+    <img mat-card-avatar src="{{ playlist.thumbnail }}" />
+  </mat-card-header>
+  <mat-card-actions>
+    <app-shuffle [playlist]="playlist"></app-shuffle>
+    <app-loop [playlist]="playlist"></app-loop>
+    <app-replace-all [playlist]="playlist"></app-replace-all>
+  </mat-card-actions>
+  <mat-card-content>
+    <app-playlist-item-list [items]="playlist.items"></app-playlist-item-list>
+  </mat-card-content>
+</mat-card>

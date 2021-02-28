@@ -9,16 +9,4 @@ import PlaylistStateModel from '../../playlist-state.model';
 
 export class InactivePlaylistItemComponent {
   @Input() playlist!: PlaylistStateModel;
-
-  public toggleShuffle(value: boolean): void {
-    this.playlist.shuffle = value;
-  }
-
-  public toggleLoop(value: boolean): void {
-    this.playlist.loop = value;
-  }
-
-  public toggleReplaceAll(value: boolean): void {
-    this.playlist.replaceAll = value;
-  }
 }

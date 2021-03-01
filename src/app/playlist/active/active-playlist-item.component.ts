@@ -27,7 +27,7 @@ export class ActivePlaylistItemComponent implements AfterViewInit {
     setTimeout(() => {
       this.audioElementInit = true;
       this.audioElement = this.audio.nativeElement;
-      this.audioElement.onended = this.updateSrc.bind(this, this.playlist.currentItemId);
+      this.audioElement.onended = this.updateSrc.bind(this, this.playlist.nextId());
       this.updateSrc(this.playlist.currentItemId);
     });
   }

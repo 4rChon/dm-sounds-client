@@ -25,6 +25,14 @@ export default class PlaylistStateModel {
     this.replaceAll = model.replaceAll;
   }
 
+  public play(index: number): number {
+    if (index >= 0 && index < this.itemCount) {
+      this.currentId = index;
+    }
+
+    return this.currentId;
+  }
+
   public nextId(): number {
     if (!this.hasNext) {
       return -1;

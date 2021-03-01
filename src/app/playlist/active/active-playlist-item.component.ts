@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { APIService } from 'src/app/common/api.service';
-import PlaylistStateModel from '../../playlist-state.model';
-import { PlaylistService } from '../../playlist.service';
+import PlaylistStateModel from '../playlist-state.model';
 
 @Component({
   selector: 'app-active-playlist-item',
   templateUrl: 'active-playlist-item.component.html',
-  styleUrls: ['../playlist-item.component.less']
+  styleUrls: ['../playlist.component.less']
 })
 
 export class ActivePlaylistItemComponent implements AfterViewInit {

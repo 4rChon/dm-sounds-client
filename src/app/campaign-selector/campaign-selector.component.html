@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill">
+  <mat-label>Current Campaign</mat-label>
+  <mat-select
+    [formControl]="campaignControl"
+    (selectionChange)="selectCampaign($event)"
+  >
+    <mat-option *ngFor="let campaign of campaignNames" [value]="campaign.id">
+      {{ campaign.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

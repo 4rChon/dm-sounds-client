@@ -11,47 +11,34 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { CampaignSelectorComponent } from './campaign-selector/campaign-selector.component';
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
-import { ActivePlaylistItemComponent } from './playlist/active/active-playlist-item.component';
-import { AddPlaylistComponent } from './playlist/add/add-playlist.component';
-import { PlaylistContainerComponent } from './playlist/container/playlist-container.component';
-import { EjectComponent } from './playlist/controls/eject/eject.component';
-import { LoopComponent } from './playlist/controls/loop/loop.component';
-import { NextComponent } from './playlist/controls/next/next.component';
-import { PreviousComponent } from './playlist/controls/previous/previous.component';
-import { ReplaceAllComponent } from './playlist/controls/replace-all/replace-all.component';
-import { ShuffleComponent } from './playlist/controls/shuffle/shuffle.component';
-import { VolumeComponent } from './playlist/controls/volume/volume.component';
-import { InactivePlaylistItemComponent } from './playlist/inactive/inactive-playlist-item.component';
-import { PreviewPlaylistItemComponent } from './playlist/preview/preview-playlist-item.component';
-import { SoundItemListComponent } from './sound-item/list/sound-item-list.component';
-import { SoundItemComponent } from './sound-item/sound-item.component';
+import { DroplistContainerComponent } from './droplist-container/droplist-container.component';
+import { DroplistComponent } from './droplist/droplist.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { PlaylistComponent } from './playlist/playlist.component';
+import { SongComponent } from './song/song.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InactivePlaylistItemComponent,
-    ActivePlaylistItemComponent,
-    PreviewPlaylistItemComponent,
-    AddPlaylistComponent,
-    PlaylistContainerComponent,
     ToggleButtonComponent,
-    SoundItemListComponent,
-    NextComponent,
-    PreviousComponent,
-    LoopComponent,
-    ShuffleComponent,
-    ReplaceAllComponent,
-    EjectComponent,
-    VolumeComponent,
-    SoundItemComponent,
+    NavigationComponent,
+    DroplistContainerComponent,
+    DroplistComponent,
+    SongComponent,
+    PlaylistComponent,
+    CampaignSelectorComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -69,10 +56,13 @@ import { SoundItemComponent } from './sound-item/sound-item.component';
     MatIconModule,
     MatInputModule,
     MatProgressBarModule,
+    MatSelectModule,
+    MatSidenavModule,
     MatSliderModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatListModule
   ],
   bootstrap: [AppComponent],
 })

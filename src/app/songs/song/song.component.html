@@ -1,0 +1,15 @@
+<mat-card [ngStyle]="{ 'background-color': colour }">
+  <app-filter-list [filters]="song.filters"></app-filter-list>
+  <mat-card-header>
+    <mat-card-title>{{ song.name }}</mat-card-title>
+    <img *ngIf="song.thumbnail" mat-card-avatar src="{{ song.thumbnail }}" />
+  </mat-card-header>
+  <mat-card-actions>
+    <!-- <app-loop></app-loop>
+    <app-replace-all></app-replace-all> -->
+  </mat-card-actions>
+  <app-audio-source-container
+    *ngIf="active"
+    [id]="song.id"
+  ></app-audio-source-container>
+</mat-card>

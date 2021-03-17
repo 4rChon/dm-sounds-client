@@ -21,13 +21,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { CampaignSelectorComponent } from './campaign-selector/campaign-selector.component';
+import { CampaignSelectorComponent } from './campaigns/campaign-selector/campaign-selector.component';
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
-import { DroplistContainerComponent } from './droplist-container/droplist-container.component';
-import { DroplistComponent } from './droplist/droplist.component';
+import { DroplistContainerComponent } from './droplists/droplist-container/droplist-container.component';
+import { DroplistComponent } from './droplists/droplist-item/droplist-item.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { PlaylistComponent } from './playlist/playlist.component';
-import { SongComponent } from './song/song.component';
+import { PlaylistComponent } from './playlists/playlist/playlist.component';
+import { SongComponent } from './songs/song/song.component';
+import { FilterComponent } from './filters/filter/filter.component';
+import { FilterListComponent } from './filters/filter-list/filter-list.component';
+import { AudioSourceContainerComponent } from './audio-sources/audio-source-container/audio-source-container.component';
+import { SongListComponent } from './songs/song-list/song-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { SongComponent } from './song/song.component';
     DroplistComponent,
     SongComponent,
     PlaylistComponent,
-    CampaignSelectorComponent
+    CampaignSelectorComponent,
+    FilterComponent,
+    FilterListComponent,
+    AudioSourceContainerComponent,
+    SongListComponent
   ],
   imports: [
     BrowserAnimationsModule,

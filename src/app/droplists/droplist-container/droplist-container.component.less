@@ -48,6 +48,35 @@
   border: none;
 }
 
+.drop-list-group {
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
 .list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.container {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+
+  & .active-dock {
+    float: left;
+  }
+
+  & .inactive-dock {
+    float: right;
+  }
+
+  & .list {
+    width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    display: block;
+    overflow: hidden;
+  }
 }

@@ -1,7 +1,12 @@
 <mat-card>
+  <app-filter-list [filters]="playlist.filters"></app-filter-list>
   <mat-card-header>
     <mat-card-title>{{ playlist.name }}</mat-card-title>
-    <img mat-card-avatar src="{{ playlist.thumbnail }}" />
+    <img
+      *ngIf="playlist.thumbnail"
+      mat-card-avatar
+      src="{{ playlist.thumbnail }}"
+    />
   </mat-card-header>
   <!-- <mat-card-actions>
     <app-shuffle [playlist]="playlist"></app-shuffle>
@@ -11,4 +16,5 @@
   <mat-card-content>
     <app-sound-item-list [playlist]="playlist"></app-sound-item-list>
   </mat-card-content> -->
+  <app-song-list [songs]="playlist.songs"></app-song-list>
 </mat-card>

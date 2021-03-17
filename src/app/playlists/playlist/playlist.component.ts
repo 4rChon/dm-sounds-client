@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import PlaylistViewModel from 'src/app/common/view-models/playlist.view-model';
+import PlaylistViewModel from 'src/app/playlists/playlist.view-model';
 
 @Component({
   selector: 'app-playlist',
@@ -8,4 +8,5 @@ import PlaylistViewModel from 'src/app/common/view-models/playlist.view-model';
 })
 export class PlaylistComponent {
   @Input() playlist!: PlaylistViewModel;
+  @Input() active!: boolean;
 }

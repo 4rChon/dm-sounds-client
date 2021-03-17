@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import CampaignNameViewModel from '../campaigns/campaign-name.view-model';
+import CampaignViewModel from '../campaigns/campaign.view-model';
 import { PlaylistModel } from './models/playlist.model';
-import CampaignNameViewModel from './view-models/campaign-name.view-model';
-import CampaignViewModel from './view-models/campaign.view-model';
 
 @Injectable({ providedIn: 'root' })
 export class APIService {

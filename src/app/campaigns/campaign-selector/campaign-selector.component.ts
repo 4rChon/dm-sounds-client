@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import CampaignNameViewModel from '../common/view-models/campaign-name.view-model';
-import CampaignViewModel from '../common/view-models/campaign.view-model';
-import { CampaignService } from './campaign.service';
+import CampaignNameViewModel from '../campaign-name.view-model';
+import { CampaignService } from '../campaign.service';
+import CampaignViewModel from '../campaign.view-model';
 
 @Component({
   selector: 'app-campaign-selector',

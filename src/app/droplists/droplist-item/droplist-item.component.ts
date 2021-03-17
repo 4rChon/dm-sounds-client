@@ -1,16 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import PlaylistItemType from '../common/playlist-item-type.enum';
-import IPlaylistItem from '../common/playlist-item.interface';
-import PlaylistViewModel from '../common/view-models/playlist.view-model';
-import SongViewModel from '../common/view-models/song.view-model';
+import PlaylistItemType from '../../playlists/playlist-item-type.enum';
+import IPlaylistItem from '../../playlists/playlist-item.interface';
+import PlaylistViewModel from '../../playlists/playlist.view-model';
+import SongViewModel from '../../songs/song.view-model';
 
 @Component({
-  selector: 'app-droplist',
-  templateUrl: './droplist.component.html',
-  styleUrls: ['./droplist.component.less']
+  selector: 'app-droplist-item',
+  templateUrl: './droplist-item.component.html',
+  styleUrls: ['./droplist-item.component.less']
 })
 export class DroplistComponent implements OnInit {
   @Input() item!: IPlaylistItem;
+  @Input() active!: boolean;
   public song?: SongViewModel;
   public playlist?: PlaylistViewModel;
 

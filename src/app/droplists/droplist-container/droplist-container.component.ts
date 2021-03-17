@@ -1,8 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import PlaylistItemType from '../common/playlist-item-type.enum';
-import IPlaylistItem from '../common/playlist-item.interface';
-import CampaignViewModel from '../common/view-models/campaign.view-model';
+import CampaignViewModel from '../../campaigns/campaign.view-model';
+import PlaylistItemType from '../../playlists/playlist-item-type.enum';
+import IPlaylistItem from '../../playlists/playlist-item.interface';
 
 @Component({
   selector: 'app-droplist-container',
@@ -12,7 +12,7 @@ import CampaignViewModel from '../common/view-models/campaign.view-model';
 
 export class DroplistContainerComponent {
   public inactiveDroplist: Array<IPlaylistItem> = [];
-  public activeDroplists = [];
+  public activeDroplists = [[]];
   public currentCampaign?: CampaignViewModel;
   public loading = false;
 

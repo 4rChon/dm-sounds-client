@@ -1,0 +1,6 @@
+<app-playlist
+  *ngIf="playlist"
+  [playlist]="playlist"
+  [active]="active"
+></app-playlist>
+<app-song *ngIf="song" [song]="song" [active]="active"></app-song>

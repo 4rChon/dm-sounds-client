@@ -1,0 +1,43 @@
+<div cdkDropListGroup class="drop-list-group">
+  <div>
+    <app-campaign-selector
+      (campaignSelected)="onCampaignSelected($event)"
+      (campaignLoading)="onCampaignLoading($event)"
+    ></app-campaign-selector>
+  </div>
+  <div *ngFor="let droplist of activeDroplists" class="container">
+    <div
+      cdkDropList
+      [cdkDropListData]="droplist"
+      (cdkDropListDropped)="drop($event)"
+      class="list active-dock"
+    >
+      <app-droplist-item
+        *ngFor="let item of droplist"
+        class="box"
+        [item]="item"
+        [active]="true"
+        cdkDrag
+      >
+      </app-droplist-item>
+    </div>
+  </div>
+
+  <div class="container">
+    <div
+      cdkDropList
+      [cdkDropListData]="inactiveDroplist"
+      (cdkDropListDropped)="drop($event)"
+      class="list inactive-dock"
+    >
+      <app-droplist-item
+        *ngFor="let item of inactiveDroplist"
+        class="box"
+        [item]="item"
+        [active]="false"
+        cdkDrag
+      >
+      </app-droplist-item>
+    </div>
+  </div>
+</div>

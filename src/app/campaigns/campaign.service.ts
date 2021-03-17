@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { APIService } from '../common/api.service';
-import CampaignNameViewModel from '../common/view-models/campaign-name.view-model';
-import CampaignViewModel from '../common/view-models/campaign.view-model';
+import CampaignNameViewModel from './campaign-name.view-model';
+import CampaignViewModel from './campaign.view-model';
+
 
 @Injectable({ providedIn: 'root' })
 export class CampaignService {

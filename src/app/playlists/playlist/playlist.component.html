@@ -8,13 +8,16 @@
       src="{{ playlist.thumbnail }}"
     />
   </mat-card-header>
-  <!-- <mat-card-actions>
-    <app-shuffle [playlist]="playlist"></app-shuffle>
+  <mat-card-actions>
+    <!-- <app-shuffle [playlist]="playlist"></app-shuffle>
     <app-loop [playlist]="playlist"></app-loop>
-    <app-replace-all [playlist]="playlist"></app-replace-all>
+    <app-replace-all [playlist]="playlist"></app-replace-all> -->
   </mat-card-actions>
   <mat-card-content>
-    <app-sound-item-list [playlist]="playlist"></app-sound-item-list>
-  </mat-card-content> -->
-  <app-song-list [songs]="playlist.songs"></app-song-list>
+    <app-song-list
+      [songs]="playlist.songs"
+      [currentIndex]="state.index"
+      [active]="active"
+    ></app-song-list>
+  </mat-card-content>
 </mat-card>

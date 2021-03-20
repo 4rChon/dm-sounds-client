@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import PlaylistItemType from '../../playlists/playlist-item-type.enum';
-import IPlaylistItem from '../../playlists/playlist-item.interface';
+import DroplistItemType from '../../playlists/playlist-item-type.enum';
+import DroplistItem from '../droplist-item.interface';
 import PlaylistViewModel from '../../playlists/playlist.view-model';
 import SongViewModel from '../../songs/song.view-model';
 
@@ -10,17 +10,17 @@ import SongViewModel from '../../songs/song.view-model';
   styleUrls: ['./droplist-item.component.less']
 })
 export class DroplistComponent implements OnInit {
-  @Input() item!: IPlaylistItem;
+  @Input() item!: DroplistItem;
   @Input() active!: boolean;
   public song?: SongViewModel;
   public playlist?: PlaylistViewModel;
 
   public ngOnInit(): void {
     switch (this.item.type) {
-      case PlaylistItemType.Playlist:
+      case DroplistItemType.Playlist:
         this.playlist = this.item.data as PlaylistViewModel;
         break;
-      case PlaylistItemType.Song:
+      case DroplistItemType.Song:
         this.song = this.item.data as SongViewModel;
         break;
     }

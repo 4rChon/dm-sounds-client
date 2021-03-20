@@ -1,0 +1,8 @@
+<div class="song-name" [ngClass]="{ active: active }">
+  {{ song.name }}
+</div>
+<app-audio-source-container
+  *ngIf="active"
+  [id]="song.id"
+></app-audio-source-container>
+<mat-divider [inset]="true"></mat-divider>

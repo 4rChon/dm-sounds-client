@@ -1,8 +1,9 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import CampaignViewModel from '../../campaigns/campaign.view-model';
-import PlaylistItemType from '../../playlists/playlist-item-type.enum';
-import IPlaylistItem from '../../playlists/playlist-item.interface';
+import DroplistItem from '../droplist-item.interface';
+import Droplist from '../droplist.interface';
+import { DroplistService } from '../droplist.service';
 
 @Component({
   selector: 'app-droplist-container',
@@ -11,17 +12,27 @@ import IPlaylistItem from '../../playlists/playlist-item.interface';
 })
 
 export class DroplistContainerComponent {
-  public inactiveDroplist: Array<IPlaylistItem> = [];
-  public activeDroplists = [[]];
   public currentCampaign?: CampaignViewModel;
   public loading = false;
 
+  constructor(private readonly droplistService: DroplistService) { }
+
+  public getActiveDroplists(): Array<Droplist> {
+    return this.droplistService.getActiveDroplists();
+  }
+
+  public getInactiveDroplist(): Array<DroplistItem> {
+    return this.droplistService.getInactiveDroplist();
+  }
+
+  public onAdd(): void {
+    this.droplistService.addDroplist('New Dock');
+  }
+
   public drop(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
-      console.log(event.container);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log(event.container);
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
@@ -31,17 +42,8 @@ export class DroplistContainerComponent {
 
   public onCampaignSelected(campaign: CampaignViewModel): void {
     this.currentCampaign = campaign;
-    this.currentCampaign.playlists.forEach(playlist => {
-      this.inactiveDroplist.push({
-        type: PlaylistItemType.Playlist, data: playlist
-      });
-    });
-
-    this.currentCampaign.songs.forEach(song => {
-      this.inactiveDroplist.push({
-        type: PlaylistItemType.Song, data: song
-      });
-    });
+    this.droplistService.addInactivePlaylists(this.currentCampaign.playlists);
+    this.droplistService.addInactiveSongs(this.currentCampaign.songs);
   }
 
   public onCampaignLoading(loading: boolean): void {

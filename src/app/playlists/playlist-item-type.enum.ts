@@ -1,6 +1,6 @@
-enum PlaylistItemType {
+enum DroplistItemType {
   Playlist,
   Song
 }
 
-export default PlaylistItemType;
+export default DroplistItemType;

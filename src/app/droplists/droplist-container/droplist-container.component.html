@@ -1,37 +1,56 @@
-<div cdkDropListGroup class="drop-list-group">
+<div cdkDropListGroup class="droplist-group">
   <div>
     <app-campaign-selector
       (campaignSelected)="onCampaignSelected($event)"
       (campaignLoading)="onCampaignLoading($event)"
     ></app-campaign-selector>
   </div>
-  <div *ngFor="let droplist of activeDroplists" class="container">
-    <div
-      cdkDropList
-      [cdkDropListData]="droplist"
-      (cdkDropListDropped)="drop($event)"
-      class="list active-dock"
-    >
-      <app-droplist-item
-        *ngFor="let item of droplist"
-        class="box"
-        [item]="item"
-        [active]="true"
-        cdkDrag
+  <div class="container active-container">
+    <div class="droplist-container-header">
+      <h2>
+        Active Docks
+        <div class="droplist-container-header-actions">
+          <app-add-button-icon (add)="onAdd()"></app-add-button-icon>
+        </div>
+      </h2>
+    </div>
+    <div class="droplist-container-content">
+      <div
+        cdkDropList
+        [cdkDropListData]="droplist.items"
+        (cdkDropListDropped)="drop($event)"
+        class="list active-droplist"
+        *ngFor="let droplist of getActiveDroplists(); index as ix"
       >
-      </app-droplist-item>
+        <app-droplist-header
+          class="droplist-header"
+          [index]="ix"
+        ></app-droplist-header>
+        <mat-divider></mat-divider>
+        <div class="droplist-content">
+          <app-droplist-item
+            *ngFor="let item of droplist.items"
+            class="box"
+            [item]="item"
+            [active]="true"
+            cdkDrag
+          >
+          </app-droplist-item>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container inactive-container">
+    <h2>Inactive Dock</h2>
     <div
       cdkDropList
-      [cdkDropListData]="inactiveDroplist"
+      [cdkDropListData]="getInactiveDroplist()"
       (cdkDropListDropped)="drop($event)"
-      class="list inactive-dock"
+      class="list inactive-droplist"
     >
       <app-droplist-item
-        *ngFor="let item of inactiveDroplist"
+        *ngFor="let item of getInactiveDroplist()"
         class="box"
         [item]="item"
         [active]="false"

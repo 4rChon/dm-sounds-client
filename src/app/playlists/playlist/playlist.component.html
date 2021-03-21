@@ -9,15 +9,29 @@
     />
   </mat-card-header>
   <mat-card-actions>
-    <!-- <app-shuffle [playlist]="playlist"></app-shuffle>
-    <app-loop [playlist]="playlist"></app-loop>
-    <app-replace-all [playlist]="playlist"></app-replace-all> -->
+    <app-loop-button-toggle
+      [initialValue]="state.loop"
+      (value)="state.loop = $event"
+    ></app-loop-button-toggle>
+    <app-shuffle-button-toggle
+      [initialValue]="state.shuffle"
+      (value)="state.shuffle = $event"
+    >
+    </app-shuffle-button-toggle>
+    <app-replace-all-button-toggle
+      [initialValue]="state.replaceAll"
+      (value)="state.replaceAll = $event"
+    >
+    </app-replace-all-button-toggle>
   </mat-card-actions>
   <mat-card-content>
     <app-song-list
       [songs]="playlist.songs"
       [currentIndex]="state.index"
+      [loop]="state.loop"
+      [shuffle]="state.shuffle"
       [active]="active"
+      (audioEnd)="onSongEnd()"
     ></app-song-list>
   </mat-card-content>
 </mat-card>

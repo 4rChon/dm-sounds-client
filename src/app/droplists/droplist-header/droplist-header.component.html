@@ -14,7 +14,13 @@
 </div>
 <h3 class="droplist-title">
   <form *ngIf="editing" (ngSubmit)="onSubmit()" autofocus>
-    <input name="name" type="text" [formControl]="name" matInput />
+    <input
+      class="title-input"
+      name="name"
+      type="text"
+      [formControl]="name"
+      matInput
+    />
   </form>
   <span *ngIf="!editing">{{ name.value }}</span>
 </h3>

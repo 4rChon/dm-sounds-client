@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import CampaignViewModel from '../campaigns/campaign.view-model';
 import DroplistItemType from '../playlists/playlist-item-type.enum';
 import PlaylistViewModel from '../playlists/playlist.view-model';
 import SongViewModel from '../songs/song.view-model';
@@ -39,18 +40,20 @@ export class DroplistService {
     return this.inactiveDroplist;
   }
 
-  public addInactivePlaylists(playlists: Array<PlaylistViewModel>): void {
-    playlists.forEach(playlist => {
-      this.inactiveDroplist.push({
-        type: DroplistItemType.Playlist, data: playlist
-      });
-    });
-  }
+  public switchCampaign(campaign: CampaignViewModel): void {
+    this.droplists.splice(0, this.droplists.length);
+    this.droplists = [{ name: 'Dock 1', items: [] }];
+    this.inactiveDroplist.splice(0, this.inactiveDroplist.length);
 
-  public addInactiveSongs(songs: Array<SongViewModel>): void {
-    songs.forEach(song => {
+    campaign.songs.forEach(song => {
       this.inactiveDroplist.push({
         type: DroplistItemType.Song, data: song
+      });
+    });
+
+    campaign.playlists.forEach(playlist => {
+      this.inactiveDroplist.push({
+        type: DroplistItemType.Playlist, data: playlist
       });
     });
   }

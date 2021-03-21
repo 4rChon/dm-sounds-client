@@ -4,5 +4,7 @@
 <app-audio-source-container
   *ngIf="active"
   [id]="song.id"
+  [loop]="false"
+  (audioEnd)="audioEnd.emit()"
 ></app-audio-source-container>
 <mat-divider [inset]="true"></mat-divider>

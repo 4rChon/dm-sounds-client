@@ -42,8 +42,7 @@ export class DroplistContainerComponent {
 
   public onCampaignSelected(campaign: CampaignViewModel): void {
     this.currentCampaign = campaign;
-    this.droplistService.addInactivePlaylists(this.currentCampaign.playlists);
-    this.droplistService.addInactiveSongs(this.currentCampaign.songs);
+    this.droplistService.switchCampaign(this.currentCampaign);
   }
 
   public onCampaignLoading(loading: boolean): void {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import SongViewModel from '../song.view-model';
 
 @Component({
@@ -9,4 +9,5 @@ import SongViewModel from '../song.view-model';
 export class SongListItemComponent {
   @Input() song!: SongViewModel;
   @Input() active = false;
+  @Output() audioEnd = new EventEmitter();
 }

@@ -19,4 +19,8 @@ export class PlaylistComponent implements OnInit {
   public ngOnInit(): void {
     this.state = this.playlistService.getOrCreatePlaylistState(this.playlist);
   }
+
+  public onSongEnd(): void {
+    this.state.getNextIndex();
+  }
 }

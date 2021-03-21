@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import SongViewModel from '../song.view-model';
 
 @Component({
@@ -10,4 +10,7 @@ export class SongListComponent {
   @Input() songs!: Array<SongViewModel>;
   @Input() currentIndex!: number;
   @Input() active!: boolean;
+  @Input() loop!: boolean;
+  @Input() shuffle!: boolean;
+  @Output() audioEnd = new EventEmitter();
 }

@@ -3,6 +3,7 @@ import FilterViewModel from '../filters/filter.view-model';
 export default interface SongViewModel {
   id: string;
   loop: boolean;
+  replaceAll: boolean;
   name: string;
   filters: Array<FilterViewModel>;
   thumbnail: string;

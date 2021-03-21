@@ -1,15 +1,27 @@
-<mat-card [ngStyle]="{ 'background-color': colour }">
-  <app-filter-list [filters]="song.filters"></app-filter-list>
+<mat-card>
+  <app-filter-list
+    [ngStyle]="{ 'background-color': colour }"
+    [filters]="song.filters"
+  ></app-filter-list>
   <mat-card-header>
     <mat-card-title>{{ song.name }}</mat-card-title>
     <img *ngIf="song.thumbnail" mat-card-avatar src="{{ song.thumbnail }}" />
   </mat-card-header>
   <mat-card-actions>
-    <!-- <app-loop></app-loop>
-    <app-replace-all></app-replace-all> -->
+    <app-loop-button-toggle
+      [initialValue]="state.loop"
+      (value)="state.loop = $event"
+    ></app-loop-button-toggle>
+    <app-replace-all-button-toggle
+      [initialValue]="state.replaceAll"
+      (value)="state.replaceAll = $event"
+    >
+    </app-replace-all-button-toggle>
   </mat-card-actions>
-  <app-audio-source-container
-    *ngIf="active"
-    [id]="song.id"
-  ></app-audio-source-container>
 </mat-card>
+
+<app-audio-source-container
+  *ngIf="active"
+  [id]="song.id"
+  [loop]="state.loop"
+></app-audio-source-container>

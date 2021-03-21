@@ -1,18 +1,11 @@
 export default class PlaylistStateModel {
   private _index = 0;
   private history: Array<number> = [];
-  private songCount;
-
-  public loop: boolean;
-  public shuffle: boolean;
-  public replaceAll: boolean;
-
-  constructor(songCount: number, loop: boolean, shuffle: boolean, replaceAll: boolean) {
-    this.songCount = songCount;
-    this.loop = loop;
-    this.shuffle = shuffle;
-    this.replaceAll = replaceAll;
-  }
+  constructor(
+    private songCount: number,
+    public loop: boolean,
+    public shuffle: boolean,
+    public replaceAll: boolean) { }
 
   public set index(ix: number) {
     if (ix >= 0 && ix < this.songCount) {

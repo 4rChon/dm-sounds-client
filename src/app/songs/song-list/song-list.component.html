@@ -7,5 +7,6 @@
     [song]="song"
     [active]="active && ix === currentIndex"
     (audioEnd)="audioEnd.emit()"
+    (click)="songClick.emit(ix)"
   ></app-song-list-item>
 </mat-expansion-panel>

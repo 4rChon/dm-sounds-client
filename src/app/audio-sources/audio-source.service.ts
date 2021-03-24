@@ -14,4 +14,21 @@ export class AudioSourceService {
 
     return this.audioSources[id];
   }
+
+  public async ejectAudioSource(id: string): Promise<void> {
+    if (!this.audioSources[id]) {
+      return;
+    }
+
+    const audioSource = this.audioSources[id];
+    while (audioSource.volume > 0.01) {
+      await new Promise<void>(resolve => {
+        setTimeout(() => {
+          audioSource.volume *= 0.9;
+          resolve();
+        }, 100);
+        console.log(audioSource.volume);
+      });
+    }
+  }
 }

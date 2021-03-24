@@ -13,10 +13,16 @@
       (value)="state.loop = $event"
     ></app-loop-button-toggle>
     <app-replace-all-button-toggle
+      *ngIf="!active"
       [initialValue]="state.replaceAll"
       (value)="state.replaceAll = $event"
     >
     </app-replace-all-button-toggle>
+    <app-eject-button
+      *ngIf="active"
+      (eject)="onEject()"
+      [disabled]="ejecting"
+    ></app-eject-button>
   </mat-card-actions>
 </mat-card>
 

@@ -17,7 +17,7 @@
     <div class="droplist-container-content">
       <div
         cdkDropList
-        [cdkDropListData]="droplist.items"
+        [cdkDropListData]="droplist"
         (cdkDropListDropped)="drop($event)"
         class="list active-droplist"
         *ngFor="let droplist of getActiveDroplists(); index as ix"
@@ -34,6 +34,7 @@
             [item]="item"
             [active]="true"
             cdkDrag
+            (eject)="onEject(item, droplist)"
           >
           </app-droplist-item>
         </div>
@@ -50,7 +51,7 @@
       class="list inactive-droplist"
     >
       <app-droplist-item
-        *ngFor="let item of getInactiveDroplist()"
+        *ngFor="let item of getInactiveDroplist().items"
         class="box"
         [item]="item"
         [active]="false"

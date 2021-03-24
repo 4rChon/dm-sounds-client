@@ -2,5 +2,11 @@
   *ngIf="playlist"
   [playlist]="playlist"
   [active]="active"
+  (eject)="onEject($event)"
 ></app-playlist>
-<app-song *ngIf="song" [song]="song" [active]="active"></app-song>
+<app-song
+  *ngIf="song"
+  [song]="song"
+  [active]="active"
+  (eject)="onEject($event)"
+></app-song>

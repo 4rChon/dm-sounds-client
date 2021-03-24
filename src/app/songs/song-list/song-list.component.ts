@@ -13,4 +13,5 @@ export class SongListComponent {
   @Input() loop!: boolean;
   @Input() shuffle!: boolean;
   @Output() audioEnd = new EventEmitter();
+  @Output() songClick = new EventEmitter<number>();
 }

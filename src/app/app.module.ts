@@ -27,6 +27,9 @@ import { AddButtonIconComponent } from './common/buttons/icon/add-button-icon/ad
 import { DeleteButtonIconComponent } from './common/buttons/icon/delete-button-icon/delete-button-icon.component';
 import { EditButtonIconComponent } from './common/buttons/icon/edit-button-icon/edit-button-icon.component';
 import { DoneButtonIconComponent } from './common/buttons/icon/submit-button-icon/done-button-icon.component';
+import { EjectButtonComponent } from './common/buttons/simple/eject/eject-button.component';
+import { NextButtonComponent } from './common/buttons/simple/next/next-button.component';
+import { PreviousButtonComponent } from './common/buttons/simple/previous/previous-button.component';
 import { LoopButtonToggleComponent } from './common/buttons/toggle/loop-button-toggle/loop-button-toggle.component';
 import { ReplaceAllButtonToggleComponent } from './common/buttons/toggle/replace-all-button-toggle/replace-all-button-toggle.component';
 import { ShuffleButtonToggleComponent } from './common/buttons/toggle/shuffle-button-toggle/shuffle-button-toggle.component';
@@ -64,7 +67,10 @@ import { SongComponent } from './songs/song/song.component';
     SongListItemComponent,
     ToggleButtonComponent,
     ReplaceAllButtonToggleComponent,
-    ShuffleButtonToggleComponent
+    ShuffleButtonToggleComponent,
+    NextButtonComponent,
+    PreviousButtonComponent,
+    EjectButtonComponent
   ],
   imports: [
     BrowserAnimationsModule,

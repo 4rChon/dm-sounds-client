@@ -9,6 +9,16 @@
     />
   </mat-card-header>
   <mat-card-actions>
+    <app-previous-button
+      *ngIf="active"
+      (previous)="state.getPrevIndex()"
+      [disabled]="!state.hasPrevIndex"
+    ></app-previous-button>
+    <app-next-button
+      *ngIf="active"
+      (next)="state.getNextIndex()"
+      [disabled]="!state.hasNextIndex"
+    ></app-next-button>
     <app-loop-button-toggle
       [initialValue]="state.loop"
       (value)="state.loop = $event"
@@ -19,10 +29,16 @@
     >
     </app-shuffle-button-toggle>
     <app-replace-all-button-toggle
+      *ngIf="!active"
       [initialValue]="state.replaceAll"
       (value)="state.replaceAll = $event"
     >
     </app-replace-all-button-toggle>
+    <app-eject-button
+      *ngIf="active"
+      (eject)="onEject()"
+      [disabled]="ejecting"
+    ></app-eject-button>
   </mat-card-actions>
   <mat-card-content>
     <app-song-list
@@ -32,6 +48,7 @@
       [shuffle]="state.shuffle"
       [active]="active"
       (audioEnd)="onSongEnd()"
+      (songClick)="onSongClick($event)"
     ></app-song-list>
   </mat-card-content>
 </mat-card>

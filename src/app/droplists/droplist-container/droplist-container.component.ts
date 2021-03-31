@@ -1,11 +1,13 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import DroplistItemType from 'src/app/playlists/playlist-item-type.enum';
-import { PlaylistService } from 'src/app/playlists/playlist.service';
+import { Observable } from 'rxjs';
+import CampaignViewModel from 'src/app/campaigns/campaign.view-model';
+import { PlaylistService } from 'src/app/playlists';
 import PlaylistViewModel from 'src/app/playlists/playlist.view-model';
-import { SongService } from 'src/app/songs/song.service';
+import { SongService } from 'src/app/songs';
 import SongViewModel from 'src/app/songs/song.view-model';
-import CampaignViewModel from '../../campaigns/campaign.view-model';
+import DragDropService from '../dragdrop.service';
+import DroplistItemType from '../droplist-item-type.enum';
 import DroplistItem from '../droplist-item.interface';
 import Droplist from '../droplist.interface';
 import { DroplistService } from '../droplist.service';
@@ -19,11 +21,15 @@ import { DroplistService } from '../droplist.service';
 export class DroplistContainerComponent {
   public currentCampaign?: CampaignViewModel;
   public loading = false;
+  public dragDropEnabled$: Observable<boolean>;
 
   constructor(
     private readonly droplistService: DroplistService,
+    private readonly dragDropService: DragDropService,
     private readonly playlistService: PlaylistService,
-    private readonly songService: SongService) { }
+    private readonly songService: SongService) {
+    this.dragDropEnabled$ = this.dragDropService.dragDropEnabled$;
+  }
 
   public getActiveDroplists(): Array<Droplist> {
     return this.droplistService.getActiveDroplists();

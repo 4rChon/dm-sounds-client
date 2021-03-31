@@ -9,41 +9,52 @@
     />
   </mat-card-header>
   <mat-card-actions>
-    <app-previous-button
-      *ngIf="active"
-      (previous)="state.getPrevIndex()"
-      [disabled]="!state.hasPrevIndex"
-    ></app-previous-button>
-    <app-next-button
-      *ngIf="active"
-      (next)="state.getNextIndex()"
-      [disabled]="!state.hasNextIndex"
-    ></app-next-button>
-    <app-loop-button-toggle
-      [initialValue]="state.loop"
-      (value)="state.loop = $event"
-    ></app-loop-button-toggle>
-    <app-shuffle-button-toggle
-      [initialValue]="state.shuffle"
-      (value)="state.shuffle = $event"
-    >
-    </app-shuffle-button-toggle>
-    <app-replace-all-button-toggle
-      *ngIf="!active"
-      [initialValue]="state.replaceAll"
-      (value)="state.replaceAll = $event"
-    >
-    </app-replace-all-button-toggle>
-    <app-eject-button
-      *ngIf="active"
-      (eject)="onEject()"
-      [disabled]="ejecting"
-    ></app-eject-button>
+    <div class="flex-left">
+      <app-previous-button
+        *ngIf="active"
+        (previous)="state.getPrevIndex()"
+        [disabled]="!state.hasPrevIndex"
+      ></app-previous-button>
+      <app-next-button
+        *ngIf="active"
+        (next)="state.getNextIndex()"
+        [disabled]="!state.hasNextIndex"
+      ></app-next-button>
+      <app-loop-button-toggle
+        [initialValue]="state.loop"
+        (value)="state.loop = $event"
+      ></app-loop-button-toggle>
+      <app-shuffle-button-toggle
+        [initialValue]="state.shuffle"
+        (value)="state.shuffle = $event"
+      >
+      </app-shuffle-button-toggle>
+      <app-replace-all-button-toggle
+        *ngIf="!active"
+        [initialValue]="state.replaceAll"
+        (value)="state.replaceAll = $event"
+      >
+      </app-replace-all-button-toggle>
+      <app-eject-button
+        *ngIf="active"
+        (eject)="onEject()"
+        [disabled]="ejecting"
+      ></app-eject-button>
+    </div>
+    <div>
+      <app-volume-slider
+        *ngIf="active"
+        [volume]="audioElement.volume"
+        (volumeChange)="audioElement.volume = $event"
+        (mouseenter)="disableDragDrop()"
+        (mouseleave)="enableDragDrop()"
+      ></app-volume-slider>
+    </div>
   </mat-card-actions>
   <mat-card-content>
     <app-song-list
       [songs]="playlist.songs"
-      [currentIndex]="state.index"
+      [currentIndex]="(state.index$ | async) || 0"
       [loop]="state.loop"
       [shuffle]="state.shuffle"
       [active]="active"

@@ -19,7 +19,6 @@ export class CampaignSelectorComponent {
   constructor(private readonly campaignService: CampaignService) {
     this.campaignService.getCampaignNames().then((campaigns) => {
       this.campaignNames = campaigns;
-      console.log(this.campaignNames);
       if (this.campaignNames.length > 0) {
         this.selectedValue = this.campaignNames[0].id;
       }

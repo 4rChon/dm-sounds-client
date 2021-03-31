@@ -1,6 +1,11 @@
+import { BehaviorSubject } from 'rxjs';
+
 export default class PlaylistStateModel {
   private _index = 0;
+  private indexSubject = new BehaviorSubject<number>(this._index);
   private history: Array<number> = [];
+  public index$ = this.indexSubject.asObservable();
+
   constructor(
     private songCount: number,
     public loop: boolean,
@@ -10,11 +15,8 @@ export default class PlaylistStateModel {
   public set index(ix: number) {
     if (ix >= 0 && ix < this.songCount) {
       this._index = ix;
+      this.indexSubject.next(this._index);
     }
-  }
-
-  public get index(): number {
-    return this._index;
   }
 
   public get hasNextIndex(): boolean {
@@ -25,9 +27,9 @@ export default class PlaylistStateModel {
     return this.history.length > 0;
   }
 
-  public getNextIndex(): number {
+  public getNextIndex(): void {
     if (!this.hasNextIndex) {
-      return -1;
+      return;
     }
 
     this.history.push(this._index);
@@ -38,14 +40,13 @@ export default class PlaylistStateModel {
       this._index = this.shuffle ? Math.floor(Math.random() * Math.floor(this.songCount)) : this._index + 1;
     }
 
-    return this._index;
+    this.indexSubject.next(this._index);
   }
 
-  public getPrevIndex(): number {
+  public getPrevIndex(): void {
     if (this.hasPrevIndex) {
       this._index = this.history.pop() ?? 0;
+      this.indexSubject.next(this._index);
     }
-
-    return this._index;
   }
 }

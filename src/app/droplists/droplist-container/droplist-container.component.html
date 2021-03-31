@@ -19,6 +19,7 @@
         cdkDropList
         [cdkDropListData]="droplist"
         (cdkDropListDropped)="drop($event)"
+        [cdkDropListDisabled]="!(dragDropEnabled$ | async)"
         class="list active-droplist"
         *ngFor="let droplist of getActiveDroplists(); index as ix"
       >

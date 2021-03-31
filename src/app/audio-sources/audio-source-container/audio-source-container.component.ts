@@ -23,8 +23,8 @@ export class AudioSourceContainerComponent implements OnInit, OnDestroy, OnChang
   ngOnInit(): void {
     this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.id);
     this.audioElement.loop = this.loop;
-    this.audioElement.volume = 1;
     this.audioElement.onended = this.onAudioEnd.bind(this);
+    this.audioElement.onplay = () => this.audioElement.volume = 1;
     this.audioElement.play();
   }
 

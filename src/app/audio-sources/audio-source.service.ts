@@ -27,7 +27,6 @@ export class AudioSourceService {
           audioSource.volume *= 0.9;
           resolve();
         }, 100);
-        console.log(audioSource.volume);
       });
     }
   }

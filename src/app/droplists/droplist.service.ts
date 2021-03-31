@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import CampaignViewModel from '../campaigns/campaign.view-model';
-import DroplistItemType from '../playlists/playlist-item-type.enum';
+import DroplistItemType from './droplist-item-type.enum';
 import DroplistItem from './droplist-item.interface';
 import Droplist from './droplist.interface';
 

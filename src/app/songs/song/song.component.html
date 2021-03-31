@@ -8,21 +8,32 @@
     <img *ngIf="song.thumbnail" mat-card-avatar src="{{ song.thumbnail }}" />
   </mat-card-header>
   <mat-card-actions>
-    <app-loop-button-toggle
-      [initialValue]="state.loop"
-      (value)="state.loop = $event"
-    ></app-loop-button-toggle>
-    <app-replace-all-button-toggle
-      *ngIf="!active"
-      [initialValue]="state.replaceAll"
-      (value)="state.replaceAll = $event"
-    >
-    </app-replace-all-button-toggle>
-    <app-eject-button
-      *ngIf="active"
-      (eject)="onEject()"
-      [disabled]="ejecting"
-    ></app-eject-button>
+    <div class="flex-left">
+      <app-loop-button-toggle
+        [initialValue]="state.loop"
+        (value)="state.loop = $event"
+      ></app-loop-button-toggle>
+      <app-replace-all-button-toggle
+        *ngIf="!active"
+        [initialValue]="state.replaceAll"
+        (value)="state.replaceAll = $event"
+      >
+      </app-replace-all-button-toggle>
+      <app-eject-button
+        *ngIf="active"
+        (eject)="onEject()"
+        [disabled]="ejecting"
+      ></app-eject-button>
+    </div>
+    <div>
+      <app-volume-slider
+        *ngIf="active"
+        [volume]="audioElement.volume"
+        (volumeChange)="audioElement.volume = $event"
+        (mouseenter)="disableDragDrop()"
+        (mouseleave)="enableDragDrop()"
+      ></app-volume-slider>
+    </div>
   </mat-card-actions>
 </mat-card>
 

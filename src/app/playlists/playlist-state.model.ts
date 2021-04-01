@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-export default class PlaylistStateModel {
+export class PlaylistStateModel {
   private _index = 0;
   private indexSubject = new BehaviorSubject<number>(this._index);
   private history: Array<number> = [];

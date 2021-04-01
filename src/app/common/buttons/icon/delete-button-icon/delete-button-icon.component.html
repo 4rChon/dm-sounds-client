@@ -1,3 +1,9 @@
-<button mat-icon-button color="warn" (click)="onDelete()" [disabled]="disabled">
+<button
+  mat-icon-button
+  matTooltip="{{ tooltip }}"
+  color="warn"
+  (click)="onDelete()"
+  [disabled]="disabled"
+>
   <mat-icon svgIcon="delete"></mat-icon>
 </button>

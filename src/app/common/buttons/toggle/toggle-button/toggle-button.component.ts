@@ -9,6 +9,8 @@ export class ToggleButtonComponent implements OnInit {
   @Output() value = new EventEmitter<boolean>();
   @Input() initialValue = false;
   @Input() icon = '';
+  @Input() tooltipOn = '';
+  @Input() tooltipOff = '';
 
   public currentValue = false;
 

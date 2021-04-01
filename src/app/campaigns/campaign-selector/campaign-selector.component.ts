@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import CampaignNameViewModel from '../campaign-name.view-model';
-import { CampaignService } from '../campaign.service';
-import CampaignViewModel from '../campaign.view-model';
+import { CampaignAPIService } from 'src/app/api-services/campaign-api.service';
+import { CampaignNameViewModel, CampaignViewModel } from '..';
 
 @Component({
   selector: 'app-campaign-selector',
@@ -16,8 +15,8 @@ export class CampaignSelectorComponent {
   @Output() campaignSelected = new EventEmitter<CampaignViewModel>();
   @Output() campaignLoading = new EventEmitter<boolean>();
 
-  constructor(private readonly campaignService: CampaignService) {
-    this.campaignService.getCampaignNames().then((campaigns) => {
+  constructor(private readonly campaignAPIService: CampaignAPIService) {
+    this.campaignAPIService.getCampaignNames().then((campaigns) => {
       this.campaignNames = campaigns;
       if (this.campaignNames.length > 0) {
         this.selectedValue = this.campaignNames[0].id;
@@ -27,7 +26,7 @@ export class CampaignSelectorComponent {
 
   public selectCampaign(event: any): void {
     this.campaignLoading.emit(true);
-    this.campaignService.getCampaign(event.value).then(
+    this.campaignAPIService.getCampaign(event.value).then(
       campaign => {
         this.campaignLoading.emit(false);
         this.campaignSelected.emit(campaign);

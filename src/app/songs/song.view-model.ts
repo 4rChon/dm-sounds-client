@@ -1,6 +1,6 @@
-import FilterViewModel from '../filters/filter.view-model';
+import { FilterViewModel } from '../filters';
 
-export default interface SongViewModel {
+export interface SongViewModel {
   id: string;
   loop: boolean;
   replaceAll: boolean;

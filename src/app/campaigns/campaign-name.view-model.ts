@@ -1,4 +1,4 @@
-export default interface CampaignNameViewModel {
+export interface CampaignNameViewModel {
   id: string;
   name: string;
 }

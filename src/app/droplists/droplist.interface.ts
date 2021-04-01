@@ -1,9 +1,7 @@
-import DroplistItem from './droplist-item.interface';
+import { DroplistItem } from '.';
 
-interface Droplist {
+export interface Droplist {
   active: boolean;
   name: string;
   items: Array<DroplistItem>;
 }
-
-export default Droplist;

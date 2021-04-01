@@ -9,10 +9,10 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Import Song</a>
-      <a mat-list-item href="#">Import Playlist</a>
-      <a mat-list-item href="#">Create Campaign</a>
-      <a mat-list-item href="#">Create Playlist</a>
+      <a mat-list-item (click)="openSongImportForm()">Import Song</a>
+      <a mat-list-item (click)="openPlaylistImportForm()">Import Playlist</a>
+      <a mat-list-item (click)="openCampaignCreateForm()">Create Campaign</a>
+      <a mat-list-item (click)="openPlaylistCreateForm()">Create Playlist</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -1,0 +1,39 @@
+<div cdkDropListGroup>
+  <div class="items-container">
+    <h3>{{ addedLabel }}</h3>
+    <div
+      cdkDropList
+      [cdkDropListData]="addedItems"
+      class="items-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="item-box"
+        *ngFor="let item of addedItems"
+        [ngStyle]="{ 'background-color': RGBtoCSS(item.data.colour) }"
+        cdkDrag
+      >
+        {{ item.data.name }}
+      </div>
+    </div>
+  </div>
+  <div class="items-container">
+    <h3>{{ availableLabel }}</h3>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <div
+      cdkDropList
+      [cdkDropListData]="items"
+      class="items-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="item-box"
+        *ngFor="let item of items"
+        [ngStyle]="{ 'background-color': RGBtoCSS(item.data.colour) }"
+        cdkDrag
+      >
+        {{ item.data.name }}
+      </div>
+    </div>
+  </div>
+</div>

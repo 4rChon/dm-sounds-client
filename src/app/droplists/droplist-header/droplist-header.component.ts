@@ -1,6 +1,8 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import Droplist from '../droplist.interface';
+import { Subscription } from 'rxjs';
+import { TooltipConstants } from 'src/app/common/tooltip.constants';
+import { Droplist } from '..';
 import { DroplistService } from '../droplist.service';
 
 @Component({
@@ -8,28 +10,31 @@ import { DroplistService } from '../droplist.service';
   templateUrl: './droplist-header.component.html',
   styleUrls: ['./droplist-header.component.less']
 })
-export class DroplistHeaderComponent implements OnInit {
+export class DroplistHeaderComponent implements OnInit, OnDestroy {
   @Input() index!: number;
   @Input() editing = false;
+
+  public editDockTooltip = TooltipConstants.EditDock;
+  public deleteDockTooltip = TooltipConstants.DeleteDock;
+  public editDockDoneTooltip = TooltipConstants.EditDockDone;
 
   public name = new FormControl('');
 
   private droplist!: Droplist;
+  private valueChangeSubscription!: Subscription;
 
   constructor(private readonly droplistService: DroplistService) { }
 
   ngOnInit(): void {
     this.droplist = this.droplistService.getDroplist(this.index);
     this.name.setValue(this.droplist.name);
+    this.valueChangeSubscription = this.name.valueChanges.subscribe(value => {
+      this.droplist.name = value;
+    });
   }
 
-  public onSubmit(): void {
-    this.editing = false;
-    this.droplist.name = this.name.value;
-  }
-
-  public onEdit(): void {
-    this.editing = true;
+  ngOnDestroy(): void {
+    this.valueChangeSubscription?.unsubscribe();
   }
 
   public onDelete(): void {

@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
 
 export class NextButtonComponent {
   @Input() disabled = false;
+  @Input() tooltip = '';
   @Output() next = new EventEmitter();
 }

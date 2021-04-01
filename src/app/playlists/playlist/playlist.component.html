@@ -14,11 +14,13 @@
         *ngIf="active"
         (previous)="state.getPrevIndex()"
         [disabled]="!state.hasPrevIndex"
+        [tooltip]="prevTooltip"
       ></app-previous-button>
       <app-next-button
         *ngIf="active"
         (next)="state.getNextIndex()"
         [disabled]="!state.hasNextIndex"
+        [tooltip]="nextTooltip"
       ></app-next-button>
       <app-loop-button-toggle
         [initialValue]="state.loop"
@@ -39,6 +41,7 @@
         *ngIf="active"
         (eject)="onEject()"
         [disabled]="ejecting"
+        [tooltip]="ejectTooltip"
       ></app-eject-button>
     </div>
     <div>

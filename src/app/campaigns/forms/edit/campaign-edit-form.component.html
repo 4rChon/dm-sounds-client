@@ -1,0 +1,48 @@
+<h2>Edit Campaign</h2>
+<form [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="legacy">
+    <mat-label>Campaign Name</mat-label>
+    <input matInput id="name" type="text" formControlName="name" />
+    <mat-error *ngIf="name?.hasError('required')">
+      Please enter a Campaign name
+    </mat-error>
+  </mat-form-field>
+  <app-dragdrop-input
+    [addedItems]="playlists?.value"
+    [items]="availablePlaylists"
+    [addedLabel]="'Added Playlists'"
+    [availableLabel]="'Available Playlists'"
+    [loading]="fetchingPlaylists"
+    (addedItemsChange)="playlists?.setValue($event)"
+  ></app-dragdrop-input>
+  <app-dragdrop-input
+    [addedItems]="songs?.value"
+    [items]="availableSongs"
+    [addedLabel]="'Added Songs'"
+    [availableLabel]="'Available Songs'"
+    [loading]="fetchingSongs"
+    (addedItemsChange)="songs?.setValue($event)"
+  ></app-dragdrop-input>
+  <div>
+    <div class="summary">
+      <mat-error *ngIf="campaignForm?.invalid">
+        {{ error }}
+      </mat-error>
+      <span *ngIf="campaignForm?.valid && success && !submitting">
+        {{ success }}
+      </span>
+    </div>
+  </div>
+  <div>
+    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
+    <button
+      class="submit"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!campaignForm.valid || submitting"
+    >
+      Submit
+    </button>
+  </div>
+</form>

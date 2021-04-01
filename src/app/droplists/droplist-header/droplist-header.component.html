@@ -1,19 +1,11 @@
 <div class="droplist-actions">
-  <app-edit-button-icon
-    *ngIf="!editing"
-    (edit)="onEdit()"
-  ></app-edit-button-icon>
-  <app-done-button-icon
-    *ngIf="editing"
-    (done)="onSubmit()"
-  ></app-done-button-icon>
   <app-delete-button-icon
-    [disabled]="editing"
     (delete)="onDelete()"
+    [tooltip]="deleteDockTooltip"
   ></app-delete-button-icon>
 </div>
 <h3 class="droplist-title">
-  <form *ngIf="editing" (ngSubmit)="onSubmit()" autofocus>
+  <form autofocus>
     <input
       class="title-input"
       name="name"
@@ -22,5 +14,4 @@
       matInput
     />
   </form>
-  <span *ngIf="!editing">{{ name.value }}</span>
 </h3>

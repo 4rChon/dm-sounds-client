@@ -1,7 +1,7 @@
-import PlaylistViewModel from '../playlists/playlist.view-model';
-import SongViewModel from '../songs/song.view-model';
+import { PlaylistViewModel } from '../playlists';
+import { SongViewModel } from '../songs';
 
-export default interface CampaignViewModel {
+export interface CampaignViewModel {
   id: string;
   name: string;
   playlists: Array<PlaylistViewModel>;

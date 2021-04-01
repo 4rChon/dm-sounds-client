@@ -1,8 +1,8 @@
-import DroplistItemType from './droplist-item-type.enum';
-import PlaylistViewModel from '../playlists/playlist.view-model';
-import SongViewModel from '../songs/song.view-model';
+import { DroplistItemType } from '.';
+import { PlaylistViewModel } from '../playlists';
+import { SongViewModel } from '../songs';
 
-export default interface DroplistItem {
+export interface DroplistItem {
   type: DroplistItemType;
   data: PlaylistViewModel | SongViewModel;
 }

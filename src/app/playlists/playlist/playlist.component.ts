@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { AudioSourceService } from 'src/app/audio-sources';
-import DragDropService from 'src/app/droplists/dragdrop.service';
-import PlaylistViewModel from 'src/app/playlists/playlist.view-model';
-import PlaylistStateModel from '../playlist-state.model';
+import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
+import { TooltipConstants } from 'src/app/common/tooltip.constants';
+import { DragDropService } from 'src/app/droplists/dragdrop.service';
+import { PlaylistStateModel } from '../playlist-state.model';
 import { PlaylistService } from '../playlist.service';
+import { PlaylistViewModel } from '../playlist.view-model';
 
 @Component({
   selector: 'app-playlist',
@@ -15,6 +16,10 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   @Input() playlist!: PlaylistViewModel;
   @Input() active!: boolean;
   @Output() eject = new EventEmitter();
+
+  public ejectTooltip = TooltipConstants.EjectPlaylist;
+  public nextTooltip = TooltipConstants.PlayNext;
+  public prevTooltip = TooltipConstants.PlayPrev;
 
   public state!: PlaylistStateModel;
   public ejecting = false;

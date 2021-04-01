@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export class DeleteButtonIconComponent {
   @Input() disabled = false;
+  @Input() tooltip = '';
   @Output() delete = new EventEmitter();
 
   public onDelete(): void {

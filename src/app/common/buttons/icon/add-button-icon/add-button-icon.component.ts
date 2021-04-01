@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export class AddButtonIconComponent {
   @Input() disabled = false;
+  @Input() tooltip = '';
   @Output() add = new EventEmitter();
 
   public onAdd(): void {

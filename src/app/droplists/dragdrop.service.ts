@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export default class DragDropService {
+export class DragDropService {
   private dragDropEnabledSubject = new BehaviorSubject<boolean>(true);
   public dragDropEnabled$ = this.dragDropEnabledSubject.asObservable();
 

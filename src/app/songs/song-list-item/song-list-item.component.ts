@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import SongViewModel from '../song.view-model';
+import { SongViewModel } from '..';
 
 @Component({
   selector: 'app-song-list-item',

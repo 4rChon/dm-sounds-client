@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AudioSourceService } from 'src/app/audio-sources';
-import DragDropService from 'src/app/droplists/dragdrop.service';
+import { TooltipConstants } from 'src/app/common/tooltip.constants';
+import { DragDropService } from 'src/app/droplists/dragdrop.service';
 import { ColourService } from '../../common/colour.service';
-import SongStateModel from '../song-state.model';
+import { SongStateModel } from '../song-state.model';
 import { SongService } from '../song.service';
-import SongViewModel from '../song.view-model';
+import { SongViewModel } from '../song.view-model';
 
 @Component({
   selector: 'app-song',
@@ -16,6 +17,8 @@ export class SongComponent implements OnInit {
   @Input() active!: boolean;
   @Output() eject = new EventEmitter();
 
+  public ejectTooltip = TooltipConstants.EjectSong;
+
   public colour!: string;
   public state!: SongStateModel;
   public ejecting = false;
@@ -23,13 +26,12 @@ export class SongComponent implements OnInit {
 
   constructor(
     private readonly songService: SongService,
-    private readonly colourService: ColourService,
     private readonly dragDropService: DragDropService,
     private readonly audioSourceService: AudioSourceService
   ) { }
 
   public ngOnInit(): void {
-    this.colour = this.colourService.RGBtoCSS(this.song.colour);
+    this.colour = ColourService.RGBtoCSS(this.song.colour);
     this.state = this.songService.getOrCreateSongState(this.song);
     this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.song.id);
   }

@@ -1,5 +1,6 @@
 <button
   *ngIf="!currentValue"
+  matTooltip="{{ tooltipOff }}"
   (click)="toggleValue()"
   mat-stroked-button
   color="accent"
@@ -8,6 +9,7 @@
 </button>
 <button
   *ngIf="currentValue"
+  matTooltip="{{ tooltipOn }}"
   (click)="toggleValue()"
   mat-raised-button
   color="accent"

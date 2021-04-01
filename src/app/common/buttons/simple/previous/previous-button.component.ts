@@ -7,5 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export class PreviousButtonComponent {
   @Input() disabled = false;
+  @Input() tooltip = '';
   @Output() previous = new EventEmitter();
 }

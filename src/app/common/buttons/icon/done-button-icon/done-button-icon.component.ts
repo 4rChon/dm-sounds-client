@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export class DoneButtonIconComponent {
   @Input() disabled = false;
+  @Input() tooltip = '';
   @Output() done = new EventEmitter();
 
   public onDone(): void {

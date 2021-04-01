@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
 
 export class EjectButtonComponent {
   @Input() disabled = false;
+  @Input() tooltip = '';
   @Output() eject = new EventEmitter();
 }

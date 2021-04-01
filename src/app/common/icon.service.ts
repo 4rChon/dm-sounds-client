@@ -27,6 +27,7 @@ export class IconService {
     this.addIcon('volumeDown', 'volume_down/v10/24px.svg');
     this.addIcon('volumeUp', 'volume_up/v10/24px.svg');
     this.addIcon('check', 'check/v13/24px.svg');
+    this.addIcon('clear', 'clear/v10/24px.svg');
   }
 
   private addIcon(name: string, resource: string): void {

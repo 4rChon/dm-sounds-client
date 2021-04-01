@@ -1,4 +1,4 @@
-export default interface FilterViewModel {
+export interface FilterViewModel {
   name: string;
   colour: {
     r: number;

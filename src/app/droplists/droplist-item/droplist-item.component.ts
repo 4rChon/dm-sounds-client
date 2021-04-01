@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import DroplistItemType from '../droplist-item-type.enum';
-import DroplistItem from '../droplist-item.interface';
-import PlaylistViewModel from '../../playlists/playlist.view-model';
-import SongViewModel from '../../songs/song.view-model';
 import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
+import { PlaylistViewModel } from 'src/app/playlists/playlist.view-model';
+import { SongViewModel } from 'src/app/songs/song.view-model';
+import { DroplistItemType } from '../droplist-item-type.enum';
+import { DroplistItem } from '../droplist-item.interface';
 
 @Component({
   selector: 'app-droplist-item',

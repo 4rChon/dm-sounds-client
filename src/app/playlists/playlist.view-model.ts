@@ -1,7 +1,7 @@
-import FilterViewModel from '../filters/filter.view-model';
-import SongViewModel from '../songs/song.view-model';
+import { FilterViewModel } from '../filters';
+import { SongViewModel } from '../songs';
 
-export default interface PlaylistViewModel {
+export interface PlaylistViewModel {
   id: string;
   name: string;
   thumbnail: string;

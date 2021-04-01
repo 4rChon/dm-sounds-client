@@ -21,18 +21,15 @@
     [loading]="fetchingSongs"
     (addedItemsChange)="songs?.setValue($event)"
   ></app-dragdrop-input>
-  <div>
-    <div class="summary">
-      <mat-error *ngIf="campaignForm?.invalid">
-        {{ error }}
-      </mat-error>
-      <span *ngIf="campaignForm?.valid && success && !submitting">
-        {{ success }}
-      </span>
-    </div>
+  <div class="summary">
+    <mat-error *ngIf="campaignForm?.invalid">
+      {{ error }}
+    </mat-error>
+    <span *ngIf="campaignForm?.valid && success && !submitting">
+      {{ success }}
+    </span>
   </div>
-  <div>
-    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
+  <div class="buttons">
     <button
       class="submit"
       mat-raised-button
@@ -42,5 +39,6 @@
     >
       Submit
     </button>
+    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
   </div>
 </form>

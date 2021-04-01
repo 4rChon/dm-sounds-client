@@ -24,7 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AudioSourceContainerComponent } from './audio-sources';
 import { CampaignSelectorComponent } from './campaigns';
+import { CampaignActionsComponent } from './campaigns/campaign-actions/campaign-actions.component';
 import { CampaignCreateFormComponent } from './campaigns/forms/create/campaign-create-form.component';
+import { CampaignDeleteFormComponent } from './campaigns/forms/delete/campaign-delete-form.component';
 import { CampaignEditFormComponent } from './campaigns/forms/edit/campaign-edit-form.component';
 import { AddButtonIconComponent, DeleteButtonIconComponent, DoneButtonIconComponent, EditButtonIconComponent } from './common/buttons/icon';
 import { EjectButtonComponent, NextButtonComponent, PreviousButtonComponent } from './common/buttons/simple';
@@ -68,7 +70,9 @@ import { SongComponent, SongListComponent, SongListItemComponent } from './songs
     PlaylistImportFormComponent,
     CampaignCreateFormComponent,
     CampaignEditFormComponent,
-    DragDropInputComponent
+    DragDropInputComponent,
+    CampaignActionsComponent,
+    CampaignDeleteFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

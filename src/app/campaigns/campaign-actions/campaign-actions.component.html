@@ -1,0 +1,17 @@
+<div>
+  <app-campaign-selector
+    (campaignSelected)="selectCampaign($event)"
+    (campaignLoading)="fetching.emit($event)"
+  ></app-campaign-selector>
+  <app-edit-button-icon
+    [disabled]="!currentCampaign"
+    (edit)="openEditDialog()"
+    [tooltip]="editCampaignTooltip"
+  ></app-edit-button-icon>
+  <app-delete-button-icon
+    [disabled]="!currentCampaign"
+    (delete)="openDeleteDialog()"
+    [tooltip]="deleteCampaignTooltip"
+  >
+  </app-delete-button-icon>
+</div>

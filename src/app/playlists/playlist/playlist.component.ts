@@ -43,7 +43,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
     this.songIdSubscription = this.currentSongId$.subscribe(id => {
       this.audioElement = this.audioSourceService.getOrCreateAudioSource(id);
-      console.log(this.audioElement.volume);
     });
   }
 

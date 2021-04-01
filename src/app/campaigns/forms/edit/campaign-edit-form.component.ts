@@ -1,11 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { finalize } from 'rxjs/operators';
 import { CampaignAPIService } from 'src/app/api-services/campaign-api.service';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 import { SongAPIService } from 'src/app/api-services/song-api.service';
 import { DroplistItemType } from 'src/app/droplists/droplist-item-type.enum';
 import { DroplistItem } from 'src/app/droplists/droplist-item.interface';
+import { CampaignActionsService } from '../../campaign-actions/campaign-actions.service';
 import { CampaignViewModel } from '../../campaign.view-model';
 import { CampaignEditFormModel } from './campaign-edit-form.model';
 
@@ -37,6 +39,7 @@ export class CampaignEditFormComponent implements OnInit {
     return this.campaignForm.get('songs');
   }
   constructor(
+    private readonly campaignActionsService: CampaignActionsService,
     private readonly campaignAPIService: CampaignAPIService,
     private readonly playlistAPIService: PlaylistAPIService,
     private readonly songAPIService: SongAPIService,
@@ -60,9 +63,6 @@ export class CampaignEditFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.campaign.playlists
-      ?.map(data => ({ type: DroplistItemType.Playlist, data })));
-
     this.campaignForm = new FormGroup({
       name: new FormControl(this.campaign.name, [Validators.required]),
       playlists: new FormControl(this.campaign.playlists
@@ -82,33 +82,28 @@ export class CampaignEditFormComponent implements OnInit {
       songs: this.songs?.value.map((item: DroplistItem) => item.data.id)
     };
 
-    this.campaignAPIService.editCampaign(model).subscribe({
-      next: this.onNext.bind(this),
-      error: this.onError.bind(this),
-      complete: this.onComplete.bind(this)
-    });
-  }
+    this.campaignAPIService.editCampaign(model)
+      .pipe(finalize(() => this.submitting = false))
+      .subscribe({
+        next: response => {
+          this.campaignForm.setErrors(null);
+          this.success = response.message;
+          const sub = this.campaignForm.valueChanges.subscribe(() => {
+            this.success = '';
+            sub.unsubscribe();
+          });
 
-  private onNext(response: any): void {
-    this.campaignForm.setErrors(null);
-    this.success = response.message;
-    const sub = this.campaignForm.valueChanges.subscribe(() => {
-      this.success = '';
-      sub.unsubscribe();
-    });
-  }
-
-  private onError(reason: any): void {
-    this.campaignForm.setErrors({ error: true });
-    this.error = reason.error.message;
-    const sub = this.campaignForm.valueChanges.subscribe(() => {
-      this.error = '';
-      this.campaignForm.setErrors(null);
-      sub.unsubscribe();
-    });
-  }
-
-  private onComplete(): void {
-    this.submitting = false;
+          this.campaignActionsService.updateCampaigns();
+        },
+        error: reason => {
+          this.campaignForm.setErrors({ error: true });
+          this.error = reason.error.message;
+          const sub = this.campaignForm.valueChanges.subscribe(() => {
+            this.error = '';
+            this.campaignForm.setErrors(null);
+            sub.unsubscribe();
+          });
+        },
+      });
   }
 }

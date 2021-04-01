@@ -50,13 +50,13 @@ export class DroplistService {
     this.droplists = [{ name: 'New Dock', items: [], active: true }];
     this.inactiveDroplist.items.splice(0, this.inactiveDroplist.items.length);
 
-    campaign.songs.forEach(song => {
+    campaign?.songs.forEach(song => {
       this.inactiveDroplist.items.push({
         type: DroplistItemType.Song, data: song
       });
     });
 
-    campaign.playlists.forEach(playlist => {
+    campaign?.playlists.forEach(playlist => {
       this.inactiveDroplist.items.push({
         type: DroplistItemType.Playlist, data: playlist
       });

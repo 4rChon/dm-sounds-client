@@ -1,15 +1,5 @@
 <div cdkDropListGroup class="droplist-group">
-  <div>
-    <app-campaign-selector
-      (campaignSelected)="selectCampaign($event)"
-      (campaignLoading)="setCampaignLoading($event)"
-    ></app-campaign-selector>
-    <app-edit-button-icon
-      [disabled]="!currentCampaign"
-      (edit)="openCampaignEditForm()"
-      [tooltip]="editCampaignTooltip"
-    ></app-edit-button-icon>
-  </div>
+  <app-campaign-actions (fetching)="fetching = $event"></app-campaign-actions>
   <div class="container active-container">
     <div class="droplist-container-header">
       <h2>
@@ -59,6 +49,10 @@
       (cdkDropListDropped)="drop($event)"
       class="list inactive-droplist"
     >
+      <mat-progress-bar
+        *ngIf="fetching"
+        mode="indeterminate"
+      ></mat-progress-bar>
       <app-droplist-item
         *ngFor="let item of getInactiveDroplist().items"
         class="box"

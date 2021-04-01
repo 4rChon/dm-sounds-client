@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { CampaignAPIService } from 'src/app/api-services/campaign-api.service';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 import { SongAPIService } from 'src/app/api-services/song-api.service';
 import { DroplistItem, DroplistItemType } from 'src/app/droplists';
+import { CampaignActionsService } from '../../campaign-actions/campaign-actions.service';
 import { CampaignCreateFormModel } from './campaign-create-form.model';
 
 @Component({
@@ -34,6 +36,7 @@ export class CampaignCreateFormComponent implements OnInit {
     return this.campaignForm.get('songs');
   }
   constructor(
+    private readonly campaignActionsService: CampaignActionsService,
     private readonly campaignAPIService: CampaignAPIService,
     private readonly playlistAPIService: PlaylistAPIService,
     private readonly songAPIService: SongAPIService,
@@ -70,33 +73,28 @@ export class CampaignCreateFormComponent implements OnInit {
       songs: this.songs?.value.map((item: DroplistItem) => item.data.id)
     };
 
-    this.campaignAPIService.createCampaign(model).subscribe({
-      next: this.onNext.bind(this),
-      error: this.onError.bind(this),
-      complete: this.onComplete.bind(this)
-    });
-  }
+    this.campaignAPIService.createCampaign(model)
+      .pipe(finalize(() => this.submitting = false))
+      .subscribe({
+        next: response => {
+          this.campaignForm.setErrors(null);
+          this.success = response.message;
+          const sub = this.campaignForm.valueChanges.subscribe(() => {
+            this.success = '';
+            sub.unsubscribe();
+          });
 
-  private onNext(response: any): void {
-    this.campaignForm.setErrors(null);
-    this.success = response.message;
-    const sub = this.campaignForm.valueChanges.subscribe(() => {
-      this.success = '';
-      sub.unsubscribe();
-    });
-  }
-
-  private onError(reason: any): void {
-    this.campaignForm.setErrors({ error: true });
-    this.error = reason.error.message;
-    const sub = this.campaignForm.valueChanges.subscribe(() => {
-      this.error = '';
-      this.campaignForm.setErrors(null);
-      sub.unsubscribe();
-    });
-  }
-
-  private onComplete(): void {
-    this.submitting = false;
+          this.campaignActionsService.updateCampaigns();
+        },
+        error: reason => {
+          this.campaignForm.setErrors({ error: true });
+          this.error = reason.error.message;
+          const sub = this.campaignForm.valueChanges.subscribe(() => {
+            this.error = '';
+            this.campaignForm.setErrors(null);
+            sub.unsubscribe();
+          });
+        }
+      });
   }
 }

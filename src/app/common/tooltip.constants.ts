@@ -15,5 +15,6 @@ export class TooltipConstants {
   static EditDockDone = 'Confirm edit changes';
   static EditPlaylist = 'Edit playlist';
   static EditCampaign = 'Edit campaign';
+  static DeleteCampaign = 'Delete campaign';
   static EditSong = 'Edit song';
 }

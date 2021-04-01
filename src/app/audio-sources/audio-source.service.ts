@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { APIService } from '../api-services/api.service';
+import { StreamAPIService } from '../api-services/stream-api.service';
 
 @Injectable({ providedIn: 'root' })
 export class AudioSourceService {
   private audioSources: { [id: string]: HTMLAudioElement } = {};
 
-  constructor(private readonly apiService: APIService) { }
+  constructor() { }
 
   public getOrCreateAudioSource(id: string): HTMLAudioElement {
     if (!this.audioSources[id]) {
-      this.audioSources[id] = new Audio(this.apiService.getAudioStreamUrl(id));
+      this.audioSources[id] = new Audio(StreamAPIService.getAudioStreamUrl(id));
     }
 
     return this.audioSources[id];

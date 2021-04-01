@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { APIService } from 'src/app/api-services/api.service';
+import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 import { ImportPlaylistViewModel } from './import-playlist-view-model';
 
 @Component({
@@ -10,7 +10,7 @@ import { ImportPlaylistViewModel } from './import-playlist-view-model';
 
 export class PlaylistImportFormComponent implements OnInit {
   constructor(
-    private readonly apiService: APIService,
+    private readonly playlistAPIService: PlaylistAPIService
     //private readonly playlistService: PlaylistService
   ) { }
 
@@ -61,7 +61,7 @@ export class PlaylistImportFormComponent implements OnInit {
       replaceAll: this.replaceAll?.value
     };
 
-    this.apiService.importPlaylist(model);
+    this.playlistAPIService.importPlaylist(model);
     // this.apiService.addPlaylist(model)
     //   .then(response => {
     //     this.playlistForm.setErrors(null);

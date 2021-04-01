@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { APIService } from 'src/app/api-services/api.service';
 import { CampaignAPIService } from 'src/app/api-services/campaign-api.service';
+import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
+import { SongAPIService } from 'src/app/api-services/song-api.service';
 import { DroplistItem, DroplistItemType } from 'src/app/droplists';
 import { CampaignCreateFormModel } from './campaign-create-form.model';
 
@@ -33,17 +34,22 @@ export class CampaignCreateFormComponent implements OnInit {
     return this.campaignForm.get('songs');
   }
   constructor(
-    private readonly apiService: APIService,
-    private readonly campaignAPIService: CampaignAPIService
+    private readonly campaignAPIService: CampaignAPIService,
+    private readonly playlistAPIService: PlaylistAPIService,
+    private readonly songAPIService: SongAPIService,
   ) {
-    this.apiService.getPlaylists().then(playlists => {
-      this.availablePlaylists = playlists.map(data => ({ type: DroplistItemType.Playlist, data }));
-      this.fetchingPlaylists = false;
+    this.playlistAPIService.getPlaylists().subscribe({
+      next: playlists => {
+        this.availablePlaylists = playlists.map(data => ({ type: DroplistItemType.Playlist, data }));
+        this.fetchingPlaylists = false;
+      }
     });
 
-    this.apiService.getSongs().then(songs => {
-      this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }));
-      this.fetchingSongs = false;
+    this.songAPIService.getSongs().subscribe({
+      next: songs => {
+        this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }));
+        this.fetchingSongs = false;
+      }
     });
   }
 
@@ -64,25 +70,33 @@ export class CampaignCreateFormComponent implements OnInit {
       songs: this.songs?.value.map((item: DroplistItem) => item.data.id)
     };
 
-    this.campaignAPIService.createCampaign(model)
-      .then(response => {
-        this.campaignForm.setErrors(null);
-        this.success = response.message;
-        const sub = this.campaignForm.valueChanges.subscribe(() => {
-          this.success = '';
-          sub.unsubscribe();
-        });
-      })
-      .catch(reason => {
-        this.campaignForm.setErrors({ error: true });
-        this.error = reason.error.message;
-        const sub = this.campaignForm.valueChanges.subscribe(() => {
-          this.error = '';
-          this.campaignForm.setErrors(null);
-          sub.unsubscribe();
-        });
-      }).finally(() => {
-        this.submitting = false;
-      });
+    this.campaignAPIService.createCampaign(model).subscribe({
+      next: this.onNext.bind(this),
+      error: this.onError.bind(this),
+      complete: this.onComplete.bind(this)
+    });
+  }
+
+  private onNext(response: any): void {
+    this.campaignForm.setErrors(null);
+    this.success = response.message;
+    const sub = this.campaignForm.valueChanges.subscribe(() => {
+      this.success = '';
+      sub.unsubscribe();
+    });
+  }
+
+  private onError(reason: any): void {
+    this.campaignForm.setErrors({ error: true });
+    this.error = reason.error.message;
+    const sub = this.campaignForm.valueChanges.subscribe(() => {
+      this.error = '';
+      this.campaignForm.setErrors(null);
+      sub.unsubscribe();
+    });
+  }
+
+  private onComplete(): void {
+    this.submitting = false;
   }
 }

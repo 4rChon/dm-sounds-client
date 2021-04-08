@@ -17,4 +17,7 @@ export class TooltipConstants {
   static EditCampaign = 'Edit campaign';
   static DeleteCampaign = 'Delete campaign';
   static EditSong = 'Edit song';
+  static AddFilter = 'Add filter';
+  static DeleteFilter = 'Delete filter';
+  static SubmitFilter = 'Submit edited filter';
 }

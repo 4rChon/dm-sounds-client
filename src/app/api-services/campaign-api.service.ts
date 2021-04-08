@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CampaignViewModel, CampaignNameViewModel } from '../campaigns';
+import { CampaignNameViewModel, CampaignViewModel } from '../campaigns';
 import { CampaignCreateFormModel } from '../campaigns/forms/create/campaign-create-form.model';
 import { CampaignEditFormModel } from '../campaigns/forms/edit/campaign-edit-form.model';
-import { Observable } from 'rxjs';
 import { ApiConstants } from './api.constants';
 
 @Injectable({ providedIn: 'root' })
@@ -21,7 +21,7 @@ export class CampaignAPIService {
 
   public getCampaigns(): Observable<Array<CampaignViewModel>> {
     return this.httpClient.get<Array<CampaignViewModel>>(
-      `${this.apiUrl}`, { responseType: 'json' }
+      this.apiUrl, { responseType: 'json' }
     );
   }
 
@@ -33,13 +33,13 @@ export class CampaignAPIService {
 
   public createCampaign(model: CampaignCreateFormModel): Observable<any> {
     return this.httpClient.post<any>(
-      `${this.apiUrl}`, model, { headers: ApiConstants.jsonHeaders }
+      this.apiUrl, model, { headers: ApiConstants.jsonHeaders }
     );
   }
 
   public editCampaign(model: CampaignEditFormModel): Observable<any> {
     return this.httpClient.put<any>(
-      `${this.apiUrl}`, model, { headers: ApiConstants.jsonHeaders }
+      this.apiUrl, model, { headers: ApiConstants.jsonHeaders }
     );
   }
 

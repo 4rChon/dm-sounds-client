@@ -1,0 +1,25 @@
+<form class="filter-form" [formGroup]="filterForm">
+  <div class="filter-content">
+    <mat-form-field>
+      <input matInput id="name" type="text" formControlName="name" />
+      <mat-error *ngIf="name?.hasError('required')">Name required</mat-error>
+    </mat-form-field>
+    <span class="filter-colour-wrapper">
+      <app-colour-picker
+        [colour]="colour?.value || '#fff'"
+        (colourChange)="colour?.setValue($event)"
+      ></app-colour-picker>
+    </span>
+  </div>
+  <div class="filter-actions">
+    <app-done-button-icon
+      [disabled]="name?.hasError('required') || !changed"
+      [tooltip]="submitTooltip"
+      (done)="editFilter()"
+    ></app-done-button-icon>
+    <app-delete-button-icon
+      [tooltip]="deleteTooltip"
+      (delete)="deleteFilter()"
+    ></app-delete-button-icon>
+  </div>
+</form>

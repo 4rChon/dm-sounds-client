@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
-import { PlaylistImportFormComponent } from '../playlists/playlist-forms/import/playlist-import-form.component';
 import { CampaignCreateFormComponent } from '../campaigns/forms/create/campaign-create-form.component';
-import { CampaignEditFormComponent } from '../campaigns/forms/edit/campaign-edit-form.component';
+import { FiltersFormComponent } from '../filters/forms/filters-form.component';
+import { PlaylistImportFormComponent } from '../playlists/playlist-forms/import/playlist-import-form.component';
 
 @Component({
   selector: 'app-navigation',
@@ -38,6 +38,10 @@ export class NavigationComponent {
 
   public openPlaylistCreateForm(): void {
 
+  }
+
+  public openFiltersEditForm(): void {
+    this.dialog.open(FiltersFormComponent);
   }
 
 }

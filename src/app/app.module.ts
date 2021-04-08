@@ -35,6 +35,10 @@ import { DragDropInputComponent } from './common/forms/dragdrop-input/dragdrop-i
 import { VolumeSliderComponent } from './common/sliders';
 import { DroplistComponent, DroplistContainerComponent, DroplistHeaderComponent } from './droplists';
 import { FilterComponent, FilterListComponent } from './filters';
+import { ColourPickerComponent } from './filters/forms/colour-picker/colour-picker.component';
+import { FilterCreateFormComponent } from './filters/forms/create/filter-create-form.component';
+import { FilterEditFormComponent } from './filters/forms/edit/filter-edit-form.component';
+import { FiltersFormComponent } from './filters/forms/filters-form.component';
 import { NavigationComponent } from './navigation';
 import { PlaylistComponent } from './playlists';
 import { PlaylistImportFormComponent } from './playlists/playlist-forms/import/playlist-import-form.component';
@@ -72,7 +76,11 @@ import { SongComponent, SongListComponent, SongListItemComponent } from './songs
     CampaignEditFormComponent,
     DragDropInputComponent,
     CampaignActionsComponent,
-    CampaignDeleteFormComponent
+    CampaignDeleteFormComponent,
+    FiltersFormComponent,
+    ColourPickerComponent,
+    FilterEditFormComponent,
+    FilterCreateFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

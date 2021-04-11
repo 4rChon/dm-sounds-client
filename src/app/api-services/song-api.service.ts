@@ -20,7 +20,19 @@ export class SongAPIService {
 
   public importSong(model: SongImportViewModel): Observable<any> {
     return this.httpClient.post<SongImportViewModel>(
+      `${this.apiUrl}/import`, model, { headers: ApiConstants.jsonHeaders }
+    );
+  }
+
+  public editSong(model: SongViewModel): Observable<any> {
+    return this.httpClient.put<SongViewModel>(
       this.apiUrl, model, { headers: ApiConstants.jsonHeaders }
+    );
+  }
+
+  public removeSong(id: string): Observable<any> {
+    return this.httpClient.delete<SongViewModel>(
+      `${this.apiUrl}/${id}`, { responseType: 'json' }
     );
   }
 }

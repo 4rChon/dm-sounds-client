@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CampaignNameViewModel } from '@app-campaigns/campaign-name.view-model';
+import { CampaignCreateFormViewModel, CampaignEditFormViewModel, CampaignViewModel } from '@app-campaigns/view-models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CampaignNameViewModel, CampaignViewModel } from '../campaigns';
-import { CampaignCreateFormViewModel } from '../campaigns/view-models/campaign-create-form.view-model';
-import { CampaignEditFormViewModel } from '../campaigns/view-models/campaign-edit-form.view-model';
 import { ApiConstants } from './api.constants';
 
 @Injectable({ providedIn: 'root' })

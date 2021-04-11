@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CampaignViewModel } from '../campaigns';
+import { CampaignViewModel } from '@app-campaigns/view-models';
 import { DroplistItemType } from './droplist-item-type.enum';
 import { DroplistItem } from './droplist-item.interface';
 import { Droplist } from './droplist.interface';

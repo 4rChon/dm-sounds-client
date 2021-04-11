@@ -12,6 +12,6 @@ export class FilterComponent implements OnInit {
   @Input() filter!: FilterViewModel;
 
   public ngOnInit(): void {
-    this.colour = ColourService.HEXtoRGB(this.filter.colour);
+    this.colour = this.filter.colour;
   }
 }

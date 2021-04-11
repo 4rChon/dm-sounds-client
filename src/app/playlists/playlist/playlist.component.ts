@@ -5,7 +5,7 @@ import { TooltipConstants } from 'src/app/common/tooltip.constants';
 import { DragDropService } from 'src/app/droplists/dragdrop.service';
 import { PlaylistStateModel } from '../playlist-state.model';
 import { PlaylistService } from '../playlist.service';
-import { PlaylistViewModel } from '../playlist.view-model';
+import { PlaylistViewModel } from '../view-models/playlist.view-model';
 
 @Component({
   selector: 'app-playlist',
@@ -38,11 +38,11 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.state = this.playlistService.getOrCreatePlaylistState(this.playlist);
     this.songIndexSubscription = this.state.index$.subscribe(index => {
-      this.currentSongId$.next(this.playlist.songs[index]._id);
+      this.currentSongId$.next(this.playlist.songs[index].songId);
     });
 
-    this.songIdSubscription = this.currentSongId$.subscribe(id => {
-      this.audioElement = this.audioSourceService.getOrCreateAudioSource(id);
+    this.songIdSubscription = this.currentSongId$.subscribe(songId => {
+      this.audioElement = this.audioSourceService.getOrCreateAudioSource(songId);
     });
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlaylistStateModel } from './playlist-state.model';
-import { PlaylistViewModel } from './playlist.view-model';
+import { PlaylistViewModel } from './view-models/playlist.view-model';
 
 @Injectable({ providedIn: 'root' })
 export class PlaylistService {

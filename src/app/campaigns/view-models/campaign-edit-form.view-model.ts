@@ -1,5 +1,5 @@
-import { PlaylistViewModel } from 'src/app/playlists';
-import { SongViewModel } from 'src/app/songs';
+import { PlaylistViewModel } from '@app-playlists/view-models';
+import { SongViewModel } from '@app-songs/view-models';
 
 export interface CampaignEditFormViewModel {
   _id: string;

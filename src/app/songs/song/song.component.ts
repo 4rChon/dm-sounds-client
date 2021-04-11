@@ -1,11 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AudioSourceService } from 'src/app/audio-sources';
-import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { DragDropService } from 'src/app/droplists/dragdrop.service';
-import { ColourService } from '../../common/colour.service';
-import { SongStateModel } from '../song-state.model';
-import { SongService } from '../song.service';
-import { SongViewModel } from '../view-models/song.view-model';
+import { MatDialog } from '@angular/material/dialog';
+import { ColourService } from '@app-common/colour.service';
+import { TooltipConstants } from '@app-common/tooltip.constants';
+import { DragDropService } from '@app-droplists/dragdrop.service';
+import { SongDeleteFormComponent } from '@app-songs/forms/delete/song-delete-form.component';
+import { SongEditFormComponent } from '@app-songs/forms/edit/song-edit-form.component';
+import { SongStateModel } from '@app-songs/song-state.model';
+import { SongService } from '@app-songs/song.service';
+import { SongViewModel } from '@app-songs/view-models';
+import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
 
 @Component({
   selector: 'app-song',
@@ -27,14 +30,24 @@ export class SongComponent implements OnInit {
   constructor(
     private readonly songService: SongService,
     private readonly dragDropService: DragDropService,
-    private readonly audioSourceService: AudioSourceService
+    private readonly audioSourceService: AudioSourceService,
+    private readonly dialog: MatDialog
   ) { }
 
   public ngOnInit(): void {
     console.log(this.song);
-    this.colour = ColourService.HEXtoRGB(this.song.colour);
+    this.colour = this.song.colour;
     this.state = this.songService.getOrCreateSongState(this.song);
     this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.song._id);
+  }
+
+
+  public openEditDialog(): void {
+    this.dialog.open(SongEditFormComponent, { data: this.song });
+  }
+
+  public openDeleteDialog(): void {
+    this.dialog.open(SongDeleteFormComponent, { data: this.song._id });
   }
 
   public onEject(): void {

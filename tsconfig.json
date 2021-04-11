@@ -3,6 +3,15 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@app-api-services/*": ["src/app/api-services/*"],
+      "@app-common/*": ["src/app/common/*"],
+      "@app-campaigns/*": ["src/app/campaigns/*"],
+      "@app-droplists/*": ["src/app/droplists/*"],
+      "@app-filters/*": ["src/app/filters/*"],
+      "@app-songs/*": ["src/app/songs/*"],
+      "@app-playlists/*": ["src/app/playlists/*"],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

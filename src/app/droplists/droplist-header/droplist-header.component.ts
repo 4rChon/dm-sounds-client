@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TooltipConstants } from '@app-common/tooltip.constants';
+import { Droplist } from '@app-droplists/droplist.interface';
+import { DroplistService } from '@app-droplists/droplist.service';
 import { Subscription } from 'rxjs';
-import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { Droplist } from '..';
-import { DroplistService } from '../droplist.service';
 
 @Component({
   selector: 'app-droplist-header',

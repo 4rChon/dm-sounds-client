@@ -1,8 +1,9 @@
-<button class="colour-choice" (click)="show = !show">
+<button type="button" class="colour-choice" (click)="show = !show">
   <span class="colour" [ngStyle]="{ 'background-color': colour }"></span>
 </button>
 <div class="colour-picker" *ngIf="show" @scaleAnimation>
   <button
+    type="button"
     *ngFor="let c of colourPalette"
     class="colour-choice"
     (click)="chooseColour(c)"

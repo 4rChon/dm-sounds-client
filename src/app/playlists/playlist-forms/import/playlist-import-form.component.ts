@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
-import { ImportPlaylistViewModel } from './import-playlist-view-model';
+import { PlaylistImportViewModel } from '../../view-models/playlist-import-view-model';
 
 @Component({
   selector: 'app-playlist-import-form',
-  templateUrl: 'playlist-import-form.component.html'
+  templateUrl: 'playlist-import-form.component.html',
+  styleUrls: ['../../../common/forms/forms.less']
 })
 
 export class PlaylistImportFormComponent implements OnInit {
@@ -21,6 +23,9 @@ export class PlaylistImportFormComponent implements OnInit {
 
   get playlistId(): AbstractControl | null {
     return this.playlistForm.get('playlistId');
+  }
+  get name(): AbstractControl | null {
+    return this.playlistForm.get('name');
   }
   get filters(): AbstractControl | null {
     return this.playlistForm.get('filters');
@@ -41,8 +46,9 @@ export class PlaylistImportFormComponent implements OnInit {
   ngOnInit(): void {
     this.playlistForm = new FormGroup({
       playlistId: new FormControl('', [Validators.required]),
-      filters: new FormControl(''),
-      colour: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      filters: new FormControl([]),
+      colour: new FormControl('#fff'),
       loop: new FormControl(false),
       shuffle: new FormControl(false),
       replaceAll: new FormControl(false)
@@ -50,10 +56,10 @@ export class PlaylistImportFormComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    // this.pending = true;
-
-    const model: ImportPlaylistViewModel = {
-      id: this.playlistId?.value,
+    this.pending = true;
+    const model: PlaylistImportViewModel = {
+      playlistId: this.playlistId?.value,
+      name: this.name?.value,
       filters: this.filters?.value,
       colour: this.colour?.value,
       loop: this.loop?.value,
@@ -61,33 +67,30 @@ export class PlaylistImportFormComponent implements OnInit {
       replaceAll: this.replaceAll?.value
     };
 
-    this.playlistAPIService.importPlaylist(model);
-    // this.apiService.addPlaylist(model)
-    //   .then(response => {
-    //     this.playlistForm.setErrors(null);
-    //     this.success = response.message;
-    //     const subscription = this.playlistForm.valueChanges.subscribe(
-    //       () => {
-    //         this.success = '';
-    //         subscription.unsubscribe();
-    //       }
-    //     );
-
-    //     this.playlistService.fetchPlaylists();
-    //   })
-    //   .catch(response => {
-    //     this.playlistForm.setErrors({ error: true });
-    //     this.error = response.error.message;
-    //     const subscription = this.playlistForm.valueChanges.subscribe(
-    //       () => {
-    //         this.error = '';
-    //         this.playlistForm.setErrors(null);
-    //         subscription.unsubscribe();
-    //       }
-    //     );
-    //   })
-    //   .finally(() =>
-    //     this.pending = false
-    //   );
+    this.playlistAPIService.importPlaylist(model)
+      .pipe(finalize(() => this.pending = false))
+      .subscribe({
+        next: response => {
+          this.playlistForm.setErrors(null);
+          this.success = response.message;
+          const subscription = this.playlistForm.valueChanges.subscribe({
+            next: () => {
+              this.success = '';
+              subscription.unsubscribe();
+            }
+          });
+        },
+        error: response => {
+          this.playlistForm.setErrors({ error: true });
+          this.error = response.error.message;
+          const subscription = this.playlistForm.valueChanges.subscribe({
+            next: () => {
+              this.error = '';
+              this.playlistForm.setErrors(null);
+              subscription.unsubscribe();
+            }
+          });
+        }
+      });
   }
 }

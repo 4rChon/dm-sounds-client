@@ -1,23 +1,11 @@
-<h2>Import Playlist</h2>
-<form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+<h2>Edit Song</h2>
+<form [formGroup]="songForm" (ngSubmit)="onSubmit()">
   <div class="form-inputs">
-    <mat-form-field appearance="legacy">
-      <mat-label>Youtube Playlist ID</mat-label>
-      <input
-        matInput
-        id="playlistId"
-        type="text"
-        formControlName="playlistId"
-      />
-      <mat-error *ngIf="playlistId?.hasError('required')">
-        Playlist ID required
-      </mat-error>
-    </mat-form-field>
     <mat-form-field appearance="legacy">
       <mat-label>Name</mat-label>
       <input matInput id="name" type="text" formControlName="name" />
       <mat-error *ngIf="name?.hasError('required')">
-        Playlist name required
+        Song name required
       </mat-error>
     </mat-form-field>
     <app-filter-picker
@@ -36,13 +24,6 @@
       Loop
     </mat-slide-toggle>
     <mat-slide-toggle
-      id="shuffle"
-      formControlName="shuffle"
-      [color]="'primary'"
-    >
-      Shuffle
-    </mat-slide-toggle>
-    <mat-slide-toggle
       id="replaceAll"
       formControlName="replaceAll"
       [color]="'primary'"
@@ -50,24 +31,22 @@
       Replace All on Play
     </mat-slide-toggle>
   </div>
-  <div>
-    <div class="summary">
-      <mat-error *ngIf="playlistForm?.invalid">
-        {{ error }}
-      </mat-error>
-      <span *ngIf="playlistForm?.valid && success && !pending">
-        {{ success }}
-      </span>
-    </div>
+  <div class="form-summary">
+    <mat-error *ngIf="songForm?.invalid">
+      {{ error }}
+    </mat-error>
+    <span *ngIf="songForm?.valid && success && !pending">
+      {{ success }}
+    </span>
   </div>
-  <div>
+  <div class="form-actions">
     <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
     <button
       class="submit"
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!playlistForm.valid || pending"
+      [disabled]="!songForm.valid || pending"
     >
       Submit
     </button>

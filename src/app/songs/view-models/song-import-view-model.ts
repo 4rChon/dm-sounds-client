@@ -1,8 +1,8 @@
 export interface SongImportViewModel {
-  _id: string;
+  songId: string;
   filters: Array<string>;
+  name: string;
   colour: string;
   loop: boolean;
-  shuffle: boolean;
   replaceAll: boolean;
 }

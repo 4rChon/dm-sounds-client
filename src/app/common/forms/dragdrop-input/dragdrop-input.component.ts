@@ -32,8 +32,4 @@ export class DragDropInputComponent {
       this.addedItemsChange.emit(this.addedItems);
     }
   }
-
-  public HEXtoRGB(colour: any): string {
-    return ColourService.HEXtoRGB(colour);
-  }
 }

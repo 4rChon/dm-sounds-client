@@ -1,6 +1,6 @@
-import { DroplistItemType } from '.';
-import { PlaylistViewModel } from '../playlists';
-import { SongViewModel } from '../songs';
+import { PlaylistViewModel } from '@app-playlists/view-models';
+import { SongViewModel } from '@app-songs/view-models';
+import { DroplistItemType } from './droplist-item-type.enum';
 
 export interface DroplistItem {
   type: DroplistItemType;

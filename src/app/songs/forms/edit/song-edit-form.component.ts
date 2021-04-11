@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SongAPIService } from '@app-api-services/song-api.service';
-import { SongImportViewModel } from '@app-songs/view-models';
+import { CampaignActionsService } from '@app-campaigns/campaign-actions/campaign-actions.service';
+import { SongViewModel } from '@app-songs/view-models';
 import { finalize } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-song-import-form',
-  templateUrl: 'song-import-form.component.html',
+  selector: 'app-song-eidt-form',
+  templateUrl: 'song-edit-form.component.html',
   styleUrls: ['../../../common/forms/forms.less']
 })
 
-export class SongImportFormComponent implements OnInit {
-  constructor(private readonly songAPIService: SongAPIService) { }
-
+export class SongEditFormComponent implements OnInit {
   public songForm!: FormGroup;
   public pending = false;
   public error = '';
   public success = '';
 
-  get songId(): AbstractControl | null {
-    return this.songForm.get('songId');
-  }
+  constructor(
+    private readonly songAPIService: SongAPIService,
+    @Inject(MAT_DIALOG_DATA) public song: SongViewModel) { }
+
   get name(): AbstractControl | null {
     return this.songForm.get('name');
   }
@@ -39,24 +40,33 @@ export class SongImportFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.songForm = new FormGroup({
-      songId: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
-      filters: new FormControl([]),
-      colour: new FormControl('#fff'),
-      loop: new FormControl(false),
-      replaceAll: new FormControl(false)
+      name: new FormControl(this.song.name, [Validators.required]),
+      filters: new FormControl([...this.song.filters]),
+      colour: new FormControl(this.song.colour),
+      loop: new FormControl(this.song.loop),
+      replaceAll: new FormControl(this.song.replaceAll)
     });
   }
 
   public async onSubmit(): Promise<void> {
     this.pending = true;
-    const model: SongImportViewModel = this.songForm.value;
-    this.songAPIService.importSong(model)
+    const model: SongViewModel = {
+      _id: this.song._id,
+      songId: this.song.songId,
+      loop: this.loop?.value,
+      replaceAll: this.replaceAll?.value,
+      name: this.name?.value,
+      filters: this.filters?.value,
+      thumbnail: this.song.thumbnail,
+      colour: this.colour?.value
+    };
+
+    this.songAPIService.editSong(model)
       .pipe(finalize(() => this.pending = false))
       .subscribe({
         next: () => {
           this.songForm.setErrors(null);
-          this.success = 'Song imported!';
+          this.success = 'Song edited!';
           const subscription = this.songForm.valueChanges.subscribe({
             next: () => {
               this.success = '';

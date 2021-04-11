@@ -1,14 +1,16 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
+import { TooltipConstants } from '@app-common/tooltip.constants';
+import { DragDropService } from '@app-droplists/dragdrop.service';
+import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
+import { DroplistItem } from '@app-droplists/droplist-item.interface';
+import { Droplist } from '@app-droplists/droplist.interface';
+import { DroplistService } from '@app-droplists/droplist.service';
+import { PlaylistService } from '@app-playlists/playlist.service';
+import { PlaylistViewModel } from '@app-playlists/view-models';
+import { SongService } from '@app-songs/song.service';
+import { SongViewModel } from '@app-songs/view-models';
 import { Observable } from 'rxjs';
-import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { PlaylistService, PlaylistViewModel } from 'src/app/playlists';
-import { SongService, SongViewModel } from 'src/app/songs';
-import { DragDropService } from '../dragdrop.service';
-import { DroplistItemType } from '../droplist-item-type.enum';
-import { DroplistItem } from '../droplist-item.interface';
-import { Droplist } from '../droplist.interface';
-import { DroplistService } from '../droplist.service';
 
 @Component({
   selector: 'app-droplist-container',

@@ -7,7 +7,7 @@ import { CampaignActionsService } from '../../campaign-actions/campaign-actions.
 @Component({
   selector: 'app-campaign-delete-form',
   templateUrl: 'campaign-delete-form.component.html',
-  styleUrls: ['campaign-delete-form.component.less']
+  styleUrls: ['../../../common/forms/forms.less', 'campaign-delete-form.component.less']
 })
 
 export class CampaignDeleteFormComponent {

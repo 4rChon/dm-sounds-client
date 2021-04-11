@@ -6,6 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { CampaignCreateFormComponent } from '../campaigns/forms/create/campaign-create-form.component';
 import { FiltersFormComponent } from '../filters/forms/filters-form.component';
 import { PlaylistImportFormComponent } from '../playlists/playlist-forms/import/playlist-import-form.component';
+import { SongImportFormComponent } from '../songs/forms/import/song-import-form.component';
 
 @Component({
   selector: 'app-navigation',
@@ -25,7 +26,7 @@ export class NavigationComponent {
     private readonly dialog: MatDialog) { }
 
   public openSongImportForm(): void {
-    // this.dialog.open(SongImportFormComponent);
+    this.dialog.open(SongImportFormComponent);
   }
 
   public openPlaylistImportForm(): void {

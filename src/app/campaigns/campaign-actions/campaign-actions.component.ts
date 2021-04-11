@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { DroplistService } from 'src/app/droplists';
-import { CampaignViewModel } from '../view-models/campaign.view-model';
-import { CampaignDeleteFormComponent } from '../forms/delete/campaign-delete-form.component';
-import { CampaignEditFormComponent } from '../forms/edit/campaign-edit-form.component';
+import { CampaignDeleteFormComponent } from '@app-campaigns/forms/delete/campaign-delete-form.component';
+import { CampaignEditFormComponent } from '@app-campaigns/forms/edit/campaign-edit-form.component';
+import { CampaignViewModel } from '@app-campaigns/view-models';
+import { TooltipConstants } from '@app-common/tooltip.constants';
+import { DroplistService } from '@app-droplists/droplist.service';
 
 @Component({
   selector: 'app-campaign-actions',

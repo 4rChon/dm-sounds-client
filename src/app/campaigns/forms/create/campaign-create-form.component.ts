@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CampaignAPIService } from '@app-api-services/campaign-api.service';
+import { PlaylistAPIService } from '@app-api-services/playlist-api.service';
+import { SongAPIService } from '@app-api-services/song-api.service';
+import { CampaignActionsService } from '@app-campaigns/campaign-actions/campaign-actions.service';
+import { CampaignCreateFormViewModel } from '@app-campaigns/view-models';
+import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
+import { DroplistItem } from '@app-droplists/droplist-item.interface';
 import { finalize } from 'rxjs/operators';
-import { CampaignAPIService } from 'src/app/api-services/campaign-api.service';
-import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
-import { SongAPIService } from 'src/app/api-services/song-api.service';
-import { DroplistItem, DroplistItemType } from 'src/app/droplists';
-import { CampaignActionsService } from '../../campaign-actions/campaign-actions.service';
-import { CampaignCreateFormViewModel } from '../../view-models/campaign-create-form.view-model';
 
 @Component({
   selector: 'app-campaign-create-form',

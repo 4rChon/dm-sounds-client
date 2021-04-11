@@ -8,7 +8,7 @@ import { AudioSourceService } from '../audio-source.service';
 })
 export class AudioSourceContainerComponent implements OnInit, OnDestroy, OnChanges {
   private audioElement!: HTMLAudioElement;
-  @Input() id!: string;
+  @Input() songId!: string;
   @Input() loop!: boolean;
   @Output() audioEnd = new EventEmitter();
 
@@ -21,7 +21,7 @@ export class AudioSourceContainerComponent implements OnInit, OnDestroy, OnChang
   }
 
   ngOnInit(): void {
-    this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.id);
+    this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.songId);
     this.audioElement.loop = this.loop;
     this.audioElement.onended = this.onAudioEnd.bind(this);
     this.audioElement.onplay = () => this.audioElement.volume = 1;

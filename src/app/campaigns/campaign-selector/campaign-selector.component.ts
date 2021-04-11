@@ -28,6 +28,7 @@ export class CampaignSelectorComponent implements OnDestroy {
       next: () => {
         this.campaignAPIService.getCampaignNames().subscribe({
           next: (campaigns) => {
+            console.log(campaigns);
             this.campaignNames = campaigns;
           }
         });

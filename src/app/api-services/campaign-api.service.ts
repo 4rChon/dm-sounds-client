@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CampaignNameViewModel, CampaignViewModel } from '../campaigns';
-import { CampaignCreateFormModel } from '../campaigns/forms/create/campaign-create-form.model';
-import { CampaignEditFormModel } from '../campaigns/forms/edit/campaign-edit-form.model';
+import { CampaignCreateFormViewModel } from '../campaigns/view-models/campaign-create-form.view-model';
+import { CampaignEditFormViewModel } from '../campaigns/view-models/campaign-edit-form.view-model';
 import { ApiConstants } from './api.constants';
 
 @Injectable({ providedIn: 'root' })
 export class CampaignAPIService {
-  private apiUrl = `${environment.api}/campaigns`;
+  private readonly apiUrl = `${environment.api}/campaigns`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,13 +31,13 @@ export class CampaignAPIService {
     );
   }
 
-  public createCampaign(model: CampaignCreateFormModel): Observable<any> {
+  public createCampaign(model: CampaignCreateFormViewModel): Observable<any> {
     return this.httpClient.post<any>(
       this.apiUrl, model, { headers: ApiConstants.jsonHeaders }
     );
   }
 
-  public editCampaign(model: CampaignEditFormModel): Observable<any> {
+  public editCampaign(model: CampaignEditFormViewModel): Observable<any> {
     return this.httpClient.put<any>(
       this.apiUrl, model, { headers: ApiConstants.jsonHeaders }
     );

@@ -1,15 +1,12 @@
-import { FilterViewModel } from '../filters';
+import { FilterViewModel } from '../../filters';
 
 export interface SongViewModel {
-  id: string;
+  _id: string;
+  song_id: string;
   loop: boolean;
   replaceAll: boolean;
   name: string;
   filters: Array<FilterViewModel>;
   thumbnail: string;
-  colour: {
-    r: number;
-    g: number;
-    b: number;
-  };
+  colour: string;
 }

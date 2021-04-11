@@ -6,7 +6,7 @@ import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 import { SongAPIService } from 'src/app/api-services/song-api.service';
 import { DroplistItem, DroplistItemType } from 'src/app/droplists';
 import { CampaignActionsService } from '../../campaign-actions/campaign-actions.service';
-import { CampaignCreateFormModel } from './campaign-create-form.model';
+import { CampaignCreateFormViewModel } from '../../view-models/campaign-create-form.view-model';
 
 @Component({
   selector: 'app-campaign-create-form',
@@ -67,10 +67,10 @@ export class CampaignCreateFormComponent implements OnInit {
   public onSubmit(): void {
     this.submitting = true;
 
-    const model: CampaignCreateFormModel = {
+    const model: CampaignCreateFormViewModel = {
       name: this.name?.value,
-      playlists: this.playlists?.value.map((item: DroplistItem) => item.data.id),
-      songs: this.songs?.value.map((item: DroplistItem) => item.data.id)
+      playlists: this.playlists?.value.map((item: DroplistItem) => item.data._id),
+      songs: this.songs?.value.map((item: DroplistItem) => item.data._id)
     };
 
     this.campaignAPIService.createCampaign(model)

@@ -10,7 +10,7 @@
       <div
         class="item-box"
         *ngFor="let item of addedItems"
-        [ngStyle]="{ 'background-color': RGBtoCSS(item.data.colour) }"
+        [ngStyle]="{ 'background-color': HEXtoRGB(item.data.colour) }"
         cdkDrag
       >
         {{ item.data.name }}
@@ -29,7 +29,7 @@
       <div
         class="item-box"
         *ngFor="let item of items"
-        [ngStyle]="{ 'background-color': RGBtoCSS(item.data.colour) }"
+        [ngStyle]="{ 'background-color': HEXtoRGB(item.data.colour) }"
         cdkDrag
       >
         {{ item.data.name }}

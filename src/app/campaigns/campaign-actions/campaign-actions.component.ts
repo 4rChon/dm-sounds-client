@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TooltipConstants } from 'src/app/common/tooltip.constants';
 import { DroplistService } from 'src/app/droplists';
-import { CampaignViewModel } from '../campaign.view-model';
+import { CampaignViewModel } from '../view-models/campaign.view-model';
 import { CampaignDeleteFormComponent } from '../forms/delete/campaign-delete-form.component';
 import { CampaignEditFormComponent } from '../forms/edit/campaign-edit-form.component';
 
@@ -32,6 +32,6 @@ export class CampaignActionsComponent {
   }
 
   public openDeleteDialog(): void {
-    this.dialog.open(CampaignDeleteFormComponent, { data: this.currentCampaign?.id });
+    this.dialog.open(CampaignDeleteFormComponent, { data: this.currentCampaign?._id });
   }
 }

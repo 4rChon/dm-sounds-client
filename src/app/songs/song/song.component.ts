@@ -5,7 +5,7 @@ import { DragDropService } from 'src/app/droplists/dragdrop.service';
 import { ColourService } from '../../common/colour.service';
 import { SongStateModel } from '../song-state.model';
 import { SongService } from '../song.service';
-import { SongViewModel } from '../song.view-model';
+import { SongViewModel } from '../view-models/song.view-model';
 
 @Component({
   selector: 'app-song',
@@ -31,14 +31,15 @@ export class SongComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.colour = ColourService.RGBtoCSS(this.song.colour);
+    console.log(this.song);
+    this.colour = ColourService.HEXtoRGB(this.song.colour);
     this.state = this.songService.getOrCreateSongState(this.song);
-    this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.song.id);
+    this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.song._id);
   }
 
   public onEject(): void {
     this.ejecting = true;
-    this.eject.emit(this.song.id);
+    this.eject.emit(this.song._id);
   }
 
   public enableDragDrop(): void {

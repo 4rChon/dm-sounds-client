@@ -1,5 +1,5 @@
 export interface FilterViewModel {
-  id: string;
+  _id: string;
   name: string;
   colour: string;
 }

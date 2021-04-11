@@ -1,4 +1,4 @@
 export interface CampaignNameViewModel {
-  id: string;
+  _id: string;
   name: string;
 }

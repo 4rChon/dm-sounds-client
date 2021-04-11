@@ -33,7 +33,7 @@ export class DragDropInputComponent {
     }
   }
 
-  public RGBtoCSS(colour: any): string {
-    return ColourService.RGBtoCSS(colour);
+  public HEXtoRGB(colour: any): string {
+    return ColourService.HEXtoRGB(colour);
   }
 }

@@ -3,7 +3,7 @@
 </div>
 <app-audio-source-container
   *ngIf="active"
-  [id]="song.id"
+  [id]="song.song_id"
   [loop]="false"
   (audioEnd)="audioEnd.emit()"
 ></app-audio-source-container>

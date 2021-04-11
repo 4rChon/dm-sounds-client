@@ -4,11 +4,11 @@
   class="filter-input"
   [filter]="filter"
   (delete)="deleteFilter(ix)"
-  (edit)="getFilters()"
+  (edit)="editFilter(ix, $event)"
 ></app-filter-edit-form>
 <app-filter-create-form
   class="filter-input"
-  (add)="getFilters()"
+  (add)="addFilter($event)"
 ></app-filter-create-form>
 <div class="buttons">
   <button class="close" mat-stroked-button [mat-dialog-close]>Close</button>

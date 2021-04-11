@@ -35,7 +35,7 @@ import { DragDropInputComponent } from './common/forms/dragdrop-input/dragdrop-i
 import { VolumeSliderComponent } from './common/sliders';
 import { DroplistComponent, DroplistContainerComponent, DroplistHeaderComponent } from './droplists';
 import { FilterComponent, FilterListComponent } from './filters';
-import { ColourPickerComponent } from './filters/forms/colour-picker/colour-picker.component';
+import { ColourPickerComponent } from './common/forms/colour-picker/colour-picker.component';
 import { FilterCreateFormComponent } from './filters/forms/create/filter-create-form.component';
 import { FilterEditFormComponent } from './filters/forms/edit/filter-edit-form.component';
 import { FiltersFormComponent } from './filters/forms/filters-form.component';

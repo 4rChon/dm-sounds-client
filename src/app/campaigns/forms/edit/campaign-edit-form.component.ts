@@ -8,8 +8,8 @@ import { SongAPIService } from 'src/app/api-services/song-api.service';
 import { DroplistItemType } from 'src/app/droplists/droplist-item-type.enum';
 import { DroplistItem } from 'src/app/droplists/droplist-item.interface';
 import { CampaignActionsService } from '../../campaign-actions/campaign-actions.service';
-import { CampaignViewModel } from '../../campaign.view-model';
-import { CampaignEditFormModel } from './campaign-edit-form.model';
+import { CampaignViewModel } from '../../view-models/campaign.view-model';
+import { CampaignEditFormViewModel } from '../../view-models/campaign-edit-form.view-model';
 
 @Component({
   selector: 'app-campaign-edit-form',
@@ -47,7 +47,7 @@ export class CampaignEditFormComponent implements OnInit {
   ) {
     this.playlistAPIService.getPlaylists().subscribe({
       next: playlists => {
-        const filteredPlaylists = playlists.filter(data => !this.campaign.playlists?.find((value) => value.id === data.id));
+        const filteredPlaylists = playlists.filter(data => !this.campaign.playlists?.find((value) => value._id === data._id));
         this.availablePlaylists = filteredPlaylists.map(data => ({ type: DroplistItemType.Playlist, data }));
         this.fetchingPlaylists = false;
       }
@@ -55,7 +55,7 @@ export class CampaignEditFormComponent implements OnInit {
 
     this.songAPIService.getSongs().subscribe({
       next: songs => {
-        const filteredSongs = songs.filter(data => !this.campaign.songs?.find((value) => value.id === data.id));
+        const filteredSongs = songs.filter(data => !this.campaign.songs?.find((value) => value._id === data._id));
         this.availableSongs = filteredSongs.map(data => ({ type: DroplistItemType.Song, data }));
         this.fetchingSongs = false;
       }
@@ -75,11 +75,11 @@ export class CampaignEditFormComponent implements OnInit {
   public onSubmit(): void {
     this.submitting = true;
 
-    const model: CampaignEditFormModel = {
-      id: this.campaign.id,
+    const model: CampaignEditFormViewModel = {
+      _id: this.campaign._id,
       name: this.name?.value,
-      playlists: this.playlists?.value.map((item: DroplistItem) => item.data.id),
-      songs: this.songs?.value.map((item: DroplistItem) => item.data.id)
+      playlists: this.playlists?.value.map((item: DroplistItem) => item.data._id),
+      songs: this.songs?.value.map((item: DroplistItem) => item.data._id)
     };
 
     this.campaignAPIService.editCampaign(model)

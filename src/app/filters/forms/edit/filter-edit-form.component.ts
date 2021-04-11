@@ -3,8 +3,8 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { Subscription } from 'rxjs';
 import { FilterAPIService } from 'src/app/api-services/filter-api.service';
 import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { FilterViewModel } from '../../filter.view-model';
-import { FilterEditFormModel } from './filter-edit-form.model';
+import { FilterViewModel } from '../../view-models/filter.view-model';
+import { FilterEditFormViewModel } from '../../view-models/filter-edit-form.view-model';
 
 @Component({
   selector: 'app-filter-edit-form',
@@ -15,7 +15,7 @@ import { FilterEditFormModel } from './filter-edit-form.model';
 export class FilterEditFormComponent implements OnInit, OnDestroy {
   @Input() filter!: FilterViewModel;
   @Output() delete = new EventEmitter();
-  @Output() edit = new EventEmitter();
+  @Output() edit = new EventEmitter<FilterViewModel>();
 
   public readonly deleteTooltip = TooltipConstants.DeleteFilter;
   public readonly submitTooltip = TooltipConstants.SubmitFilter;
@@ -51,7 +51,7 @@ export class FilterEditFormComponent implements OnInit, OnDestroy {
   }
 
   public deleteFilter(): void {
-    this.filterAPIService.deleteFilter(this.filter.id).subscribe({
+    this.filterAPIService.deleteFilter(this.filter._id).subscribe({
       next: () => {
         this.delete.emit();
       }
@@ -59,15 +59,15 @@ export class FilterEditFormComponent implements OnInit, OnDestroy {
   }
 
   public editFilter(): void {
-    const model: FilterEditFormModel = {
-      id: this.filter.id,
+    const model: FilterEditFormViewModel = {
+      _id: this.filter._id,
       name: this.name?.value,
-      colour: this.colour?.value
+      colour: this.colour?.value ?? '#fff'
     };
 
     this.filterAPIService.editFilter(model).subscribe({
-      next: () => {
-        this.edit.emit();
+      next: (filter) => {
+        this.edit.emit(filter);
       }
     });
   }

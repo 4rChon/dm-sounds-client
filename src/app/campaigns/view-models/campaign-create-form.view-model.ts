@@ -1,7 +1,7 @@
 import { PlaylistViewModel } from 'src/app/playlists';
 import { SongViewModel } from 'src/app/songs';
 
-export interface CampaignCreateFormModel {
+export interface CampaignCreateFormViewModel {
   name: string;
   playlists: Array<PlaylistViewModel>;
   songs: Array<SongViewModel>;

@@ -38,7 +38,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.state = this.playlistService.getOrCreatePlaylistState(this.playlist);
     this.songIndexSubscription = this.state.index$.subscribe(index => {
-      this.currentSongId$.next(this.playlist.songs[index].id);
+      this.currentSongId$.next(this.playlist.songs[index]._id);
     });
 
     this.songIdSubscription = this.currentSongId$.subscribe(id => {

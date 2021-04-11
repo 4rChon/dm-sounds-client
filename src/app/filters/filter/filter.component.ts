@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColourService } from '../../common/colour.service';
-import { FilterViewModel } from '../filter.view-model';
+import { FilterViewModel } from '../view-models/filter.view-model';
 
 @Component({
   selector: 'app-filter',
@@ -8,10 +8,10 @@ import { FilterViewModel } from '../filter.view-model';
   styleUrls: ['./filter.component.less']
 })
 export class FilterComponent implements OnInit {
-  public colour!: any;
+  public colour!: string;
   @Input() filter!: FilterViewModel;
 
   public ngOnInit(): void {
-    this.colour = ColourService.RGBtoCSS(this.filter.colour);
+    this.colour = ColourService.HEXtoRGB(this.filter.colour);
   }
 }

@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PlaylistCreateFormComponent } from '@app-playlists/playlist-forms/create/playlist-create-form.component';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { CampaignCreateFormComponent } from '../campaigns/forms/create/campaign-create-form.component';
@@ -38,7 +39,7 @@ export class NavigationComponent {
   }
 
   public openPlaylistCreateForm(): void {
-
+    this.dialog.open(PlaylistCreateFormComponent);
   }
 
   public openFiltersEditForm(): void {

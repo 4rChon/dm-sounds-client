@@ -2,18 +2,6 @@
 <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
   <div class="form-inputs">
     <mat-form-field appearance="legacy">
-      <mat-label>Youtube Playlist ID</mat-label>
-      <input
-        matInput
-        id="playlistId"
-        type="text"
-        formControlName="playlistId"
-      />
-      <mat-error *ngIf="playlistId?.hasError('required')">
-        Playlist ID required
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="legacy">
       <mat-label>Name</mat-label>
       <input matInput id="name" type="text" formControlName="name" />
       <mat-error *ngIf="name?.hasError('required')">
@@ -49,13 +37,20 @@
     >
       Replace All on Play
     </mat-slide-toggle>
+    <app-dragdrop-input
+      [items]="availableSongs"
+      [addedLabel]="'Added Songs'"
+      [availableLabel]="'Available Songs'"
+      [loading]="fetchingSongs"
+      (addedItemsChange)="songs?.setValue($event)"
+    ></app-dragdrop-input>
   </div>
   <div>
     <div class="form-summary">
       <mat-error *ngIf="playlistForm?.invalid">
         {{ error }}
       </mat-error>
-      <span *ngIf="playlistForm?.valid && success && !pending">
+      <span *ngIf="playlistForm?.valid && success && !submitting">
         {{ success }}
       </span>
     </div>
@@ -67,7 +62,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!playlistForm.valid || pending"
+      [disabled]="!playlistForm.valid || submitting"
     >
       Submit
     </button>

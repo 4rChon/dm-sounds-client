@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-campaign-create-form',
   templateUrl: 'campaign-create-form.component.html',
-  styleUrls: ['campaign-create-form.component.less']
+  styleUrls: ['../../../common/forms/forms.less']
 })
 
 export class CampaignCreateFormComponent implements OnInit {

@@ -1,5 +1,8 @@
 <mat-card>
-  <app-filter-list [filters]="playlist.filters"></app-filter-list>
+  <app-filter-list
+    [ngStyle]="{ 'background-color': playlist.colour }"
+    [filters]="playlist.filters"
+  ></app-filter-list>
   <mat-card-header>
     <mat-card-title>{{ playlist.name }}</mat-card-title>
     <img
@@ -52,6 +55,10 @@
         (mouseenter)="disableDragDrop()"
         (mouseleave)="enableDragDrop()"
       ></app-volume-slider>
+      <app-edit-button-icon *ngIf="!active" (edit)="openEditDialog()">
+      </app-edit-button-icon>
+      <app-delete-button-icon *ngIf="!active" (delete)="openDeleteDialog()">
+      </app-delete-button-icon>
     </div>
   </mat-card-actions>
   <mat-card-content>

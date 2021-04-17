@@ -2,7 +2,7 @@
 <form (ngSubmit)="onSubmit()">
   <div *ngIf="!success">Are you sure you want to delete this campaign?</div>
   <div>
-    <div class="summary">
+    <div class="form-summary">
       <mat-error *ngIf="error">
         {{ error }}
       </mat-error>
@@ -18,7 +18,7 @@
       mat-raised-button
       color="warn"
     >
-      Confirm
+      Delete
     </button>
     <button
       *ngIf="!(success || error)"

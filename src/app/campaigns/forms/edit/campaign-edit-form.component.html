@@ -23,7 +23,7 @@
     [loading]="fetchingSongs"
     (addedItemsChange)="songs?.setValue($event)"
   ></app-dragdrop-input>
-  <div class="summary">
+  <div class="form-summary">
     <mat-error *ngIf="campaignForm?.invalid">
       {{ error }}
     </mat-error>

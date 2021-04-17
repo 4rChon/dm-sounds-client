@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ColourService } from '@app-common/colour.service';
 import { TooltipConstants } from '@app-common/tooltip.constants';
 import { DragDropService } from '@app-droplists/dragdrop.service';
 import { SongDeleteFormComponent } from '@app-songs/forms/delete/song-delete-form.component';
@@ -13,7 +12,7 @@ import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
 @Component({
   selector: 'app-song',
   templateUrl: './song.component.html',
-  styleUrls: ['./song.component.less']
+  styleUrls: ['../../../app/common/audio-card.less']
 })
 export class SongComponent implements OnInit {
   @Input() song!: SongViewModel;
@@ -22,7 +21,6 @@ export class SongComponent implements OnInit {
 
   public ejectTooltip = TooltipConstants.EjectSong;
 
-  public colour!: string;
   public state!: SongStateModel;
   public ejecting = false;
   public audioElement!: HTMLAudioElement;
@@ -35,10 +33,8 @@ export class SongComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    console.log(this.song);
-    this.colour = this.song.colour;
     this.state = this.songService.getOrCreateSongState(this.song);
-    this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.song._id);
+    this.audioElement = this.audioSourceService.getOrCreateAudioSource(this.song.songId);
   }
 
 

@@ -43,6 +43,9 @@ import { FilterComponent } from '@app-filters/filter/filter.component';
 import { FilterCreateFormComponent } from '@app-filters/forms/create/filter-create-form.component';
 import { FilterEditFormComponent } from '@app-filters/forms/edit/filter-edit-form.component';
 import { FiltersFormComponent } from '@app-filters/forms/filters-form.component';
+import { PlaylistCreateFormComponent } from '@app-playlists/playlist-forms/create/playlist-create-form.component';
+import { PlaylistDeleteFormComponent } from '@app-playlists/playlist-forms/delete/playlist-delete-form.component';
+import { PlaylistEditFormComponent } from '@app-playlists/playlist-forms/edit/playlist-edit-form.component';
 import { PlaylistImportFormComponent } from '@app-playlists/playlist-forms/import/playlist-import-form.component';
 import { PlaylistComponent } from '@app-playlists/playlist/playlist.component';
 import { SongDeleteFormComponent } from '@app-songs/forms/delete/song-delete-form.component';
@@ -95,7 +98,10 @@ import { NavigationComponent } from './navigation/navigation.component';
     SongImportFormComponent,
     FilterPickerComponent,
     SongEditFormComponent,
-    SongDeleteFormComponent
+    SongDeleteFormComponent,
+    PlaylistCreateFormComponent,
+    PlaylistEditFormComponent,
+    PlaylistDeleteFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

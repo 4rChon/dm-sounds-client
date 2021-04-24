@@ -7,22 +7,14 @@
       Please enter a Campaign name
     </mat-error>
   </mat-form-field>
-  <app-dragdrop-input
-    [addedItems]="playlists?.value"
-    [items]="availablePlaylists"
-    [addedLabel]="'Added Playlists'"
-    [availableLabel]="'Available Playlists'"
-    [loading]="fetchingPlaylists"
-    (addedItemsChange)="playlists?.setValue($event)"
-  ></app-dragdrop-input>
-  <app-dragdrop-input
-    [addedItems]="songs?.value"
-    [items]="availableSongs"
-    [addedLabel]="'Added Songs'"
-    [availableLabel]="'Available Songs'"
-    [loading]="fetchingSongs"
-    (addedItemsChange)="songs?.setValue($event)"
-  ></app-dragdrop-input>
+  <app-playlist-picker
+    [playlists]="playlists?.value"
+    (playlistsChange)="playlists?.setValue($event)"
+  ></app-playlist-picker>
+  <app-song-picker
+    [songs]="songs?.value"
+    (songsChange)="songs?.setValue($event)"
+  ></app-song-picker>
   <div class="form-summary">
     <mat-error *ngIf="campaignForm?.invalid">
       {{ error }}
@@ -32,6 +24,7 @@
     </span>
   </div>
   <div class="buttons">
+    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
     <button
       class="submit"
       mat-raised-button
@@ -41,6 +34,5 @@
     >
       Submit
     </button>
-    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
   </div>
 </form>

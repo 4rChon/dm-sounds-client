@@ -1,0 +1,8 @@
+<app-dragdrop-input
+  [addedItems]="addedSongs"
+  [availableItems]="availableSongs"
+  [addedLabel]="'Added Songs'"
+  [availableLabel]="'Available Songs'"
+  [loading]="fetchingSongs"
+  (addedItemsChange)="onSongsChange($event)"
+></app-dragdrop-input>

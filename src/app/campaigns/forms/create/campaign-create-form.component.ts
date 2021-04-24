@@ -16,16 +16,11 @@ import { finalize } from 'rxjs/operators';
 })
 
 export class CampaignCreateFormComponent implements OnInit {
-  public availablePlaylists: Array<DroplistItem> = [];
-  public availableSongs: Array<DroplistItem> = [];
+  public campaignForm!: FormGroup;
 
-  public fetchingPlaylists = true;
-  public fetchingSongs = true;
+  public submitting = false;
   public error = '';
   public success = '';
-
-  public campaignForm!: FormGroup;
-  public submitting = false;
 
   get name(): AbstractControl | null {
     return this.campaignForm.get('name');
@@ -38,24 +33,8 @@ export class CampaignCreateFormComponent implements OnInit {
   }
   constructor(
     private readonly campaignActionsService: CampaignActionsService,
-    private readonly campaignAPIService: CampaignAPIService,
-    private readonly playlistAPIService: PlaylistAPIService,
-    private readonly songAPIService: SongAPIService,
-  ) {
-    this.playlistAPIService.getPlaylists().subscribe({
-      next: playlists => {
-        this.availablePlaylists = playlists.map(data => ({ type: DroplistItemType.Playlist, data }));
-        this.fetchingPlaylists = false;
-      }
-    });
-
-    this.songAPIService.getSongs().subscribe({
-      next: songs => {
-        this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }));
-        this.fetchingSongs = false;
-      }
-    });
-  }
+    private readonly campaignAPIService: CampaignAPIService
+  ) { }
 
   ngOnInit(): void {
     this.campaignForm = new FormGroup({
@@ -70,8 +49,8 @@ export class CampaignCreateFormComponent implements OnInit {
 
     const model: CampaignCreateFormViewModel = {
       name: this.name?.value,
-      playlists: this.playlists?.value.map((item: DroplistItem) => item.data._id),
-      songs: this.songs?.value.map((item: DroplistItem) => item.data._id)
+      playlists: this.playlists?.value,
+      songs: this.songs?.value
     };
 
     this.campaignAPIService.createCampaign(model)

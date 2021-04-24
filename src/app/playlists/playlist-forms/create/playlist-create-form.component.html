@@ -9,6 +9,7 @@
       </mat-error>
     </mat-form-field>
     <app-filter-picker
+      [filters]="filters?.value"
       (filtersChange)="filters?.setValue($event)"
     ></app-filter-picker>
     <div class="colour-input">
@@ -36,13 +37,10 @@
     >
       Replace All on Play
     </mat-slide-toggle>
-    <app-dragdrop-input
-      [items]="availableSongs"
-      [addedLabel]="'Added Songs'"
-      [availableLabel]="'Available Songs'"
-      [loading]="fetchingSongs"
-      (addedItemsChange)="songs?.setValue($event)"
-    ></app-dragdrop-input>
+    <app-song-picker
+      [songs]="songs?.value"
+      (songsChange)="songs?.setValue($event)"
+    ></app-song-picker>
   </div>
   <div>
     <div class="form-summary">

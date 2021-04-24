@@ -21,7 +21,8 @@
       </mat-error>
     </mat-form-field>
     <app-filter-picker
-      (addedItemsChange)="filters?.setValue($event)"
+      [filters]="filters?.value"
+      (filtersChange)="filters?.setValue($event)"
     ></app-filter-picker>
     <div class="colour-input">
       <label for="colour-picker">Colour</label>

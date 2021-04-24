@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FilterViewModel } from '@app-filters/view-models';
+import { finalize } from 'rxjs/operators';
 import { FilterAPIService } from 'src/app/api-services/filter-api.service';
 
 @Component({
@@ -10,12 +11,14 @@ import { FilterAPIService } from 'src/app/api-services/filter-api.service';
 export class FiltersFormComponent {
   public filters: Array<FilterViewModel> = [];
 
+  public fetching = true;
+
   constructor(private readonly filterAPIService: FilterAPIService) {
-    this.filterAPIService.getFilters().subscribe({
-      next: filters => {
-        return this.filters = filters;
-      }
-    });
+    this.filterAPIService.getFilters()
+      .pipe(finalize(() => this.fetching = false))
+      .subscribe({
+        next: filters => this.filters = filters
+      });
   }
 
   public deleteFilter(index: number): void {

@@ -32,6 +32,7 @@ import { LoopButtonToggleComponent, ReplaceAllButtonToggleComponent, ShuffleButt
 import { ColourPickerComponent } from '@app-common/forms/colour-picker/colour-picker.component';
 import { DragDropInputComponent } from '@app-common/forms/dragdrop-input/dragdrop-input.component';
 import { FilterPickerComponent } from '@app-common/forms/filter-picker/filter-picker.component';
+import { SongPickerComponent } from '@app-common/forms/song-picker/song-picker.component';
 import { VolumeSliderComponent } from '@app-common/sliders';
 import { DroplistContainerComponent } from '@app-droplists/droplist-container/droplist-container.component';
 import { DroplistHeaderComponent } from '@app-droplists/droplist-header/droplist-header.component';
@@ -54,6 +55,7 @@ import { SongListComponent } from '@app-songs/song-list/song-list.component';
 import { SongComponent } from '@app-songs/song/song.component';
 import { AppComponent } from './app.component';
 import { AudioSourceContainerComponent } from './audio-sources/audio-source-container/audio-source-container.component';
+import { PlaylistPickerComponent } from './common/forms/playlist-picker/playlist-picker.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
@@ -84,6 +86,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     EjectButtonComponent,
     VolumeSliderComponent,
     PlaylistImportFormComponent,
+    SongPickerComponent,
+    PlaylistPickerComponent,
     CampaignCreateFormComponent,
     CampaignEditFormComponent,
     DragDropInputComponent,

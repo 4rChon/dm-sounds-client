@@ -48,7 +48,7 @@ export class SongComponent implements OnInit {
 
   public onEject(): void {
     this.ejecting = true;
-    this.eject.emit(this.song._id);
+    this.eject.emit(this.song.songId);
   }
 
   public enableDragDrop(): void {

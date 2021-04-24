@@ -14,9 +14,6 @@ import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 })
 
 export class PlaylistCreateFormComponent implements OnInit {
-  public availableSongs: Array<DroplistItem> = [];
-  public fetchingSongs = true;
-
   public playlistForm!: FormGroup;
 
   public submitting = false;
@@ -45,16 +42,7 @@ export class PlaylistCreateFormComponent implements OnInit {
     return this.playlistForm.get('replaceAll');
   }
 
-  constructor(
-    private readonly playlistAPIService: PlaylistAPIService,
-    private readonly songAPIService: SongAPIService
-  ) {
-    this.songAPIService.getSongs()
-      .pipe(finalize(() => this.fetchingSongs = false))
-      .subscribe({
-        next: songs => this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }))
-      });
-  }
+  constructor(private readonly playlistAPIService: PlaylistAPIService) { }
 
   ngOnInit(): void {
     this.playlistForm = new FormGroup({
@@ -74,7 +62,7 @@ export class PlaylistCreateFormComponent implements OnInit {
     const model: PlaylistCreateViewModel = {
       name: this.name?.value,
       filters: this.filters?.value,
-      songs: this.songs?.value.map((item: DroplistItem) => item.data._id),
+      songs: this.songs?.value,
       colour: this.colour?.value,
       loop: this.loop?.value,
       shuffle: this.shuffle?.value,

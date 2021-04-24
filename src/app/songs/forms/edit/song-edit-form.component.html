@@ -9,6 +9,7 @@
       </mat-error>
     </mat-form-field>
     <app-filter-picker
+      [filters]="filters?.value"
       (filtersChange)="filters?.setValue($event)"
     ></app-filter-picker>
     <div class="colour-input">

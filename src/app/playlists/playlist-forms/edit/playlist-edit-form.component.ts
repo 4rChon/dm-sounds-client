@@ -15,9 +15,6 @@ import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 })
 
 export class PlaylistEditFormComponent implements OnInit {
-  public availableSongs: Array<DroplistItem> = [];
-
-  public fetchingSongs = true;
   public error = '';
   public success = '';
 
@@ -48,23 +45,14 @@ export class PlaylistEditFormComponent implements OnInit {
 
   constructor(
     private readonly playlistAPIService: PlaylistAPIService,
-    private readonly songAPIService: SongAPIService,
     @Inject(MAT_DIALOG_DATA) public playlist: PlaylistViewModel
-  ) {
-    this.songAPIService.getSongs().subscribe({
-      next: songs => {
-        this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }));
-        this.fetchingSongs = false;
-      }
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
     this.playlistForm = new FormGroup({
       name: new FormControl(this.playlist.name, [Validators.required]),
       filters: new FormControl(this.playlist.filters),
-      songs: new FormControl(this.playlist.songs
-        ?.map(data => ({ type: DroplistItemType.Song, data }))),
+      songs: new FormControl(this.playlist.songs),
       colour: new FormControl(this.playlist.colour),
       loop: new FormControl(this.playlist.loop),
       shuffle: new FormControl(this.playlist.shuffle),

@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PlaylistCreateViewModel } from '@app-playlists/view-models/playlist-create-view-model';
-import { PlaylistEditViewModel } from '@app-playlists/view-models/playlist-edit-view-model copy';
+import {
+  PlaylistCreateViewModel,
+  PlaylistEditViewModel,
+  PlaylistImportViewModel,
+  PlaylistViewModel
+} from '@app-playlists/view-models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PlaylistImportViewModel } from '../playlists/view-models/playlist-import-view-model';
-import { PlaylistViewModel } from '../playlists/view-models/playlist.view-model';
 import { ApiConstants } from './api.constants';
 
 @Injectable({ providedIn: 'root' })

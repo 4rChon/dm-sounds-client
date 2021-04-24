@@ -1,12 +1,10 @@
+import { Colourable, Indexable, Nameable } from '@app-common/interfaces';
 import { FilterViewModel } from '@app-filters/view-models';
 
-export interface SongViewModel {
-  _id: string;
+export interface SongViewModel extends Colourable, Indexable, Nameable {
   songId: string;
-  name: string;
   filters: Array<FilterViewModel>;
   thumbnail: string;
-  colour: string;
   loop: boolean;
   replaceAll: boolean;
 }

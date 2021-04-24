@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ColourService } from '../../common/colour.service';
-import { FilterViewModel } from '../view-models/filter.view-model';
+import { FilterViewModel } from '@app-filters/view-models';
 
 @Component({
   selector: 'app-filter',

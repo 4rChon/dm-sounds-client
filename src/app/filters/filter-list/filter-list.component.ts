@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FilterViewModel } from '../view-models/filter.view-model';
+import { FilterViewModel } from '@app-filters/view-models';
 
 @Component({
   selector: 'app-filter-list',

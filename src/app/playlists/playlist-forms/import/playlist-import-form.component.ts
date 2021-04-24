@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PlaylistImportViewModel } from '@app-playlists/view-models';
 import { finalize } from 'rxjs/operators';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
-import { PlaylistImportViewModel } from '../../view-models/playlist-import-view-model';
 
 @Component({
   selector: 'app-playlist-import-form',
@@ -12,7 +12,8 @@ import { PlaylistImportViewModel } from '../../view-models/playlist-import-view-
 
 export class PlaylistImportFormComponent implements OnInit {
   public playlistForm!: FormGroup;
-  public pending = false;
+
+  public submitting = false;
   public error = '';
   public success = '';
 
@@ -38,9 +39,7 @@ export class PlaylistImportFormComponent implements OnInit {
     return this.playlistForm.get('replaceAll');
   }
 
-  constructor(
-    private readonly playlistAPIService: PlaylistAPIService
-  ) { }
+  constructor(private readonly playlistAPIService: PlaylistAPIService) { }
 
   ngOnInit(): void {
     this.playlistForm = new FormGroup({
@@ -55,7 +54,7 @@ export class PlaylistImportFormComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    this.pending = true;
+    this.submitting = true;
     const model: PlaylistImportViewModel = {
       playlistId: this.playlistId?.value,
       name: this.name?.value,
@@ -67,7 +66,7 @@ export class PlaylistImportFormComponent implements OnInit {
     };
 
     this.playlistAPIService.importPlaylist(model)
-      .pipe(finalize(() => this.pending = false))
+      .pipe(finalize(() => this.submitting = false))
       .subscribe({
         next: response => {
           this.playlistForm.setErrors(null);

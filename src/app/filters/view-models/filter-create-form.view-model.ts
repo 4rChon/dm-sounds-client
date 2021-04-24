@@ -1,4 +1,3 @@
-export interface FilterCreateFormViewModel {
-  name: string;
-  colour: string;
-}
+import { Colourable, Nameable } from '@app-common/interfaces';
+
+export interface FilterCreateFormViewModel extends Colourable, Nameable { }

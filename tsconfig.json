@@ -11,6 +11,7 @@
       "@app-filters/*": ["src/app/filters/*"],
       "@app-songs/*": ["src/app/songs/*"],
       "@app-playlists/*": ["src/app/playlists/*"],
+      "@app-interfaces/*": ["src/app/common/interfaces"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

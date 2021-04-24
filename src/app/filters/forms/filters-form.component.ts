@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { FilterViewModel } from '@app-filters/view-models';
 import { FilterAPIService } from 'src/app/api-services/filter-api.service';
-import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { FilterViewModel } from '../view-models/filter.view-model';
 
 @Component({
   selector: 'app-filters-form',

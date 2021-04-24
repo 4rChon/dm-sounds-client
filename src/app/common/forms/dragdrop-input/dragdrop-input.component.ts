@@ -2,7 +2,6 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DroplistItem } from 'src/app/droplists/droplist-item.interface';
-import { ColourService } from '../../colour.service';
 
 @Component({
   selector: 'app-dragdrop-input',

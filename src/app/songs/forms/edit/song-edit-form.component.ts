@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SongAPIService } from '@app-api-services/song-api.service';
-import { CampaignActionsService } from '@app-campaigns/campaign-actions/campaign-actions.service';
 import { SongViewModel } from '@app-songs/view-models';
 import { finalize } from 'rxjs/operators';
 
@@ -14,7 +13,7 @@ import { finalize } from 'rxjs/operators';
 
 export class SongEditFormComponent implements OnInit {
   public songForm!: FormGroup;
-  public pending = false;
+  public submitting = false;
   public error = '';
   public success = '';
 
@@ -49,7 +48,7 @@ export class SongEditFormComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    this.pending = true;
+    this.submitting = true;
     const model: SongViewModel = {
       _id: this.song._id,
       songId: this.song.songId,
@@ -62,7 +61,7 @@ export class SongEditFormComponent implements OnInit {
     };
 
     this.songAPIService.editSong(model)
-      .pipe(finalize(() => this.pending = false))
+      .pipe(finalize(() => this.submitting = false))
       .subscribe({
         next: () => {
           this.songForm.setErrors(null);

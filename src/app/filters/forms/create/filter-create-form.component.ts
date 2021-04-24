@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FilterAPIService } from 'src/app/api-services/filter-api.service';
-import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { FilterViewModel } from '../../view-models/filter.view-model';
+import { FilterAPIService } from '@app-api-services/filter-api.service';
+import { TooltipConstants } from '@app-common/tooltip.constants';
+import { FilterViewModel } from '@app-filters/view-models';
 
 @Component({
   selector: 'app-filter-create-form',

@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FilterEditFormViewModel, FilterViewModel } from '@app-filters/view-models';
 import { Subscription } from 'rxjs';
 import { FilterAPIService } from 'src/app/api-services/filter-api.service';
 import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { FilterViewModel } from '../../view-models/filter.view-model';
-import { FilterEditFormViewModel } from '../../view-models/filter-edit-form.view-model';
 
 @Component({
   selector: 'app-filter-edit-form',

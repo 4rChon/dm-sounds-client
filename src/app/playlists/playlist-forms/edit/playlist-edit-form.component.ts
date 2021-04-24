@@ -4,8 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SongAPIService } from '@app-api-services/song-api.service';
 import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
 import { DroplistItem } from '@app-droplists/droplist-item.interface';
-import { PlaylistViewModel } from '@app-playlists/view-models';
-import { PlaylistEditViewModel } from '@app-playlists/view-models/playlist-edit-view-model copy';
+import { PlaylistEditViewModel, PlaylistViewModel } from '@app-playlists/view-models';
 import { finalize } from 'rxjs/operators';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 

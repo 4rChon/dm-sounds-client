@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CampaignEditFormViewModel, CampaignViewModel } from '@app-campaigns/view-models';
 import { finalize } from 'rxjs/operators';
 import { CampaignAPIService } from 'src/app/api-services/campaign-api.service';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
@@ -8,8 +9,6 @@ import { SongAPIService } from 'src/app/api-services/song-api.service';
 import { DroplistItemType } from 'src/app/droplists/droplist-item-type.enum';
 import { DroplistItem } from 'src/app/droplists/droplist-item.interface';
 import { CampaignActionsService } from '../../campaign-actions/campaign-actions.service';
-import { CampaignViewModel } from '../../view-models/campaign.view-model';
-import { CampaignEditFormViewModel } from '../../view-models/campaign-edit-form.view-model';
 
 @Component({
   selector: 'app-campaign-edit-form',

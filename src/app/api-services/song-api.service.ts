@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SongImportViewModel, SongViewModel } from '@app-songs/view-models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { SongImportViewModel } from '../songs/view-models/song-import-view-model';
-import { SongViewModel } from '../songs/view-models/song.view-model';
 import { ApiConstants } from './api.constants';
 
 @Injectable({ providedIn: 'root' })

@@ -1,33 +1,8 @@
-<mat-form-field class="filter-picker">
-  <mat-label>Filters</mat-label>
-  <mat-chip-list #chipList aria-label="Filter selection">
-    <mat-chip
-      *ngFor="let filter of filters"
-      [selectable]="selectable"
-      [removable]="removable"
-      (removed)="remove(filter)"
-      [ngStyle]="{
-        backgroundColor: 'white',
-        color: filter.colour,
-        border: '1px solid ' + filter.colour
-      }"
-    >
-      {{ filter.name }}
-      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-    </mat-chip>
-    <input
-      placeholder="New filter..."
-      #filterInput
-      [formControl]="filterCtrl"
-      [matAutocomplete]="auto"
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="add($event)"
-    />
-  </mat-chip-list>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let filter of filteredFilters" [value]="filter">
-      {{ filter.name }}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+<app-dragdrop-input
+  [items]="availableFilters"
+  [addedLabel]="'Added Filters'"
+  [availableLabel]="'Available Filters'"
+  [loading]="fetchingFilters"
+  (addedItemsChange)="onFiltersChange($event)"
+>
+</app-dragdrop-input>

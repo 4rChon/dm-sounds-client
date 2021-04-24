@@ -21,8 +21,7 @@
       </mat-error>
     </mat-form-field>
     <app-filter-picker
-      [filters]="filters?.value"
-      (filtersChange)="filters?.setValue($event)"
+      (addedItemsChange)="filters?.setValue($event)"
     ></app-filter-picker>
     <div class="colour-input">
       <label for="colour-picker">Colour</label>
@@ -55,7 +54,7 @@
       <mat-error *ngIf="playlistForm?.invalid">
         {{ error }}
       </mat-error>
-      <span *ngIf="playlistForm?.valid && success && !pending">
+      <span *ngIf="playlistForm?.valid && success && !submitting">
         {{ success }}
       </span>
     </div>
@@ -67,7 +66,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!playlistForm.valid || pending"
+      [disabled]="!playlistForm.valid || submitting"
     >
       Submit
     </button>

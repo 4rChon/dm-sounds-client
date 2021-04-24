@@ -1,4 +1,4 @@
-<h2>Import Playlist</h2>
+<h2>Create Playlist</h2>
 <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
   <div class="form-inputs">
     <mat-form-field appearance="legacy">
@@ -9,7 +9,6 @@
       </mat-error>
     </mat-form-field>
     <app-filter-picker
-      [filters]="filters?.value"
       (filtersChange)="filters?.setValue($event)"
     ></app-filter-picker>
     <div class="colour-input">

@@ -1,4 +1,5 @@
 export enum DroplistItemType {
   Playlist,
-  Song
+  Song,
+  Filter
 }

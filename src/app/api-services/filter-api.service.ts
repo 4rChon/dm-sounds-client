@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FilterViewModel } from '../filters/view-models/filter.view-model';
+import { environment } from 'src/environments/environment';
+import { FilterCreateFormViewModel, FilterEditFormViewModel, FilterViewModel } from '../filters/view-models';
 import { ApiConstants } from './api.constants';
-import { FilterEditFormViewModel } from '../filters/view-models/filter-edit-form.view-model';
-import { FilterCreateFormViewModel } from '../filters/view-models/filter-create-form.view-model';
 
 @Injectable({ providedIn: 'root' })
 export class FilterAPIService {

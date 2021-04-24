@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CampaignNameViewModel } from '@app-campaigns/campaign-name.view-model';
-import { CampaignCreateFormViewModel, CampaignEditFormViewModel, CampaignViewModel } from '@app-campaigns/view-models';
+import {
+  CampaignCreateFormViewModel,
+  CampaignEditFormViewModel,
+  CampaignNameViewModel,
+  CampaignViewModel
+} from '@app-campaigns/view-models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiConstants } from './api.constants';

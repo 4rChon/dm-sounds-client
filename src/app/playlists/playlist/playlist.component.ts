@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { MatDialog } from '@angular/material/dialog';
 import { PlaylistDeleteFormComponent } from '@app-playlists/playlist-forms/delete/playlist-delete-form.component';
 import { PlaylistEditFormComponent } from '@app-playlists/playlist-forms/edit/playlist-edit-form.component';
+import { PlaylistViewModel } from '@app-playlists/view-models';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
 import { TooltipConstants } from 'src/app/common/tooltip.constants';
 import { DragDropService } from 'src/app/droplists/dragdrop.service';
 import { PlaylistStateModel } from '../playlist-state.model';
 import { PlaylistService } from '../playlist.service';
-import { PlaylistViewModel } from '../view-models/playlist.view-model';
 
 @Component({
   selector: 'app-playlist',

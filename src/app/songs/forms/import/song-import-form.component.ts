@@ -14,7 +14,7 @@ export class SongImportFormComponent implements OnInit {
   constructor(private readonly songAPIService: SongAPIService) { }
 
   public songForm!: FormGroup;
-  public pending = false;
+  public submitting = false;
   public error = '';
   public success = '';
 
@@ -49,10 +49,10 @@ export class SongImportFormComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    this.pending = true;
+    this.submitting = true;
     const model: SongImportViewModel = this.songForm.value;
     this.songAPIService.importSong(model)
-      .pipe(finalize(() => this.pending = false))
+      .pipe(finalize(() => this.submitting = false))
       .subscribe({
         next: () => {
           this.songForm.setErrors(null);

@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { SongAPIService } from '@app-api-services/song-api.service';
 import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
 import { DroplistItem } from '@app-droplists/droplist-item.interface';
-import { PlaylistCreateViewModel } from '@app-playlists/view-models/playlist-create-view-model';
+import { PlaylistCreateViewModel } from '@app-playlists/view-models/playlist-create.view-model';
 import { finalize } from 'rxjs/operators';
 import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 
@@ -15,13 +15,13 @@ import { PlaylistAPIService } from 'src/app/api-services/playlist-api.service';
 
 export class PlaylistCreateFormComponent implements OnInit {
   public availableSongs: Array<DroplistItem> = [];
-
   public fetchingSongs = true;
-  public error = '';
-  public success = '';
 
   public playlistForm!: FormGroup;
+
   public submitting = false;
+  public error = '';
+  public success = '';
 
   get name(): AbstractControl | null {
     return this.playlistForm.get('name');
@@ -49,12 +49,11 @@ export class PlaylistCreateFormComponent implements OnInit {
     private readonly playlistAPIService: PlaylistAPIService,
     private readonly songAPIService: SongAPIService
   ) {
-    this.songAPIService.getSongs().subscribe({
-      next: songs => {
-        this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }));
-        this.fetchingSongs = false;
-      }
-    });
+    this.songAPIService.getSongs()
+      .pipe(finalize(() => this.fetchingSongs = false))
+      .subscribe({
+        next: songs => this.availableSongs = songs.map(data => ({ type: DroplistItemType.Song, data }))
+      });
   }
 
   ngOnInit(): void {

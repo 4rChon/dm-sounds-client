@@ -1,5 +1,3 @@
-export interface FilterEditFormViewModel {
-  _id: string;
-  name: string;
-  colour: string;
-}
+import { Colourable, Indexable, Nameable } from '@app-common/interfaces';
+
+export interface FilterEditFormViewModel extends Colourable, Indexable, Nameable { }

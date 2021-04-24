@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { SongViewModel } from '@app-songs/view-models';
 import { SongStateModel } from './song-state.model';
-import { SongViewModel } from './view-models/song.view-model';
 
 @Injectable({ providedIn: 'root' })
 export class SongService {

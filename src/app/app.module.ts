@@ -57,6 +57,7 @@ import { AppComponent } from './app.component';
 import { AudioSourceContainerComponent } from './audio-sources/audio-source-container/audio-source-container.component';
 import { PlaylistPickerComponent } from './common/forms/playlist-picker/playlist-picker.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     MatSlideToggleModule,
     MatToolbarModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent],
 })

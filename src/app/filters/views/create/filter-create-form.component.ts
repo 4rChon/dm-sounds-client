@@ -7,7 +7,7 @@ import { FilterViewModel } from '@app-filters/view-models';
 @Component({
   selector: 'app-filter-create-form',
   templateUrl: 'filter-create-form.component.html',
-  styleUrls: ['../filters-form.component.less']
+  styleUrls: ['../filter-form.component.less']
 })
 
 export class FilterCreateFormComponent {

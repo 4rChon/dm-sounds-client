@@ -1,0 +1,67 @@
+<h2>Edit Playlist</h2>
+<form *ngIf="playlistForm" [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+  <div class="form-inputs">
+    <mat-form-field appearance="legacy">
+      <mat-label>Name</mat-label>
+      <input matInput id="name" type="text" formControlName="name" />
+      <mat-error *ngIf="name?.hasError('required')">
+        Playlist name required
+      </mat-error>
+    </mat-form-field>
+    <app-filter-picker
+      [filters]="filters?.value"
+      (filtersChange)="filters?.setValue($event)"
+    ></app-filter-picker>
+    <div class="colour-input">
+      <label for="colour-picker">Colour</label>
+      <app-colour-picker
+        id="colour-picker"
+        [colour]="colour?.value"
+        (colourChange)="colour?.setValue($event)"
+      ></app-colour-picker>
+    </div>
+    <mat-slide-toggle id="loop" formControlName="loop" [color]="'primary'">
+      Loop
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      id="shuffle"
+      formControlName="shuffle"
+      [color]="'primary'"
+    >
+      Shuffle
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      id="replaceAll"
+      formControlName="replaceAll"
+      [color]="'primary'"
+    >
+      Replace All on Play
+    </mat-slide-toggle>
+    <app-song-picker
+      [songs]="songs?.value"
+      (songsChange)="songs?.setValue($event)"
+    ></app-song-picker>
+  </div>
+  <div>
+    <div class="form-summary">
+      <mat-error *ngIf="playlistForm?.invalid">
+        {{ error }}
+      </mat-error>
+      <span *ngIf="playlistForm?.valid && success && !submitting">
+        {{ success }}
+      </span>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
+    <button
+      class="submit"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!playlistForm.valid || submitting"
+    >
+      Submit
+    </button>
+  </div>
+</form>

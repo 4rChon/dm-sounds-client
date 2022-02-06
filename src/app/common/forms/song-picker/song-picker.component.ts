@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SongAPIService } from '@app-api-services/song-api.service';
-import { CampaignSelectorComponent } from '@app-campaigns/campaign-selector/campaign-selector.component';
+import { SongAPIService } from '@app-common/api-services/song-api.service';
 import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
 import { DroplistItem } from '@app-droplists/droplist-item.interface';
 import { SongViewModel } from '@app-songs/view-models';

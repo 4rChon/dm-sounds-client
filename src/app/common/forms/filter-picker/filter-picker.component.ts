@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FilterAPIService } from '@app-api-services/filter-api.service';
+import { FilterAPIService } from '@app-common/api-services/filter-api.service';
 import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
 import { DroplistItem } from '@app-droplists/droplist-item.interface';
 import { FilterViewModel } from '@app-filters/view-models';
@@ -31,7 +31,6 @@ export class FilterPickerComponent implements OnInit {
   }
 
   public onFiltersChange(droplistItems: Array<DroplistItem>): void {
-    console.log(droplistItems);
     this.filtersChange.emit(droplistItems.map(droplistItem => droplistItem.data));
   }
 }

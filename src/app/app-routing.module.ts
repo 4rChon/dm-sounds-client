@@ -1,20 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CampaignCreateFormComponent } from '@app-campaigns/forms/create/campaign-create-form.component';
+import { CampaignCreateComponent } from '@app-campaigns/views/create/campaign-create.component';
+import { CampaignEditComponent } from '@app-campaigns/views/edit/campaign-edit.component';
+import { CampaignIndexComponent } from '@app-campaigns/views/index/campaign-index.component';
 import { DroplistContainerComponent } from '@app-droplists/droplist-container/droplist-container.component';
-import { FiltersFormComponent } from '@app-filters/forms/filters-form.component';
-import { PlaylistCreateFormComponent } from '@app-playlists/playlist-forms/create/playlist-create-form.component';
-import { PlaylistImportFormComponent } from '@app-playlists/playlist-forms/import/playlist-import-form.component';
-import { SongImportFormComponent } from '@app-songs/forms/import/song-import-form.component';
+import { FilterFormComponent } from '@app-filters/views/filter-form.component';
+import { PlaylistCreateComponent } from '@app-playlists/views/create/playlist-create.component';
+import { PlaylistEditComponent } from '@app-playlists/views/edit/playlist-edit.component';
+import { PlaylistFormComponent } from '@app-playlists/views/import/playlist-import.component';
+import { PlaylistIndexComponent } from '@app-playlists/views/index/playlist-index.component';
+import { SongDeleteComponent } from '@app-songs/views/delete/song-delete.component';
+import { SongEditComponent } from '@app-songs/views/edit/song-edit.component';
+import { SongImportComponent } from '@app-songs/views/import/song-import.component';
+import { SongIndexComponent } from '@app-songs/views/index/song-index.component';
 
 
 const routes: Routes = [
   { path: 'dashboard', component: DroplistContainerComponent },
-  { path: 'import/song', component: SongImportFormComponent },
-  { path: 'import/playlist', component: PlaylistImportFormComponent },
-  { path: 'create/campaign', component: CampaignCreateFormComponent },
-  { path: 'create/playlist', component: PlaylistCreateFormComponent },
-  { path: 'edit/filters', component: FiltersFormComponent },
+  {
+    path: 'songs',
+    component: SongIndexComponent,
+    children: [
+      {
+        path: 'delete/:id',
+        component: SongDeleteComponent
+      }
+    ]
+  },
+  { path: 'songs/edit/:id', component: SongEditComponent },
+  { path: 'songs/import', component: SongImportComponent },
+  { path: 'playlists', component: PlaylistIndexComponent },
+  { path: 'playlists/edit/:id', component: PlaylistEditComponent },
+  { path: 'playlists/import', component: PlaylistFormComponent },
+  { path: 'playlists/create', component: PlaylistCreateComponent },
+  { path: 'filters', component: FilterFormComponent },
+  { path: 'campaigns', component: CampaignIndexComponent },
+  { path: 'campaigns/edit/:id', component: CampaignEditComponent },
+  { path: 'campaigns/create', component: CampaignCreateComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard' }
 ];
 
 @NgModule({

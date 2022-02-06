@@ -1,0 +1,9 @@
+<h2>Playlist Index</h2>
+<div class="playlist-item" *ngFor="let playlist of playlists">
+  <app-index-item
+    [item]="playlist"
+    (edit)="openEditView($event)"
+    (delete)="openDeleteDialog($event)"
+  ></app-index-item>
+  <mat-divider></mat-divider>
+</div>

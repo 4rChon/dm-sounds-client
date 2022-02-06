@@ -1,0 +1,15 @@
+<h2>Edit Filters</h2>
+<app-filter-edit
+  *ngFor="let filter of filters; let ix = index"
+  class="filter-input"
+  [filter]="filter"
+  (delete)="deleteFilter(ix)"
+  (edit)="editFilter(ix, $event)"
+></app-filter-edit>
+<app-filter-create-form
+  class="filter-input"
+  (add)="addFilter($event)"
+></app-filter-create-form>
+<div class="buttons">
+  <button class="close" mat-stroked-button [mat-dialog-close]>Close</button>
+</div>

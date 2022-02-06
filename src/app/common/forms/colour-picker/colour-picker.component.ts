@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ColourService } from 'src/app/common/colour.service';
+import { ColourService } from '@app-common/colour.service';
 
 @Component({
   selector: 'app-colour-picker',

@@ -1,0 +1,9 @@
+<h2>Song Index</h2>
+<div class="song-item" *ngFor="let song of songs">
+  <app-index-item
+    [item]="song"
+    (edit)="openEditView($event)"
+    (delete)="openDeleteDialog($event)"
+  ></app-index-item>
+  <mat-divider></mat-divider>
+</div>

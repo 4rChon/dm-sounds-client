@@ -4,7 +4,6 @@ import { SongViewModel } from '@app-songs/view-models';
 @Component({
   selector: 'app-song-list',
   templateUrl: './song-list.component.html',
-  styleUrls: ['./song-list.component.less']
 })
 export class SongListComponent {
   @Input() songs!: Array<SongViewModel>;

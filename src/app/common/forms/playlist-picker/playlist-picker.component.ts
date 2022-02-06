@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PlaylistAPIService } from '@app-api-services/playlist-api.service';
+import { PlaylistAPIService } from '@app-common/api-services/playlist-api.service';
 import { DroplistItemType } from '@app-droplists/droplist-item-type.enum';
 import { DroplistItem } from '@app-droplists/droplist-item.interface';
 import { PlaylistViewModel } from '@app-playlists/view-models';

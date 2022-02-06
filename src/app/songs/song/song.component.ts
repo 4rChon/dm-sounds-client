@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TooltipConstants } from '@app-common/tooltip.constants';
 import { DragDropService } from '@app-droplists/dragdrop.service';
-import { SongDeleteFormComponent } from '@app-songs/forms/delete/song-delete-form.component';
-import { SongEditFormComponent } from '@app-songs/forms/edit/song-edit-form.component';
+import { SongDeleteComponent } from '@app-songs/views/delete/song-delete.component';
 import { SongStateModel } from '@app-songs/song-state.model';
 import { SongService } from '@app-songs/song.service';
 import { SongViewModel } from '@app-songs/view-models';
-import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
+import { Router } from '@angular/router';
+import { AudioSourceService } from '@app-common/audio-sources/audio-source.service';
 
 @Component({
   selector: 'app-song',
@@ -29,6 +29,7 @@ export class SongComponent implements OnInit {
     private readonly songService: SongService,
     private readonly dragDropService: DragDropService,
     private readonly audioSourceService: AudioSourceService,
+    private readonly router: Router,
     private readonly dialog: MatDialog
   ) { }
 
@@ -38,12 +39,12 @@ export class SongComponent implements OnInit {
   }
 
 
-  public openEditDialog(): void {
-    this.dialog.open(SongEditFormComponent, { data: this.song });
+  public openEditView(): void {
+    this.router.navigate(['songs', 'edit', this.song._id]);
   }
 
   public openDeleteDialog(): void {
-    this.dialog.open(SongDeleteFormComponent, { data: this.song._id });
+    this.dialog.open(SongDeleteComponent, { data: this.song._id });
   }
 
   public onEject(): void {

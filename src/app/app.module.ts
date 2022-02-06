@@ -23,9 +23,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CampaignActionsComponent } from '@app-campaigns/campaign-actions/campaign-actions.component';
 import { CampaignSelectorComponent } from '@app-campaigns/campaign-selector/campaign-selector.component';
-import { CampaignCreateFormComponent } from '@app-campaigns/forms/create/campaign-create-form.component';
-import { CampaignDeleteFormComponent } from '@app-campaigns/forms/delete/campaign-delete-form.component';
-import { CampaignEditFormComponent } from '@app-campaigns/forms/edit/campaign-edit-form.component';
+import { CampaignCreateComponent } from '@app-campaigns/views/create/campaign-create.component';
+import { CampaignDeleteComponent } from '@app-campaigns/views/delete/campaign-delete.component';
+import { CampaignEditComponent } from '@app-campaigns/views/edit/campaign-edit.component';
+import { CampaignIndexComponent } from '@app-campaigns/views/index/campaign-index.component';
+import { AudioSourceContainerComponent } from '@app-common/audio-sources/audio-source-container/audio-source-container.component';
 import { AddButtonIconComponent, DeleteButtonIconComponent, DoneButtonIconComponent, EditButtonIconComponent } from '@app-common/buttons/icon';
 import { EjectButtonComponent, NextButtonComponent, PreviousButtonComponent } from '@app-common/buttons/simple';
 import { LoopButtonToggleComponent, ReplaceAllButtonToggleComponent, ShuffleButtonToggleComponent, ToggleButtonComponent } from '@app-common/buttons/toggle';
@@ -33,78 +35,84 @@ import { ColourPickerComponent } from '@app-common/forms/colour-picker/colour-pi
 import { DragDropInputComponent } from '@app-common/forms/dragdrop-input/dragdrop-input.component';
 import { FilterPickerComponent } from '@app-common/forms/filter-picker/filter-picker.component';
 import { SongPickerComponent } from '@app-common/forms/song-picker/song-picker.component';
+import { IndexItemComponent } from '@app-common/index-item/index-item.component';
 import { VolumeSliderComponent } from '@app-common/sliders';
 import { DroplistContainerComponent } from '@app-droplists/droplist-container/droplist-container.component';
 import { DroplistHeaderComponent } from '@app-droplists/droplist-header/droplist-header.component';
 import { DroplistComponent } from '@app-droplists/droplist-item/droplist-item.component';
 import { FilterListComponent } from '@app-filters/filter-list/filter-list.component';
 import { FilterComponent } from '@app-filters/filter/filter.component';
-import { FilterCreateFormComponent } from '@app-filters/forms/create/filter-create-form.component';
-import { FilterEditFormComponent } from '@app-filters/forms/edit/filter-edit-form.component';
-import { FiltersFormComponent } from '@app-filters/forms/filters-form.component';
-import { PlaylistCreateFormComponent } from '@app-playlists/playlist-forms/create/playlist-create-form.component';
-import { PlaylistDeleteFormComponent } from '@app-playlists/playlist-forms/delete/playlist-delete-form.component';
-import { PlaylistEditFormComponent } from '@app-playlists/playlist-forms/edit/playlist-edit-form.component';
-import { PlaylistImportFormComponent } from '@app-playlists/playlist-forms/import/playlist-import-form.component';
+import { FilterCreateFormComponent } from '@app-filters/views/create/filter-create-form.component';
+import { FilterEditFormComponent } from '@app-filters/views/edit/filter-edit.component';
+import { FilterFormComponent } from '@app-filters/views/filter-form.component';
 import { PlaylistComponent } from '@app-playlists/playlist/playlist.component';
-import { SongDeleteFormComponent } from '@app-songs/forms/delete/song-delete-form.component';
-import { SongEditFormComponent } from '@app-songs/forms/edit/song-edit-form.component';
-import { SongImportFormComponent } from '@app-songs/forms/import/song-import-form.component';
+import { PlaylistCreateComponent } from '@app-playlists/views/create/playlist-create.component';
+import { PlaylistDeleteComponent } from '@app-playlists/views/delete/playlist-delete.component';
+import { PlaylistEditComponent } from '@app-playlists/views/edit/playlist-edit.component';
+import { PlaylistFormComponent } from '@app-playlists/views/import/playlist-import.component';
+import { PlaylistIndexComponent } from '@app-playlists/views/index/playlist-index.component';
 import { SongListItemComponent } from '@app-songs/song-list-item/song-list-item.component';
 import { SongListComponent } from '@app-songs/song-list/song-list.component';
 import { SongComponent } from '@app-songs/song/song.component';
+import { SongDeleteComponent } from '@app-songs/views/delete/song-delete.component';
+import { SongEditComponent } from '@app-songs/views/edit/song-edit.component';
+import { SongImportComponent } from '@app-songs/views/import/song-import.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AudioSourceContainerComponent } from './audio-sources/audio-source-container/audio-source-container.component';
 import { PlaylistPickerComponent } from './common/forms/playlist-picker/playlist-picker.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { AppRoutingModule } from './app-routing.module';
+import { SongIndexComponent } from './songs/views/index/song-index.component';
 
 @NgModule({
   declarations: [
     AddButtonIconComponent,
     AppComponent,
     AudioSourceContainerComponent,
+    CampaignIndexComponent,
     CampaignSelectorComponent,
+    CampaignCreateComponent,
+    CampaignEditComponent,
+    CampaignActionsComponent,
+    CampaignDeleteComponent,
+    ColourPickerComponent,
     DeleteButtonIconComponent,
     DoneButtonIconComponent,
+    DragDropInputComponent,
     DroplistComponent,
     DroplistContainerComponent,
     DroplistHeaderComponent,
     EditButtonIconComponent,
+    EjectButtonComponent,
+    FilterCreateFormComponent,
     FilterComponent,
+    FilterEditFormComponent,
+    FilterFormComponent,
     FilterListComponent,
+    FilterPickerComponent,
+    IndexItemComponent,
     LoopButtonToggleComponent,
     NavigationComponent,
+    NextButtonComponent,
     PlaylistComponent,
+    PlaylistIndexComponent,
+    PlaylistFormComponent,
+    PlaylistPickerComponent,
+    PlaylistCreateComponent,
+    PlaylistEditComponent,
+    PlaylistDeleteComponent,
+    PreviousButtonComponent,
+    ReplaceAllButtonToggleComponent,
+    ShuffleButtonToggleComponent,
     SongComponent,
     SongListComponent,
     SongListItemComponent,
-    ToggleButtonComponent,
-    ReplaceAllButtonToggleComponent,
-    ShuffleButtonToggleComponent,
-    NextButtonComponent,
-    PreviousButtonComponent,
-    EjectButtonComponent,
-    VolumeSliderComponent,
-    PlaylistImportFormComponent,
     SongPickerComponent,
-    PlaylistPickerComponent,
-    CampaignCreateFormComponent,
-    CampaignEditFormComponent,
-    DragDropInputComponent,
-    CampaignActionsComponent,
-    CampaignDeleteFormComponent,
-    FiltersFormComponent,
-    ColourPickerComponent,
-    FilterEditFormComponent,
-    FilterCreateFormComponent,
-    SongImportFormComponent,
-    FilterPickerComponent,
-    SongEditFormComponent,
-    SongDeleteFormComponent,
-    PlaylistCreateFormComponent,
-    PlaylistEditFormComponent,
-    PlaylistDeleteFormComponent
+    SongImportComponent,
+    SongEditComponent,
+    SongDeleteComponent,
+    SongIndexComponent,
+    ToggleButtonComponent,
+    VolumeSliderComponent,
   ],
   imports: [
     BrowserAnimationsModule,

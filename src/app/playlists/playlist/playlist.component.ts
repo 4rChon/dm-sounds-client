@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PlaylistDeleteFormComponent } from '@app-playlists/playlist-forms/delete/playlist-delete-form.component';
-import { PlaylistEditFormComponent } from '@app-playlists/playlist-forms/edit/playlist-edit-form.component';
+import { PlaylistDeleteComponent } from '@app-playlists/views/delete/playlist-delete.component';
+import { PlaylistEditComponent } from '@app-playlists/views/edit/playlist-edit.component';
 import { PlaylistViewModel } from '@app-playlists/view-models';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { AudioSourceService } from 'src/app/audio-sources/audio-source.service';
 import { TooltipConstants } from 'src/app/common/tooltip.constants';
-import { DragDropService } from 'src/app/droplists/dragdrop.service';
 import { PlaylistStateModel } from '../playlist-state.model';
 import { PlaylistService } from '../playlist.service';
+import { AudioSourceService } from '@app-common/audio-sources/audio-source.service';
+import { DragDropService } from '@app-droplists/dragdrop.service';
 
 @Component({
   selector: 'app-playlist',
@@ -77,10 +77,10 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
 
   public openEditDialog(): void {
-    this.dialog.open(PlaylistEditFormComponent, { data: this.playlist });
+    this.dialog.open(PlaylistEditComponent, { data: this.playlist });
   }
 
   public openDeleteDialog(): void {
-    this.dialog.open(PlaylistDeleteFormComponent, { data: this.playlist._id });
+    this.dialog.open(PlaylistDeleteComponent, { data: this.playlist._id });
   }
 }

@@ -1,0 +1,38 @@
+<h2>Edit Campaign</h2>
+<form *ngIf="campaignForm" [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="legacy">
+    <mat-label>Campaign Name</mat-label>
+    <input matInput id="name" type="text" formControlName="name" />
+    <mat-error *ngIf="name?.hasError('required')">
+      Please enter a Campaign name
+    </mat-error>
+  </mat-form-field>
+  <app-playlist-picker
+    [playlists]="playlists?.value"
+    (playlistsChange)="playlists?.setValue($event)"
+  ></app-playlist-picker>
+  <app-song-picker
+    [songs]="songs?.value"
+    (songsChange)="songs?.setValue($event)"
+  ></app-song-picker>
+  <div class="form-summary">
+    <mat-error *ngIf="campaignForm?.invalid">
+      {{ error }}
+    </mat-error>
+    <span *ngIf="campaignForm?.valid && success && !submitting">
+      {{ success }}
+    </span>
+  </div>
+  <div class="buttons">
+    <button class="cancel" mat-stroked-button [mat-dialog-close]>Cancel</button>
+    <button
+      class="submit"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!campaignForm.valid || submitting"
+    >
+      Submit
+    </button>
+  </div>
+</form>

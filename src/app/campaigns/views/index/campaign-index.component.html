@@ -1,0 +1,9 @@
+<h2>Campaign Index</h2>
+<div class="campaign-item" *ngFor="let campaign of campaigns">
+  <app-index-item
+    [item]="campaign"
+    (edit)="openEditView($event)"
+    (delete)="openDeleteDialog($event)"
+  >
+  </app-index-item>
+</div>

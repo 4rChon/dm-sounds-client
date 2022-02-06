@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CampaignAPIService } from '@app-api-services/campaign-api.service';
 import { CampaignActionsService } from '@app-campaigns/campaign-actions/campaign-actions.service';
 import { CampaignNameViewModel, CampaignViewModel } from '@app-campaigns/view-models';
+import { CampaignAPIService } from '@app-common/api-services/campaign-api.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 

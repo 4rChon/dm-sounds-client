@@ -52,9 +52,9 @@ export class CampaignCreateComponent implements OnInit {
     this.campaignAPIService.createCampaign(model)
       .pipe(finalize(() => this.submitting = false))
       .subscribe({
-        next: response => {
+        next: () => {
           this.campaignForm.setErrors(null);
-          this.success = response.message;
+          this.success = 'Campaign created!';
           const sub = this.campaignForm.valueChanges.subscribe(() => {
             this.success = '';
             sub.unsubscribe();

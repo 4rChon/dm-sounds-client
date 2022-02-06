@@ -83,9 +83,9 @@ export class CampaignEditComponent implements OnInit, OnDestroy {
     this.campaignAPIService.editCampaign(model)
       .pipe(finalize(() => this.submitting = false))
       .subscribe({
-        next: response => {
+        next: () => {
           this.campaignForm.setErrors(null);
-          this.success = response.message;
+          this.success = 'Campaign updated!';
           const sub = this.campaignForm.valueChanges.subscribe(() => {
             this.success = '';
             sub.unsubscribe();

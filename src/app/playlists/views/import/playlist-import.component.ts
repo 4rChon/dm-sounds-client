@@ -68,9 +68,9 @@ export class PlaylistFormComponent implements OnInit {
     this.playlistAPIService.importPlaylist(model)
       .pipe(finalize(() => this.submitting = false))
       .subscribe({
-        next: response => {
+        next: () => {
           this.playlistForm.setErrors(null);
-          this.success = response.message;
+          this.success = 'Playlist imported!';
           const subscription = this.playlistForm.valueChanges.subscribe({
             next: () => {
               this.success = '';

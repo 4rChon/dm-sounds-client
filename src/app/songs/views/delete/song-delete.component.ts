@@ -23,7 +23,7 @@ export class SongDeleteComponent {
     this.songAPIService.removeSong(this.id)
       .pipe(finalize(() => this.deleting = false))
       .subscribe({
-        next: response => {
+        next: () => {
           this.success = 'Song deleted!';
         },
         error: response => {

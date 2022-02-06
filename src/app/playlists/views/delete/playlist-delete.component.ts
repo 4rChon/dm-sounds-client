@@ -23,8 +23,8 @@ export class PlaylistDeleteComponent {
     this.playlistAPIService.removePlaylist(this.id)
       .pipe(finalize(() => this.deleting = false))
       .subscribe({
-        next: response => {
-          this.success = response.message;
+        next: () => {
+          this.success = 'Playlist deleted!';
         },
         error: reason => {
           this.error = reason.error.message;

@@ -94,7 +94,7 @@ export class SongEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.songForm.setErrors(null);
-          this.success = 'Song edited!';
+          this.success = 'Song updated!';
           const subscription = this.songForm.valueChanges.subscribe({
             next: () => {
               this.success = '';

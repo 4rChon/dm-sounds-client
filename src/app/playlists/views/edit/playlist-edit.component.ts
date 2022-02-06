@@ -3,7 +3,9 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute } from '@angular/router';
 import { PlaylistAPIService } from '@app-common/api-services/playlist-api.service';
 import { DroplistItem } from '@app-droplists/droplist-item.interface';
+import { FilterViewModel } from '@app-filters/view-models';
 import { PlaylistEditViewModel, PlaylistViewModel } from '@app-playlists/view-models';
+import { SongViewModel } from '@app-songs/view-models';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -53,26 +55,27 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
     const routeSubscription = this.route.paramMap.subscribe(params => {
       const id = params.get('id');
 
-      if (id) {
-        const playlistSubscription = this.playlistAPIService.getPlaylist(id).subscribe(playlist => {
-          this.playlist = playlist;
-
-          console.log(this.playlist);
-
-          this.playlistForm = new FormGroup({
-            name: new FormControl(this.playlist.name, [Validators.required]),
-            filters: new FormControl(this.playlist.filters),
-            songs: new FormControl(this.playlist.songs),
-            colour: new FormControl(this.playlist.colour),
-            loop: new FormControl(this.playlist.loop),
-            shuffle: new FormControl(this.playlist.shuffle),
-            replaceAll: new FormControl(this.playlist.replaceAll)
-          });
-
-          this.subscriptions.push(playlistSubscription);
-        });
+      if (!id) {
+        return
       }
 
+      const playlistSubscription = this.playlistAPIService.getPlaylist(id).subscribe(playlist => {
+        this.playlist = playlist;
+
+        console.log(this.playlist);
+
+        this.playlistForm = new FormGroup({
+          name: new FormControl(this.playlist.name, [Validators.required]),
+          filters: new FormControl(this.playlist.filters),
+          songs: new FormControl(this.playlist.songs),
+          colour: new FormControl(this.playlist.colour),
+          loop: new FormControl(this.playlist.loop),
+          shuffle: new FormControl(this.playlist.shuffle),
+          replaceAll: new FormControl(this.playlist.replaceAll)
+        });
+
+        this.subscriptions.push(playlistSubscription);
+      });
     });
 
     this.subscriptions.push(routeSubscription);
@@ -92,8 +95,8 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
     const model: PlaylistEditViewModel = {
       _id: this.playlist._id,
       name: this.name?.value,
-      filters: this.filters?.value,
-      songs: this.songs?.value.map((item: DroplistItem) => item.data._id),
+      filters: this.filters?.value.map((filter: FilterViewModel) => filter._id),
+      songs: this.songs?.value.map((song: SongViewModel) => song._id),
       colour: this.colour?.value,
       loop: this.loop?.value,
       shuffle: this.shuffle?.value,
@@ -103,9 +106,9 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
     this.playlistAPIService.editPlaylist(model)
       .pipe(finalize(() => this.submitting = false))
       .subscribe({
-        next: response => {
+        next: () => {
           this.playlistForm.setErrors(null);
-          this.success = response.message;
+          this.success = 'Playlist updated!';
           const subscription = this.playlistForm.valueChanges.subscribe({
             next: () => {
               this.success = '';

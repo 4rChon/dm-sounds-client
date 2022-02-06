@@ -9,6 +9,7 @@ import { PlaylistStateModel } from '../playlist-state.model';
 import { PlaylistService } from '../playlist.service';
 import { AudioSourceService } from '@app-common/audio-sources/audio-source.service';
 import { DragDropService } from '@app-droplists/dragdrop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlist',
@@ -36,6 +37,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     private readonly playlistService: PlaylistService,
     private readonly dragDropService: DragDropService,
     private readonly audioSourceService: AudioSourceService,
+    private readonly router: Router,
     private readonly dialog: MatDialog
   ) { }
 
@@ -76,8 +78,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     this.dragDropService.disableDragDrop();
   }
 
-  public openEditDialog(): void {
-    this.dialog.open(PlaylistEditComponent, { data: this.playlist });
+  public openEditView(): void {
+    this.router.navigate(['playlists', 'edit', this.playlist._id]);
   }
 
   public openDeleteDialog(): void {

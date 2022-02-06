@@ -69,9 +69,9 @@ export class PlaylistCreateComponent implements OnInit {
     this.playlistAPIService.createPlaylist(model)
       .pipe(finalize(() => this.submitting = false))
       .subscribe({
-        next: response => {
+        next: () => {
           this.playlistForm.setErrors(null);
-          this.success = response.message;
+          this.success = 'Playlist created!';
           const subscription = this.playlistForm.valueChanges.subscribe({
             next: () => {
               this.success = '';
